@@ -1,44 +1,189 @@
 /* ==============================================================================
-   ELECZZA - Victorian Noir Theme Variables & Utility Classes
+   ELECZZA - Sherlock Holmes Victorian Noir Design Tokens
+   Deep Charcoal, Oxblood, Aged-Paper Cream, Brass Gold & Thames Fog
    ============================================================================== */
 
-:root {
-  --color-noir-950: #0b0c10;
-  --color-noir-900: #12151c;
-  --color-noir-800: #1c202b;
-  --color-fog-700: #2d3344;
-  --color-fog-500: #4e5569;
-  --color-parchment-100: #f7f2e7;
-  --color-parchment-200: #eee3cf;
-  --color-parchment-300: #d9ceb8;
-  --color-brass-400: #dfb75a;
-  --color-brass-500: #c59b27;
-  --color-brass-600: #9b7728;
-  --color-crimson-wax: #9e2a2b;
-  --color-emerald-solved: #2a7b54;
+:root,
+.dark {
+  /* Charcoal Base & Surfaces */
+  --charcoal-950: #0b0c10;
+  --charcoal-900: #12151c;
+  --charcoal-850: #161922;
+  --charcoal-800: #1c202b;
+
+  /* Oxblood & Red Sealing Wax */
+  --oxblood-950: #250608;
+  --oxblood-900: #3d0b0e;
+  --oxblood-700: #6b171a;
+  --oxblood-600: #8b1e22;
+  --oxblood-500: #a8262b;
+  --oxblood-400: #c93b41;
+
+  /* Aged-Paper Cream & Manuscript Vellum */
+  --cream-50: #fbf8f1;
+  --cream-100: #f4ebd9;
+  --cream-200: #eadcc1;
+  --cream-300: #d9ceb8;
+  --cream-400: #baaa8f;
+  --cream-600: #85755b;
+
+  /* Brass & Gaslamp Gold */
+  --brass-300: #f3d88c;
+  --brass-400: #dfb75a;
+  --brass-500: #c59b27;
+  --brass-600: #9b7728;
+  --brass-800: #574213;
+
+  /* Thames Fog Grey */
+  --fog-900: #181b24;
+  --fog-700: #2d3344;
+  --fog-500: #4e5569;
+  --fog-300: #8892b0;
+  --fog-200: #b4bccf;
+
+  /* Solved Emerald */
+  --emerald-solved: #2a7b54;
+  --emerald-glow: #3eaa75;
+
+  /* Semantic Shadcn Tokens (Dark default) */
+  --background: var(--charcoal-950);
+  --foreground: var(--cream-100);
+
+  --card: var(--charcoal-900);
+  --card-foreground: var(--cream-100);
+
+  --popover: var(--charcoal-900);
+  --popover-foreground: var(--cream-100);
+
+  --primary: var(--brass-400);
+  --primary-foreground: var(--charcoal-950);
+
+  --secondary: var(--charcoal-800);
+  --secondary-foreground: var(--cream-100);
+
+  --muted: var(--charcoal-850);
+  --muted-foreground: var(--cream-300);
+
+  --accent: var(--charcoal-800);
+  --accent-foreground: var(--brass-400);
+
+  --destructive: var(--oxblood-500);
+  --destructive-foreground: var(--cream-50);
+
+  --border: var(--fog-700);
+  --input: var(--fog-700);
+  --ring: var(--brass-400);
+
+  --radius: 0.5rem;
 }
 
-/* Atmospheric Victorian Vignette & Fog */
-.fog-ambient {
+/* ==============================================================================
+   Atmospheric Textures & Visual Effects
+   ============================================================================== */
+
+/* Gaslamp subtle ambient gradient */
+.gaslamp-glow {
   background: radial-gradient(
-    circle at 50% 20%,
-    rgba(223, 183, 90, 0.08) 0%,
-    rgba(18, 21, 28, 0.4) 40%,
-    rgba(11, 12, 16, 0.95) 100%
+    circle at 50% 0%,
+    rgba(223, 183, 90, 0.12) 0%,
+    rgba(18, 21, 28, 0.6) 45%,
+    rgba(11, 12, 16, 0.98) 100%
   );
 }
 
-.parchment-border {
-  border: 1px solid rgba(223, 183, 90, 0.22);
+/* Burnished brass metallic border & shine */
+.brass-border {
+  border: 1px solid rgba(223, 183, 90, 0.35);
+  box-shadow: 0 0 14px rgba(223, 183, 90, 0.12);
+}
+
+.brass-border:hover {
+  border-color: rgba(223, 183, 90, 0.65);
+  box-shadow: 0 0 20px rgba(223, 183, 90, 0.25);
+}
+
+/* Aged parchment paper texture simulation */
+.paper-texture {
+  background-color: var(--charcoal-900);
+  background-image:
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(223, 183, 90, 0.03) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 90% 90%,
+      rgba(107, 23, 26, 0.04) 0%,
+      transparent 50%
+    ),
+    linear-gradient(135deg, rgba(244, 235, 217, 0.02) 25%, transparent 25%),
+    linear-gradient(225deg, rgba(244, 235, 217, 0.02) 25%, transparent 25%);
+  background-size:
+    100% 100%,
+    100% 100%,
+    8px 8px,
+    8px 8px;
+  border: 1px solid var(--fog-700);
+}
+
+/* Wax seal badge styling */
+.wax-seal {
+  background: radial-gradient(
+    circle at 35% 35%,
+    #c93b41 0%,
+    #8b1e22 55%,
+    #3d0b0e 100%
+  );
+  border: 2px solid #a8262b;
   box-shadow:
-    inset 0 0 12px rgba(0, 0, 0, 0.5),
-    0 4px 16px rgba(0, 0, 0, 0.6);
+    inset 0 2px 4px rgba(255, 255, 255, 0.2),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.6),
+    0 4px 10px rgba(0, 0, 0, 0.6);
 }
 
-.brass-glow {
-  box-shadow: 0 0 15px rgba(223, 183, 90, 0.35);
+/* Red Confidential Stamp */
+.ink-stamp {
+  display: inline-block;
+  padding: 0.25rem 0.65rem;
+  border: 2px solid #8b1e22;
+  border-radius: 3px;
+  color: #c93b41;
+  font-family: var(--font-mono, monospace);
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transform: rotate(-7deg);
+  opacity: 0.88;
+  mask-image: radial-gradient(circle, black 70%, transparent 100%);
+  user-select: none;
 }
 
+/* Ambient Fog Animations */
+@keyframes drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(4%, 3%, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes driftReverse {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-3%, -4%, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Reduced motion fallbacks */
 @media (prefers-reduced-motion: reduce) {
   *,
   ::before,
