@@ -1,19 +1,21 @@
 import Link from "next/link";
-import { FogBackdrop } from "@/components/theme/fog-backdrop";
+import { FogBackground } from "@/components/theme/fog-background";
+import { BrassButton } from "@/components/theme/brass-button";
+import { Footer } from "@/components/layout/footer";
 import { ArrowRight, Compass, Shield, Award } from "lucide-react";
 
 export default function Home() {
   const domain = process.env.NEXT_PUBLIC_ALLOWED_EMAIL_DOMAIN || "@aot.edu.in";
 
   return (
-    <div className="relative min-h-screen text-[#F7F2E7]">
-      <FogBackdrop />
+    <div className="relative min-h-screen flex flex-col justify-between text-[#F7F2E7]">
+      <FogBackground density="medium" />
 
       {/* Header */}
-      <header className="mx-auto flex max-w-7xl items-center justify-between p-6">
+      <header className="mx-auto flex w-full max-w-7xl items-center justify-between p-6">
         <div className="flex items-center gap-2">
           <div className="flex h-9 w-9 items-center justify-center rounded border border-[#DFB75A]/60 bg-[#12151C] text-lg font-bold text-[#DFB75A]">
-            E
+            §
           </div>
           <span className="font-serif text-xl font-bold tracking-wider text-[#F7F2E7]">
             ELECZZA
@@ -22,22 +24,25 @@ export default function Home() {
 
         <div className="flex items-center gap-4">
           <Link
+            href="/styleguide"
+            className="hidden sm:inline-block text-xs font-semibold text-[#D9CEB8] transition-colors hover:text-[#DFB75A]"
+          >
+            Styleguide
+          </Link>
+          <Link
             href="/login"
             className="text-xs font-semibold text-[#D9CEB8] transition-colors hover:text-[#DFB75A]"
           >
             Authenticate
           </Link>
-          <Link
-            href="/signup"
-            className="rounded border border-[#DFB75A] bg-[#DFB75A] px-4 py-1.5 text-xs font-semibold text-[#0B0C10] transition-colors hover:bg-[#C59B27]"
-          >
-            Enlist Agency
+          <Link href="/signup">
+            <BrassButton size="sm">Enlist Agency</BrassButton>
           </Link>
         </div>
       </header>
 
       {/* Hero Section */}
-      <main className="mx-auto max-w-5xl px-6 py-20 text-center">
+      <main className="mx-auto max-w-5xl px-6 py-16 text-center">
         <div className="inline-flex items-center gap-2 rounded-full border border-[#DFB75A]/40 bg-[#12151C] px-3.5 py-1 text-xs font-semibold tracking-wider text-[#DFB75A] uppercase">
           <Shield className="h-3.5 w-3.5" />
           The Game is Afoot • Academy of Technology
@@ -61,29 +66,28 @@ export default function Home() {
         </div>
 
         <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Link
-            href="/login"
-            className="inline-flex h-11 items-center justify-center gap-2 rounded-md bg-[#DFB75A] px-6 text-sm font-semibold text-[#0B0C10] shadow-lg transition-colors hover:bg-[#C59B27]"
-          >
-            Enter 221B Baker St
-            <ArrowRight className="h-4 w-4" />
+          <Link href="/login">
+            <BrassButton size="lg" withLoupe>
+              Enter 221B Baker St
+            </BrassButton>
           </Link>
           <Link
             href="/dashboard"
-            className="inline-flex h-11 items-center justify-center gap-2 rounded-md border border-[#2D3344] bg-[#12151C] px-6 text-sm font-semibold text-[#F7F2E7] transition-colors hover:border-[#DFB75A]/50"
+            className="inline-flex h-11 items-center justify-center gap-2 rounded-md border border-[#2D3344] bg-[#12151C] px-6 text-xs font-semibold uppercase tracking-wider text-[#F7F2E7] transition-colors hover:border-[#DFB75A]/50"
           >
             Inspector Study Demo
+            <ArrowRight className="h-3.5 w-3.5 text-[#DFB75A]" />
           </Link>
         </div>
 
         {/* Feature Highlights */}
-        <div className="mt-20 grid gap-6 text-left sm:grid-cols-3">
+        <div className="mt-20 grid gap-6 sm:grid-cols-3 text-left">
           <div className="parchment-border rounded-lg bg-[#12151C] p-6">
             <Compass className="h-6 w-6 text-[#DFB75A]" />
             <h3 className="mt-3 font-bold text-[#F7F2E7]">
               Cryptographic Ciphers
             </h3>
-            <p className="mt-2 text-xs leading-relaxed text-[#D9CEB8]">
+            <p className="mt-2 text-xs text-[#D9CEB8] leading-relaxed">
               Decouple complex multi-stage ciphers, hidden payloads, and
               steganographic evidence.
             </p>
@@ -94,7 +98,7 @@ export default function Home() {
             <h3 className="mt-3 font-bold text-[#F7F2E7]">
               Detective Agencies
             </h3>
-            <p className="mt-2 text-xs leading-relaxed text-[#D9CEB8]">
+            <p className="mt-2 text-xs text-[#D9CEB8] leading-relaxed">
               Team up with fellow students. Designate Lead Inspectors and
               Cryptanalysts to solve in sync.
             </p>
@@ -105,13 +109,15 @@ export default function Home() {
             <h3 className="mt-3 font-bold text-[#F7F2E7]">
               Scotland Yard Ledger
             </h3>
-            <p className="mt-2 text-xs leading-relaxed text-[#D9CEB8]">
+            <p className="mt-2 text-xs text-[#D9CEB8] leading-relaxed">
               Real-time competitive telemetry tracking deduction speed,
               accuracy, and penalty points.
             </p>
           </div>
         </div>
       </main>
+
+      <Footer />
     </div>
   );
 }
