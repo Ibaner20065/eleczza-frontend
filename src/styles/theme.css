@@ -1,0 +1,51 @@
+/* ==============================================================================
+   ELECZZA - Victorian Noir Theme Variables & Utility Classes
+   ============================================================================== */
+
+:root {
+  --color-noir-950: #0b0c10;
+  --color-noir-900: #12151c;
+  --color-noir-800: #1c202b;
+  --color-fog-700: #2d3344;
+  --color-fog-500: #4e5569;
+  --color-parchment-100: #f7f2e7;
+  --color-parchment-200: #eee3cf;
+  --color-parchment-300: #d9ceb8;
+  --color-brass-400: #dfb75a;
+  --color-brass-500: #c59b27;
+  --color-brass-600: #9b7728;
+  --color-crimson-wax: #9e2a2b;
+  --color-emerald-solved: #2a7b54;
+}
+
+/* Atmospheric Victorian Vignette & Fog */
+.fog-ambient {
+  background: radial-gradient(
+    circle at 50% 20%,
+    rgba(223, 183, 90, 0.08) 0%,
+    rgba(18, 21, 28, 0.4) 40%,
+    rgba(11, 12, 16, 0.95) 100%
+  );
+}
+
+.parchment-border {
+  border: 1px solid rgba(223, 183, 90, 0.22);
+  box-shadow:
+    inset 0 0 12px rgba(0, 0, 0, 0.5),
+    0 4px 16px rgba(0, 0, 0, 0.6);
+}
+
+.brass-glow {
+  box-shadow: 0 0 15px rgba(223, 183, 90, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
