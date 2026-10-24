@@ -183,6 +183,19 @@
   }
 }
 
+@keyframes auth-error-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  35% {
+    transform: translateX(-3px);
+  }
+  70% {
+    transform: translateX(3px);
+  }
+}
+
 /* Reduced motion fallbacks */
 @media (prefers-reduced-motion: reduce) {
   *,

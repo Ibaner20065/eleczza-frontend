@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Playfair_Display, Special_Elite, Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
+import { AppAuthProvider } from "@/components/auth/auth-provider";
 
 const serifDisplay = Playfair_Display({
   variable: "--font-serif",
@@ -39,7 +40,7 @@ export default function RootLayout({
       className={`dark ${serifDisplay.variable} ${typewriterMono.variable} ${sansBody.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans bg-background text-foreground">
-        {children}
+        <AppAuthProvider>{children}</AppAuthProvider>
         <Toaster />
       </body>
     </html>

@@ -1,14 +1,18 @@
 import { z } from "zod";
 
-const ALLOWED_DOMAIN =
-  process.env.NEXT_PUBLIC_ALLOWED_EMAIL_DOMAIN || "@aot.edu.in";
+const configuredDomain =
+  process.env.NEXT_PUBLIC_ALLOWED_EMAIL_DOMAIN?.trim() || "@aot.edu.in";
+const ALLOWED_DOMAIN = configuredDomain.startsWith("@")
+  ? configuredDomain
+  : `@${configuredDomain}`;
 
 export const collegeEmailSchema = z
   .string()
+  .trim()
   .email("Please provide a valid email address.")
   .refine(
     (email) => email.toLowerCase().endsWith(ALLOWED_DOMAIN.toLowerCase()),
-    `Registration is strictly restricted to Academy of Technology students (${ALLOWED_DOMAIN}).`,
+    `Use your college email address ending in ${ALLOWED_DOMAIN}.`,
   );
 
 export const loginSchema = z.object({
@@ -16,20 +20,30 @@ export const loginSchema = z.object({
   password: z.string().min(6, "Password must contain at least 6 characters."),
 });
 
+export const passwordSchema = z
+  .string()
+  .min(
+    8,
+    "Use at least 8 characters, including uppercase, lowercase, a number, and a symbol.",
+  )
+  .regex(
+    /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/,
+    "Use at least 8 characters, including uppercase, lowercase, a number, and a symbol.",
+  );
+
 export const signupSchema = z
   .object({
-    fullName: z
+    name: z
       .string()
-      .min(2, "Inspector name must be at least 2 characters."),
+      .trim()
+      .min(2, "Name must be at least 2 characters.")
+      .max(60, "Name must be no more than 60 characters."),
     email: collegeEmailSchema,
-    rollNumber: z
-      .string()
-      .min(5, "Valid college roll / registration number is required."),
-    password: z.string().min(6, "Password must contain at least 6 characters."),
+    password: passwordSchema,
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "Deduction mismatch: Passwords do not match.",
+    message: "Passwords do not match.",
     path: ["confirmPassword"],
   });
 
@@ -39,11 +53,11 @@ export const forgotPasswordSchema = z.object({
 
 export const resetPasswordSchema = z
   .object({
-    password: z.string().min(6, "Password must contain at least 6 characters."),
+    password: passwordSchema,
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "Deduction mismatch: Passwords do not match.",
+    message: "Passwords do not match.",
     path: ["confirmPassword"],
   });
 

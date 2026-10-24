@@ -16,6 +16,24 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Supabase email authentication
+
+Set `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`,
+`NEXT_PUBLIC_ALLOWED_EMAIL_DOMAIN`, and `NEXT_PUBLIC_APP_URL` in your local
+environment. In Supabase Auth, enable email confirmations and add the callback
+URL for each environment to the redirect URL allow list, for example:
+
+- `http://localhost:3000/auth/callback`
+- `https://your-production-domain.example/auth/callback`
+
+The callback exchanges signup-verification and password-recovery email links
+for a session before sending the user to the relevant page.
+
+The Express API wrapper uses `NEXT_PUBLIC_API_URL` and attaches the current
+Supabase access token as a bearer token. For local mock responses, set
+`NEXT_PUBLIC_MOCK_API=true` and pass a typed mock value as the third argument
+to `apiRequest`; mock mode intentionally fails if a caller has no mock value.
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
