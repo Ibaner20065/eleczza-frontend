@@ -11,6 +11,7 @@ import {
   Users,
   HelpCircle,
   Trophy,
+  BadgeCheck,
   Menu,
   X,
   Palette,
@@ -30,6 +31,7 @@ const navItems: NavItem[] = [
   { label: "Agency", href: "/team", icon: Users },
   { label: "Case Files", href: "/quiz", icon: HelpCircle },
   { label: "Ledger", href: "/leaderboard", icon: Trophy },
+  { label: "Results", href: "/results", icon: BadgeCheck },
   { label: "Styleguide", href: "/styleguide", icon: Palette },
 ];
 
@@ -79,7 +81,7 @@ export function Navbar() {
           </div>
           <div className="flex flex-col">
             <span className="font-serif text-lg font-bold tracking-wider text-[#F7F2E7] group-hover:text-[#DFB75A] transition-colors">
-              ELECZZA
+              ELECZZA 2.0
             </span>
             <span className="text-[9px] font-mono tracking-widest text-[#DFB75A] uppercase">
               221B Bureau

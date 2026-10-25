@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
+  <circle cx="40" cy="40" r="36" fill="#3D0B0E" stroke="#F3D88C" stroke-width="2"/>
+  <circle cx="40" cy="40" r="29" stroke="#F3D88C" stroke-opacity=".72"/>
+  <path d="M21 27h38M21 53h38" stroke="#F3D88C" stroke-opacity=".5"/>
+  <text x="40" y="46" fill="#FBF8F1" font-family="Georgia,serif" font-size="20" font-weight="700" text-anchor="middle">221B</text>
+</svg>

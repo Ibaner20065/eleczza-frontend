@@ -1,4 +1,4 @@
-# ELECZZA — Git Branching & Commit Conventions
+# ELECZZA 2.0 — Git Branching & Commit Conventions
 
 To maintain a clean Scotland Yard ledger of all code revisions, all contributors must adhere to the following Git workflow standards:
 

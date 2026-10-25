@@ -1,5 +1,5 @@
 # ==========================================
-# ELECZZA - Git Ignore Configuration
+# ELECZZA 2.0 - Git Ignore Configuration
 # Next.js, TypeScript, Node.js & Tooling
 # ==========================================
 
@@ -23,6 +23,7 @@
 
 # Next.js & Build Outputs
 /.next/
+/.next-e2e/
 /out/
 /build
 /dist
@@ -32,6 +33,8 @@
 
 # Testing & Coverage
 /coverage
+/test-results
+/playwright-report
 *.lcov
 
 # Debug & Package Manager Logs
@@ -103,4 +106,3 @@ desktop.ini
 *.swp
 *.swo
 *~
-

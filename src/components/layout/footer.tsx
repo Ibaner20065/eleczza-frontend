@@ -16,7 +16,7 @@ export function Footer() {
                 §
               </div>
               <span className="font-serif text-base font-bold tracking-wider text-[#F7F2E7]">
-                ELECZZA
+                ELECZZA 2.0
               </span>
             </div>
             <p className="max-w-sm text-xs text-[#8892B0] leading-relaxed">
@@ -24,7 +24,7 @@ export function Footer() {
               the Academy of Technology. Sift evidence, solve multi-stage
               ciphers, and climb the Scotland Yard Ledger.
             </p>
-            <div className="flex items-center gap-2 text-[11px] text-[#2A7B54]">
+            <div className="flex items-center gap-2 text-[11px] text-[#3EAA75]">
               <Radio className="h-3.5 w-3.5 animate-pulse" />
               <span>Scotland Yard Wire Protocol: Operational</span>
             </div>
@@ -70,6 +70,14 @@ export function Footer() {
               </li>
               <li>
                 <Link
+                  href="/results"
+                  className="hover:text-[#DFB75A] transition-colors"
+                >
+                  Case Results
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/styleguide"
                   className="hover:text-[#DFB75A] transition-colors"
                 >
@@ -96,8 +104,8 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col items-center justify-between border-t border-[#2D3344]/50 pt-6 text-[11px] text-[#4E5569] sm:flex-row">
-          <div>© 2026 ELECZZA. All forensic deductions reserved.</div>
+        <div className="mt-8 flex flex-col items-center justify-between border-t border-[#2D3344]/50 pt-6 text-[11px] text-[#8892B0] sm:flex-row">
+          <div>© 2026 ELECZZA 2.0. All forensic deductions reserved.</div>
           <div className="mt-2 font-mono sm:mt-0">
             221B Baker St. Archival System • Ver 3.0
           </div>

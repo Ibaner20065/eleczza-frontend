@@ -62,7 +62,8 @@ export async function updateSession(request: NextRequest) {
     pathname.startsWith("/dashboard") ||
     pathname.startsWith("/team") ||
     pathname.startsWith("/quiz") ||
-    pathname.startsWith("/leaderboard");
+    pathname.startsWith("/leaderboard") ||
+    pathname.startsWith("/results");
   const isOnboardingPath = pathname === "/team";
 
   const isAuthPath =

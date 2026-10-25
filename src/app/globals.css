@@ -88,3 +88,98 @@
     font-family: var(--font-mono), monospace;
   }
 }
+
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid #f3d88c;
+  outline-offset: 3px;
+}
+
+.page-enter {
+  animation: page-enter 180ms ease-out both;
+}
+
+.leaderboard-row,
+.leaderboard-row-own {
+  animation: rank-enter 220ms ease-out both;
+}
+
+.leaderboard-row-own {
+  box-shadow: inset 4px 0 #f3d88c;
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rank-enter {
+  from {
+    opacity: 0.6;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes signal-pulse {
+  0%,
+  100% {
+    opacity: 0.65;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes stamp-in {
+  from {
+    opacity: 0;
+    transform: scale(1.4) rotate(-18deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(-7deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app-shell:has([data-quiz-screen]) > header,
+  .app-shell:has([data-quiz-screen]) > footer {
+    display: none;
+  }
+
+  .app-shell:has([data-quiz-screen]) > main {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+}

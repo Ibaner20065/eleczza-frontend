@@ -120,7 +120,12 @@ export default function ResetPasswordPage() {
           Verifying your recovery link...
         </p>
       ) : hasRecoverySession ? (
-        <form onSubmit={onFormSubmit} className="space-y-4" noValidate>
+        <form
+          onSubmit={onFormSubmit}
+          className="space-y-3"
+          aria-label="Reset your password"
+          noValidate
+        >
           <div>
             <label
               htmlFor="password"
@@ -145,7 +150,7 @@ export default function ResetPasswordPage() {
                       ? "password-strength"
                       : undefined
                 }
-                className="w-full rounded border border-[#2D3344] bg-[#0B0C10] px-3 py-2 pr-11 text-sm text-[#F7F2E7] placeholder-[#4E5569] focus:border-[#DFB75A] focus:outline-none"
+                className="w-full rounded border border-[#2D3344] bg-[#0B0C10] px-3 py-2 pr-11 text-sm text-[#F7F2E7] placeholder-[#8892B0] focus-visible:border-[#F3D88C] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F3D88C]"
               />
               <button
                 type="button"
@@ -198,7 +203,7 @@ export default function ResetPasswordPage() {
               <p
                 id="password-error"
                 role="alert"
-                className="animate-[auth-error-shake_0.28s_ease-in-out] mt-1 text-xs text-[#C93B41]"
+                className="animate-[auth-error-shake_0.28s_ease-in-out] mt-1 text-xs text-[#FF9B9F]"
               >
                 {errors.password.message}
               </p>
@@ -223,7 +228,7 @@ export default function ResetPasswordPage() {
                 aria-describedby={
                   errors.confirmPassword ? "confirm-password-error" : undefined
                 }
-                className="w-full rounded border border-[#2D3344] bg-[#0B0C10] px-3 py-2 pr-11 text-sm text-[#F7F2E7] placeholder-[#4E5569] focus:border-[#DFB75A] focus:outline-none"
+                className="w-full rounded border border-[#2D3344] bg-[#0B0C10] px-3 py-2 pr-11 text-sm text-[#F7F2E7] placeholder-[#8892B0] focus-visible:border-[#F3D88C] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F3D88C]"
               />
               <button
                 type="button"
@@ -243,7 +248,7 @@ export default function ResetPasswordPage() {
               <p
                 id="confirm-password-error"
                 role="alert"
-                className="animate-[auth-error-shake_0.28s_ease-in-out] mt-1 text-xs text-[#C93B41]"
+                className="animate-[auth-error-shake_0.28s_ease-in-out] mt-1 text-xs text-[#FF9B9F]"
               >
                 {errors.confirmPassword.message}
               </p>
@@ -254,7 +259,7 @@ export default function ResetPasswordPage() {
             <p
               role="alert"
               aria-live="assertive"
-              className="rounded border border-[#C93B41]/30 bg-[#3D0B0E]/40 px-3 py-2 text-sm text-[#F1A3A6]"
+              className="rounded border border-[#C93B41]/30 bg-[#3D0B0E]/40 px-3 py-2 text-sm text-[#FFB3B6]"
             >
               {formError}
             </p>

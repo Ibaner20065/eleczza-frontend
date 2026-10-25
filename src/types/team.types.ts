@@ -11,7 +11,7 @@ export interface TeamMember {
 export interface DetectiveAgency {
   id: string;
   name: string;
-  motto?: string;
+  motto?: string | null;
   passcode: string;
   leaderId: string;
   members: TeamMember[];

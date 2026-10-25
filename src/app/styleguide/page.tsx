@@ -59,7 +59,7 @@ export default function StyleguidePage() {
             </div>
             <div>
               <h1 className="font-serif text-lg font-bold tracking-wider text-[#F7F2E7]">
-                ELECZZA Styleguide
+                ELECZZA 2.0 Styleguide
               </h1>
               <p className="text-[10px] uppercase font-mono tracking-widest text-[#DFB75A]">
                 Sherlock Holmes & Scotland Yard Design System
@@ -568,7 +568,7 @@ export default function StyleguidePage() {
               variants={stampIn}
               className="parchment-border rounded-lg bg-[#12151C] p-5 space-y-2"
             >
-              <div className="flex items-center gap-2 text-[#C93B41]">
+              <div className="flex items-center gap-2 text-[#FF9B9F]">
                 <FileQuestion className="h-4 w-4" />
                 <span className="font-mono text-xs font-bold uppercase">
                   Preset: stampIn

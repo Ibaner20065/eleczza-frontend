@@ -58,7 +58,7 @@ export function CaseFileCard({
             variants={stampIn}
             initial="initial"
             animate="animate"
-            className="ink-stamp border-[#8B1E22] text-[#C93B41] text-[10px] tracking-widest bg-[#3D0B0E]/70 px-2.5 py-0.5 rounded shadow-sm"
+            className="ink-stamp border-[#8B1E22] text-[#FF9B9F] text-[10px] tracking-widest bg-[#3D0B0E]/70 px-2.5 py-0.5 rounded shadow-sm"
           >
             {stampText}
           </motion.div>
@@ -91,7 +91,7 @@ export function CaseFileCard({
             {points} pts
           </span>
           <span className="flex items-center gap-1 font-mono">
-            <Clock className="h-3.5 w-3.5 text-[#4E5569]" />
+            <Clock className="h-3.5 w-3.5 text-[#8892B0]" />
             {durationMinutes}m
           </span>
         </div>
