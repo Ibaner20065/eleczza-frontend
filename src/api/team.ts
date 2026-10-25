@@ -1,48 +1,32 @@
-import {
-  createAgency as createAgencyRequest,
-  getAgencyRoster as getAgencyRosterRequest,
-  joinAgency as joinAgencyRequest,
-  setAgencyMemberReady,
-  syncQueuedAgencyReadiness,
-} from "@/api/event";
 import type { CreateTeamInput, JoinTeamInput } from "@/lib/validators/team";
 import type { DetectiveAgency } from "@/types/team.types";
 
-export interface AgencyMemberIdentity {
-  userId: string;
-  fullName: string;
-  email: string;
-}
-
-export function createAgency(
+export async function createAgency(
   input: CreateTeamInput,
-  member: AgencyMemberIdentity,
 ): Promise<DetectiveAgency> {
-  return createAgencyRequest(input, member);
+  // Mock / typed service implementation for Phase 1
+  return {
+    id: "agency-1",
+    name: input.name,
+    motto: input.motto,
+    passcode: "BAKER7",
+    leaderId: "user-lead-1",
+    members: [],
+    score: 0,
+    createdAt: "2026-10-25T10:00:00.000Z",
+  };
 }
 
-export function joinAgency(
+export async function joinAgency(
   input: JoinTeamInput,
-  member: AgencyMemberIdentity,
-): Promise<DetectiveAgency> {
-  return joinAgencyRequest(input, member);
+): Promise<{ success: boolean; agencyName: string }> {
+  // Mock / typed service implementation for Phase 1
+  return {
+    success: true,
+    agencyName: `Agency #${input.passcode}`,
+  };
 }
 
-export function getAgencyRoster(
-  userId?: string,
-): Promise<DetectiveAgency | null> {
-  return getAgencyRosterRequest(userId);
-}
-
-export function updateAgencyReadiness(
-  userId: string,
-  isReady: boolean,
-): Promise<DetectiveAgency> {
-  return setAgencyMemberReady(userId, isReady);
-}
-
-export function syncAgencyReadiness(
-  userId: string,
-): Promise<DetectiveAgency | null> {
-  return syncQueuedAgencyReadiness(userId);
+export async function getAgencyRoster(): Promise<DetectiveAgency | null> {
+  return null;
 }

@@ -12,7 +12,7 @@ export default function NotFound() {
       <div className="parchment-border relative w-full max-w-xl rounded-lg bg-[#12151C]/95 p-8 shadow-2xl backdrop-blur-md">
         {/* Red Ink Cold Case Stamp */}
         <div className="absolute -top-3 -right-3 select-none pointer-events-none">
-          <div className="ink-stamp border-[#8B1E22] bg-[#3D0B0E]/90 px-3 py-1 text-xs tracking-widest text-[#FF9B9F]">
+          <div className="ink-stamp border-[#8B1E22] bg-[#3D0B0E]/90 px-3 py-1 text-xs tracking-widest text-[#C93B41]">
             COLD CASE • UNRESOLVED
           </div>
         </div>
@@ -42,7 +42,7 @@ export default function NotFound() {
 
         {/* Crime Scene Note */}
         <div className="mt-6 rounded border border-[#2D3344] bg-[#0B0C10] p-4 text-left font-mono text-xs text-[#DFB75A]">
-          <div className="text-[10px] text-[#8892B0] uppercase tracking-wider mb-1">
+          <div className="text-[10px] text-[#4E5569] uppercase tracking-wider mb-1">
             FORENSIC SEARCH LOG:
           </div>
           <code>
@@ -74,7 +74,7 @@ export default function NotFound() {
         </div>
       </div>
 
-      <div className="mt-8 font-mono text-[11px] text-[#8892B0]">
+      <div className="mt-8 font-mono text-[11px] text-[#4E5569]">
         Scotland Yard Archive Registry • All investigations logged
       </div>
     </div>

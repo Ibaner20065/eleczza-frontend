@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  distDir: process.env.ELECZZA_TEST_DIST_DIR || ".next",
+  /* config options here */
   cacheComponents: true,
   partialPrefetching: true,
   turbopack: {

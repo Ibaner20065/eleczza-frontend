@@ -18,7 +18,7 @@ export default function Home() {
             §
           </div>
           <span className="font-serif text-xl font-bold tracking-wider text-[#F7F2E7]">
-            ELECZZA 2.0
+            ELECZZA
           </span>
         </div>
 

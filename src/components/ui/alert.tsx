@@ -10,7 +10,7 @@ const alertVariants = cva(
         default:
           "border-[#DFB75A]/40 bg-[#12151C] text-[#F4EBD9] [&>svg]:text-[#DFB75A]",
         oxblood:
-          "border-[#8B1E22] bg-[#3D0B0E]/60 text-[#FBF8F1] [&>svg]:text-[#FF9B9F]",
+          "border-[#8B1E22] bg-[#3D0B0E]/60 text-[#FBF8F1] [&>svg]:text-[#C93B41]",
         telegram:
           "border-[#2D3344] bg-[#0B0C10] text-[#D9CEB8] font-mono [&>svg]:text-[#DFB75A]",
         solved:

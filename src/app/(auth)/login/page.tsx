@@ -8,17 +8,48 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Eye, EyeOff } from "lucide-react";
 import { toast } from "sonner";
-import { loginWithEmail } from "@/api/auth";
+import { loginWithEmail, resendSignupVerification } from "@/api/auth";
 import { AuthCard } from "@/components/auth/auth-card";
 import { DomainNotice } from "@/components/auth/domain-notice";
 import { Button } from "@/components/ui/button";
 import { loginSchema, type LoginInput } from "@/lib/validators/auth";
 
+function errorDetails(error: unknown) {
+  if (!(error instanceof Error)) {
+    return { code: "", message: "" };
+  }
+
+  return {
+    code:
+      "code" in error && typeof error.code === "string"
+        ? error.code.toLowerCase()
+        : "",
+    message: error.message.toLowerCase(),
+  };
+}
+
+function isRateLimitError(error: unknown) {
+  const { code, message } = errorDetails(error);
+  return (
+    code.includes("rate_limit") ||
+    code.includes("too_many") ||
+    code.includes("over_request") ||
+    message.includes("rate limit") ||
+    message.includes("too many requests") ||
+    message.includes("security purposes")
+  );
+}
+
 export default function LoginPage() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [formError, setFormError] = useState("");
+  const [unverifiedEmail, setUnverifiedEmail] = useState("");
+  const [resendMessage, setResendMessage] = useState("");
+  const [resendCooldown, setResendCooldown] = useState(0);
+  const [isResending, setIsResending] = useState(false);
   const submitLock = useRef(false);
+  const resendLock = useRef(false);
 
   const {
     register,
@@ -43,8 +74,18 @@ export default function LoginPage() {
     }
   }, []);
 
+  useEffect(() => {
+    if (resendCooldown <= 0) return;
+    const timeout = window.setTimeout(
+      () => setResendCooldown((remaining) => remaining - 1),
+      1000,
+    );
+    return () => window.clearTimeout(timeout);
+  }, [resendCooldown]);
+
   const onSubmit = async (data: LoginInput) => {
     setFormError("");
+    setUnverifiedEmail("");
 
     try {
       await loginWithEmail(data);
@@ -57,8 +98,29 @@ export default function LoginPage() {
           ? redirect
           : "/dashboard";
       router.replace(destination);
-    } catch {
-      setFormError("Unable to sign in. Check your details or try again.");
+    } catch (error) {
+      const { code, message } = errorDetails(error);
+      if (
+        code === "email_not_confirmed" ||
+        message.includes("email not confirmed")
+      ) {
+        setUnverifiedEmail(data.email);
+        setFormError(
+          "Please verify your email before logging in. You can request a new verification link below.",
+        );
+      } else if (isRateLimitError(error)) {
+        setFormError("Too many attempts. Please wait a moment and try again.");
+      } else if (
+        message.includes("fetch") ||
+        message.includes("network") ||
+        message.includes("failed to connect")
+      ) {
+        setFormError(
+          "We couldn't reach the login service. Check your connection and try again.",
+        );
+      } else {
+        setFormError("Invalid email or password.");
+      }
     }
   };
 
@@ -76,17 +138,35 @@ export default function LoginPage() {
     }
   };
 
+  const onResendVerification = async () => {
+    if (resendLock.current || resendCooldown > 0) return;
+    resendLock.current = true;
+    setIsResending(true);
+    setResendMessage("");
+
+    try {
+      await resendSignupVerification(unverifiedEmail);
+      setResendCooldown(60);
+      setResendMessage("A verification link is on its way.");
+    } catch (error) {
+      setResendMessage(
+        isRateLimitError(error)
+          ? "Too many attempts. Please wait a minute before trying again."
+          : "We couldn't resend the verification email. Please try again.",
+      );
+      if (isRateLimitError(error)) setResendCooldown(60);
+    } finally {
+      resendLock.current = false;
+      setIsResending(false);
+    }
+  };
+
   return (
     <AuthCard
       title="Inspector Identification"
       subtitle="Present your credentials to access the 221B Case Archives."
     >
-      <form
-        onSubmit={onFormSubmit}
-        className="space-y-3"
-        aria-label="Log in"
-        noValidate
-      >
+      <form onSubmit={onFormSubmit} className="space-y-4" noValidate>
         <DomainNotice />
 
         <div>
@@ -104,13 +184,13 @@ export default function LoginPage() {
             placeholder="detective@aot.edu.in"
             aria-invalid={Boolean(errors.email)}
             aria-describedby={errors.email ? "email-error" : undefined}
-            className="mt-1 w-full rounded border border-[#2D3344] bg-[#0B0C10] px-3 py-2 text-sm text-[#F7F2E7] placeholder-[#8892B0] focus-visible:border-[#F3D88C] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F3D88C]"
+            className="mt-1 w-full rounded border border-[#2D3344] bg-[#0B0C10] px-3 py-2 text-sm text-[#F7F2E7] placeholder-[#4E5569] focus:border-[#DFB75A] focus:outline-none"
           />
           {errors.email && (
             <p
               id="email-error"
               role="alert"
-              className="mt-1 text-xs text-[#FF9B9F]"
+              className="animate-[auth-error-shake_0.28s_ease-in-out] mt-1 text-xs text-[#C93B41]"
             >
               {errors.email.message}
             </p>
@@ -127,7 +207,7 @@ export default function LoginPage() {
             </label>
             <Link
               href="/forgot-password"
-              className="rounded text-xs text-[#F3D88C] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F3D88C]"
+              className="text-xs text-[#DFB75A] hover:underline"
             >
               Forgot password?
             </Link>
@@ -141,7 +221,7 @@ export default function LoginPage() {
               placeholder="Enter your password"
               aria-invalid={Boolean(errors.password)}
               aria-describedby={errors.password ? "password-error" : undefined}
-              className="w-full rounded border border-[#2D3344] bg-[#0B0C10] px-3 py-2 pr-11 text-sm text-[#F7F2E7] placeholder-[#8892B0] focus-visible:border-[#F3D88C] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F3D88C]"
+              className="w-full rounded border border-[#2D3344] bg-[#0B0C10] px-3 py-2 pr-11 text-sm text-[#F7F2E7] placeholder-[#4E5569] focus:border-[#DFB75A] focus:outline-none"
             />
             <button
               type="button"
@@ -161,7 +241,7 @@ export default function LoginPage() {
             <p
               id="password-error"
               role="alert"
-              className="mt-1 text-xs text-[#FF9B9F]"
+              className="animate-[auth-error-shake_0.28s_ease-in-out] mt-1 text-xs text-[#C93B41]"
             >
               {errors.password.message}
             </p>
@@ -172,9 +252,31 @@ export default function LoginPage() {
           <div
             role="alert"
             aria-live="assertive"
-            className="space-y-2 rounded border border-[#C93B41]/30 bg-[#3D0B0E]/40 px-3 py-2 text-sm text-[#FFB3B6]"
+            className="space-y-2 rounded border border-[#C93B41]/30 bg-[#3D0B0E]/40 px-3 py-2 text-sm text-[#F1A3A6]"
           >
             <p>{formError}</p>
+            {unverifiedEmail && (
+              <div className="space-y-1">
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  disabled={isResending || resendCooldown > 0}
+                  onClick={onResendVerification}
+                >
+                  {isResending
+                    ? "Sending..."
+                    : resendCooldown > 0
+                      ? `Resend available in ${resendCooldown}s`
+                      : "Resend verification email"}
+                </Button>
+                {resendMessage && (
+                  <p role="status" className="text-xs text-[#D9CEB8]">
+                    {resendMessage}
+                  </p>
+                )}
+              </div>
+            )}
           </div>
         )}
 
@@ -186,7 +288,7 @@ export default function LoginPage() {
           New here?{" "}
           <Link
             href="/signup"
-            className="rounded font-semibold text-[#F3D88C] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F3D88C]"
+            className="font-semibold text-[#DFB75A] hover:underline"
           >
             Create account
           </Link>

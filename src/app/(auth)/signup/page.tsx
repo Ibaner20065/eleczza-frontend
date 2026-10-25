@@ -13,17 +13,17 @@ import { AuthCard } from "@/components/auth/auth-card";
 import { DomainNotice } from "@/components/auth/domain-notice";
 import { Button } from "@/components/ui/button";
 
-function isExistingAccountError(error: unknown) {
+function getAuthErrorMessage(error: unknown, action: "signup" | "resend") {
   const message = error instanceof Error ? error.message.toLowerCase() : "";
-  return (
+
+  if (
     message.includes("already registered") ||
     message.includes("already been registered") ||
     message.includes("user already exists")
-  );
-}
+  ) {
+    return "This email already has an account. Log in or reset your password instead.";
+  }
 
-function getAuthErrorMessage(error: unknown, action: "signup" | "resend") {
-  const message = error instanceof Error ? error.message.toLowerCase() : "";
   if (message.includes("rate limit") || message.includes("too many requests")) {
     return "Too many attempts. Please wait a minute before trying again.";
   }
@@ -110,17 +110,15 @@ export default function SignupPage() {
       }
 
       if (user.identities?.length === 0) {
-        setRegisteredEmail(data.email);
+        setFormError(
+          "This email already has an account. Log in or reset your password instead.",
+        );
         return;
       }
 
       setRegisteredEmail(data.email);
     } catch (error) {
-      if (isExistingAccountError(error)) {
-        setRegisteredEmail(data.email);
-      } else {
-        setFormError(getAuthErrorMessage(error, "signup"));
-      }
+      setFormError(getAuthErrorMessage(error, "signup"));
     }
   };
 
@@ -215,12 +213,7 @@ export default function SignupPage() {
           </p>
         </div>
       ) : (
-        <form
-          onSubmit={onFormSubmit}
-          className="space-y-2.5"
-          aria-label="Create account"
-          noValidate
-        >
+        <form onSubmit={onFormSubmit} className="space-y-4" noValidate>
           <DomainNotice />
 
           <div>
@@ -238,13 +231,13 @@ export default function SignupPage() {
               placeholder="Sherlock Holmes"
               aria-invalid={Boolean(errors.name)}
               aria-describedby={errors.name ? "name-error" : undefined}
-              className="mt-1 w-full rounded border border-[#2D3344] bg-[#0B0C10] px-3 py-2 text-sm text-[#F7F2E7] placeholder-[#8892B0] focus-visible:border-[#F3D88C] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F3D88C]"
+              className="mt-1 w-full rounded border border-[#2D3344] bg-[#0B0C10] px-3 py-2 text-sm text-[#F7F2E7] placeholder-[#4E5569] focus:border-[#DFB75A] focus:outline-none"
             />
             {errors.name && (
               <p
                 id="name-error"
                 role="alert"
-                className="animate-[auth-error-shake_0.28s_ease-in-out] mt-1 text-xs text-[#FF9B9F]"
+                className="animate-[auth-error-shake_0.28s_ease-in-out] mt-1 text-xs text-[#C93B41]"
               >
                 {errors.name.message}
               </p>
@@ -266,13 +259,13 @@ export default function SignupPage() {
               placeholder="roll.number@aot.edu.in"
               aria-invalid={Boolean(errors.email)}
               aria-describedby={errors.email ? "email-error" : undefined}
-              className="mt-1 w-full rounded border border-[#2D3344] bg-[#0B0C10] px-3 py-2 text-sm text-[#F7F2E7] placeholder-[#8892B0] focus-visible:border-[#F3D88C] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F3D88C]"
+              className="mt-1 w-full rounded border border-[#2D3344] bg-[#0B0C10] px-3 py-2 text-sm text-[#F7F2E7] placeholder-[#4E5569] focus:border-[#DFB75A] focus:outline-none"
             />
             {errors.email && (
               <p
                 id="email-error"
                 role="alert"
-                className="animate-[auth-error-shake_0.28s_ease-in-out] mt-1 text-xs text-[#FF9B9F]"
+                className="animate-[auth-error-shake_0.28s_ease-in-out] mt-1 text-xs text-[#C93B41]"
               >
                 {errors.email.message}
               </p>
@@ -303,7 +296,7 @@ export default function SignupPage() {
                       ? "password-strength"
                       : undefined
                 }
-                className="w-full rounded border border-[#2D3344] bg-[#0B0C10] px-3 py-2 pr-11 text-sm text-[#F7F2E7] placeholder-[#8892B0] focus-visible:border-[#F3D88C] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F3D88C]"
+                className="w-full rounded border border-[#2D3344] bg-[#0B0C10] px-3 py-2 pr-11 text-sm text-[#F7F2E7] placeholder-[#4E5569] focus:border-[#DFB75A] focus:outline-none"
               />
               <button
                 type="button"
@@ -356,7 +349,7 @@ export default function SignupPage() {
               <p
                 id="password-error"
                 role="alert"
-                className="animate-[auth-error-shake_0.28s_ease-in-out] mt-1 text-xs text-[#FF9B9F]"
+                className="animate-[auth-error-shake_0.28s_ease-in-out] mt-1 text-xs text-[#C93B41]"
               >
                 {errors.password.message}
               </p>
@@ -381,7 +374,7 @@ export default function SignupPage() {
                 aria-describedby={
                   errors.confirmPassword ? "confirm-password-error" : undefined
                 }
-                className="w-full rounded border border-[#2D3344] bg-[#0B0C10] px-3 py-2 pr-11 text-sm text-[#F7F2E7] placeholder-[#8892B0] focus-visible:border-[#F3D88C] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F3D88C]"
+                className="w-full rounded border border-[#2D3344] bg-[#0B0C10] px-3 py-2 pr-11 text-sm text-[#F7F2E7] placeholder-[#4E5569] focus:border-[#DFB75A] focus:outline-none"
               />
               <button
                 type="button"
@@ -401,7 +394,7 @@ export default function SignupPage() {
               <p
                 id="confirm-password-error"
                 role="alert"
-                className="animate-[auth-error-shake_0.28s_ease-in-out] mt-1 text-xs text-[#FF9B9F]"
+                className="animate-[auth-error-shake_0.28s_ease-in-out] mt-1 text-xs text-[#C93B41]"
               >
                 {errors.confirmPassword.message}
               </p>
