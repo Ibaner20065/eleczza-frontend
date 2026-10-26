@@ -11,6 +11,10 @@ import { toast } from "sonner";
 import { loginWithEmail, resendSignupVerification } from "@/api/auth";
 import { AuthCard } from "@/components/auth/auth-card";
 import { DomainNotice } from "@/components/auth/domain-notice";
+import {
+  LightBeamButton,
+  type LightBeamButtonStatus,
+} from "@/components/theme/brass-button";
 import { Button } from "@/components/ui/button";
 import { loginSchema, type LoginInput } from "@/lib/validators/auth";
 
@@ -48,6 +52,8 @@ export default function LoginPage() {
   const [resendMessage, setResendMessage] = useState("");
   const [resendCooldown, setResendCooldown] = useState(0);
   const [isResending, setIsResending] = useState(false);
+  const [submitStatus, setSubmitStatus] =
+    useState<LightBeamButtonStatus>("idle");
   const submitLock = useRef(false);
   const resendLock = useRef(false);
 
@@ -86,9 +92,11 @@ export default function LoginPage() {
   const onSubmit = async (data: LoginInput) => {
     setFormError("");
     setUnverifiedEmail("");
+    setSubmitStatus("loading");
 
     try {
       await loginWithEmail(data);
+      setSubmitStatus("success");
       toast.success("Welcome back.");
 
       const params = new URLSearchParams(window.location.search);
@@ -121,6 +129,7 @@ export default function LoginPage() {
       } else {
         setFormError("Invalid email or password.");
       }
+      setSubmitStatus("failure");
     }
   };
 
@@ -280,9 +289,12 @@ export default function LoginPage() {
           </div>
         )}
 
-        <Button type="submit" disabled={isSubmitting} className="w-full">
+        <LightBeamButton
+          type="submit"
+          status={isSubmitting ? "loading" : submitStatus}
+        >
           {isSubmitting ? "Signing in..." : "Log in"}
-        </Button>
+        </LightBeamButton>
 
         <div className="text-center text-xs text-parchment">
           New here?{" "}

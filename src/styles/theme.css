@@ -11,6 +11,14 @@
   --wax-foreground: #ff9e97;
   --fog: #2b3238;
 
+  --obsidian: var(--umber);
+  --charcoal: var(--fog);
+  --walnut: var(--surface);
+  --ivory: var(--parchment);
+  --brass: var(--amber);
+  --crimson: var(--wax);
+  --crimson-foreground: var(--wax-foreground);
+
   --umber-rgb: 13 9 7;
   --surface-rgb: 26 17 12;
   --amber-rgb: 242 163 58;
@@ -42,6 +50,7 @@
   --border: var(--fog);
   --input: var(--fog);
   --ring: var(--amber);
+  --button-focus: var(--brass);
   --radius: 0.5rem;
 }
 
@@ -183,6 +192,17 @@ button:focus-visible,
 [role="button"]:focus-visible {
   outline: 2px solid rgb(var(--amber-rgb) / 0.72);
   outline-offset: 2px;
+}
+
+@media (forced-colors: active) {
+  button:focus-visible,
+  [role="button"]:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid ButtonText;
+    outline-offset: 2px;
+  }
 }
 
 .wax-seal {
