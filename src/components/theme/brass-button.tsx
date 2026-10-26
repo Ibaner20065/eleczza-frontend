@@ -1,6 +1,6 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { Search } from "lucide-react";
+import { AlertCircle, Check, LoaderCircle, Search } from "lucide-react";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 export interface BrassButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -20,6 +20,8 @@ export const LightBeamButton = React.forwardRef<
 >(({ className, children, status = "idle", disabled, ...props }, ref) => {
   const reducedMotion = useReducedMotion();
   const isLoading = status === "loading";
+  const isSuccess = status === "success";
+  const isFailure = status === "failure";
   const isDisabled = disabled || isLoading;
 
   return (
@@ -33,6 +35,8 @@ export const LightBeamButton = React.forwardRef<
         "active:translate-y-px active:shadow-[inset_0_2px_4px_rgb(var(--umber-rgb)/0.5)]",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass focus-visible:ring-offset-2 focus-visible:ring-offset-obsidian",
         "disabled:cursor-not-allowed disabled:opacity-60",
+        isSuccess && "border-brass bg-walnut",
+        isFailure && "border-crimson-foreground bg-crimson/90",
         !reducedMotion &&
           "before:pointer-events-none before:absolute before:inset-y-0 before:left-[-35%] before:w-1/3 before:skew-x-[-18deg] before:bg-gradient-to-r before:from-transparent before:via-ivory/20 before:to-transparent before:transition-transform before:duration-700 before:group-hover:left-[105%]",
         className,
@@ -42,6 +46,27 @@ export const LightBeamButton = React.forwardRef<
       {...props}
     >
       <span className="relative z-10">{children}</span>
+      {isLoading && (
+        <LoaderCircle
+          aria-hidden="true"
+          className={cn(
+            "relative z-10 ml-2 h-4 w-4",
+            !reducedMotion && "animate-spin",
+          )}
+        />
+      )}
+      {isSuccess && (
+        <Check
+          aria-hidden="true"
+          className="relative z-10 ml-2 h-4 w-4 text-brass"
+        />
+      )}
+      {isFailure && (
+        <AlertCircle
+          aria-hidden="true"
+          className="relative z-10 ml-2 h-4 w-4 text-crimson-foreground"
+        />
+      )}
       {isLoading && (
         <span className="sr-only" role="status">
           Loading
