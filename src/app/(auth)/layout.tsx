@@ -1,6 +1,8 @@
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { FogBackground } from "@/components/theme/fog-background";
+import { AtmosphereEffects } from "@/components/theme/atmosphere-effects";
 import { TypewriterText } from "@/components/theme/typewriter-text";
 import { Shield, ArrowLeft, Key, BookOpen } from "lucide-react";
 
@@ -17,14 +19,26 @@ export default function AuthLayout({
 
       <div className="grid min-h-screen lg:grid-cols-12">
         {/* Left Side: Animated Sherlock Holmes 221B Showcase (Hidden on Mobile) */}
-        <aside className="relative hidden flex-col justify-between border-r border-fog bg-umber/85 p-12 backdrop-blur-md lg:col-span-5 lg:flex xl:col-span-5">
+        <aside className="relative isolate hidden flex-col justify-between overflow-hidden border-r border-fog bg-umber p-12 backdrop-blur-md lg:col-span-5 lg:flex xl:col-span-5">
+          <div className="pointer-events-none absolute inset-0 z-0">
+            <Image
+              src="/images/hero-sherlock.jpg"
+              alt=""
+              fill
+              sizes="(min-width: 1280px) 42vw, (min-width: 1024px) 42vw, 0px"
+              className="object-cover object-[58%_center]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-umber/75 via-umber/85 to-umber/95" />
+            <AtmosphereEffects />
+          </div>
+
           {/* Subtle Gaslamp Light Cone */}
-          <div className="pointer-events-none absolute -top-24 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-radial from-amber/15 via-transparent to-transparent blur-2xl" />
+          <div className="pointer-events-none absolute -top-24 left-1/2 z-[1] h-96 w-96 -translate-x-1/2 rounded-full bg-radial from-amber/15 via-transparent to-transparent blur-2xl" />
 
           {/* Top Logo & Bureau Seal */}
-          <div className="relative z-10 flex items-center justify-between">
+          <div className="relative z-[2] flex items-center justify-between">
             <Link href="/" className="flex items-center gap-3 group">
-              <div className="flex h-10 w-10 items-center justify-center rounded border border-amber bg-surface font-serif text-lg font-bold text-amber shadow-[0_0_12px_rgb(var(--amber-rgb)/0.3)] transition-transform group-hover:scale-105">
+              <div className="wax-seal flex h-10 w-10 items-center justify-center rounded-full font-serif text-lg font-bold text-parchment shadow-[0_0_12px_rgb(var(--wax-rgb)/0.3)] transition-transform group-hover:scale-105">
                 §
               </div>
               <div>
@@ -43,7 +57,7 @@ export default function AuthLayout({
           </div>
 
           {/* Central Atmospheric Case File Display */}
-          <div className="relative z-10 my-auto space-y-6 max-w-md">
+          <div className="relative z-[2] my-auto max-w-md space-y-6">
             <div className="inline-flex items-center gap-2 rounded border border-wax bg-wax/60 px-3 py-1 text-[11px] font-mono font-bold tracking-widest text-wax-foreground uppercase">
               <Shield className="h-3.5 w-3.5" />
               RESTRICTED FORENSIC DOSSIER
@@ -88,7 +102,7 @@ export default function AuthLayout({
           </div>
 
           {/* Bottom Bureau Metadata */}
-          <div className="relative z-10 border-t border-fog/50 pt-4 text-[11px] text-muted-foreground">
+          <div className="relative z-[2] border-t border-fog/50 pt-4 text-[11px] text-muted-foreground">
             Academy of Technology • Department of ECE
           </div>
         </aside>
@@ -107,7 +121,7 @@ export default function AuthLayout({
 
             {/* Mobile-only brand banner */}
             <div className="flex items-center gap-2 lg:hidden">
-              <div className="flex h-7 w-7 items-center justify-center rounded border border-amber bg-surface font-serif text-xs font-bold text-amber">
+              <div className="wax-seal flex h-7 w-7 items-center justify-center rounded-full font-serif text-xs font-bold text-parchment">
                 §
               </div>
               <span className="font-script text-2xl text-parchment">

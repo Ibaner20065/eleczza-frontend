@@ -7,7 +7,7 @@ function Skeleton({
   return (
     <div
       className={cn(
-        "animate-pulse rounded-md bg-surface border border-fog/30",
+        "animate-pulse rounded-md border border-parchment/10 bg-gradient-to-r from-surface via-fog/25 to-surface",
         className,
       )}
       {...props}

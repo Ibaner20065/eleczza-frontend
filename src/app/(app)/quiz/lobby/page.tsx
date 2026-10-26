@@ -36,7 +36,7 @@ export default function QuizLobbyPage() {
           {caseFile.title}
         </h1>
 
-        <div className="mx-auto max-w-md rounded-lg border border-fog bg-umber p-4 font-mono text-xs text-amber">
+        <div className="wood-panel mx-auto max-w-md rounded-lg p-4 font-mono text-xs text-amber">
           <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1">
             INSPECTOR LESTRADE BRIEFING:
           </div>
@@ -71,7 +71,7 @@ export default function QuizLobbyPage() {
           <motion.div
             key={item.label}
             variants={fadeUp}
-            className="parchment-border rounded-lg bg-surface p-4 text-center"
+            className="wood-panel rounded-lg p-4 text-center"
           >
             <div className="text-2xl">{item.icon}</div>
             <div className="mt-1 font-mono text-sm font-bold text-amber">
@@ -85,7 +85,7 @@ export default function QuizLobbyPage() {
       </motion.div>
 
       {/* Waiting Indicator & Agency Readiness */}
-      <div className="parchment-border rounded-xl bg-surface p-6 space-y-5">
+      <div className="wood-panel space-y-5 rounded-xl p-6">
         <div className="flex items-center justify-between border-b border-fog pb-4">
           <div className="flex items-center gap-3">
             <MagnifierLoader label="" size="sm" />
@@ -128,7 +128,7 @@ export default function QuizLobbyPage() {
             {team.members.map((member) => (
               <div
                 key={member.userId}
-                className="flex items-center justify-between rounded-md border border-fog/60 bg-surface px-4 py-2.5"
+                className="flex items-center justify-between rounded-md border border-fog/60 bg-umber/35 px-4 py-2.5"
               >
                 <div className="flex items-center gap-2.5">
                   {member.isReady ? (
@@ -179,7 +179,7 @@ export default function QuizLobbyPage() {
         <Link href="/dashboard" className="w-full sm:w-auto">
           <button
             type="button"
-            className="w-full inline-flex h-11 items-center justify-center gap-2 rounded-md border border-fog bg-surface px-6 text-xs font-semibold uppercase tracking-wider text-parchment transition-colors hover:border-amber/50 hover:text-parchment"
+            className="w-full inline-flex h-11 items-center justify-center gap-2 rounded-md border border-parchment/35 bg-transparent px-6 text-xs font-semibold uppercase tracking-wider text-parchment transition-colors hover:border-parchment/70 hover:bg-parchment/5 hover:text-parchment"
           >
             Return to Study
           </button>

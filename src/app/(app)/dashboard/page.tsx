@@ -13,7 +13,7 @@ export default function DashboardPage() {
   return (
     <div className="space-y-8">
       {/* Welcome Banner */}
-      <section className="parchment-border rounded-xl bg-surface p-6 shadow-xl">
+      <section className="wood-panel rounded-xl p-6 shadow-xl">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
           <div className="space-y-2">
             <div className="flex items-center gap-2">
@@ -113,7 +113,7 @@ export default function DashboardPage() {
               <Link
                 key={tile.href}
                 href={tile.href}
-                className="flex flex-col items-center justify-center gap-2 rounded-lg border border-fog bg-surface p-4 text-center transition-all hover:border-amber/50 hover:bg-surface"
+                className="wood-panel flex flex-col items-center justify-center gap-2 rounded-lg p-4 text-center transition-all hover:border-amber/50"
               >
                 <span className="text-2xl">{tile.icon}</span>
                 <span className="text-xs font-semibold text-parchment">

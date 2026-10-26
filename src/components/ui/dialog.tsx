@@ -17,7 +17,7 @@ const DialogBackdrop = React.forwardRef<
   <DialogPrimitive.Backdrop
     ref={ref}
     className={cn(
-      "fixed inset-0 z-50 bg-umber/80 backdrop-blur-sm transition-opacity duration-200 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0",
+      "fixed inset-0 z-50 bg-umber/88 backdrop-blur-sm transition-opacity duration-200 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0",
       className,
     )}
     {...props}
@@ -35,7 +35,7 @@ const DialogPopup = React.forwardRef<
       <DialogPrimitive.Popup
         ref={ref}
         className={cn(
-          "parchment-border relative w-full max-w-lg rounded-lg bg-surface p-6 text-parchment shadow-2xl transition-all duration-200 data-[ending-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:scale-95 data-[starting-style]:opacity-0",
+          "wood-panel relative w-full max-w-lg rounded-lg p-6 text-parchment shadow-2xl transition-all duration-200 data-[ending-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:scale-95 data-[starting-style]:opacity-0",
           className,
         )}
         {...props}
@@ -86,7 +86,7 @@ const DialogTitle = React.forwardRef<
   <DialogPrimitive.Title
     ref={ref}
     className={cn(
-      "font-serif text-lg font-bold tracking-tight text-parchment",
+      "font-script text-2xl font-normal tracking-normal text-parchment",
       className,
     )}
     {...props}

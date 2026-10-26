@@ -68,11 +68,11 @@ export function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-fog bg-umber/90 backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full border-b border-fog bg-[linear-gradient(180deg,rgb(var(--surface-rgb)/0.97),rgb(var(--umber-rgb)/0.94))] shadow-[0_5px_18px_rgb(var(--umber-rgb)/0.35)] backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
         {/* Brand Logo */}
         <Link href="/dashboard" className="flex items-center gap-3 group">
-          <div className="flex h-9 w-9 items-center justify-center rounded border border-amber bg-surface font-serif text-base font-bold text-amber shadow-[0_0_10px_rgb(var(--amber-rgb)/0.25)] transition-transform group-hover:scale-105">
+          <div className="wax-seal flex h-9 w-9 items-center justify-center rounded-full font-serif text-base font-bold text-parchment shadow-[0_0_12px_rgb(var(--wax-rgb)/0.3)] transition-transform group-hover:scale-105">
             §
           </div>
           <div className="flex flex-col">
@@ -134,7 +134,7 @@ export function Navbar() {
                   className="h-3.5 w-3.5 text-muted-foreground transition-transform group-open:rotate-180"
                 />
               </summary>
-              <div className="absolute right-0 z-50 mt-2 w-60 rounded-md border border-fog bg-surface p-2 shadow-xl">
+              <div className="wood-panel absolute right-0 z-50 mt-2 w-60 rounded-md p-2 shadow-xl">
                 <div className="border-b border-fog px-3 py-2">
                   <p className="truncate text-xs font-semibold text-parchment">
                     {fullName || "Inspector"}
@@ -170,7 +170,7 @@ export function Navbar() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="rounded border border-fog bg-surface p-2 text-parchment hover:text-amber focus:outline-none"
+            className="rounded border border-fog bg-surface p-2 text-parchment hover:text-amber focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? (
@@ -184,7 +184,7 @@ export function Navbar() {
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="border-b border-fog bg-umber p-4 md:hidden space-y-2">
+        <div className="wood-panel space-y-2 border-b border-fog p-4 md:hidden">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = pathname === item.href;

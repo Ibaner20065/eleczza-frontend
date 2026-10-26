@@ -3,15 +3,17 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const alertVariants = cva(
-  "relative w-full rounded-lg border p-4 text-xs [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground",
+  "relative w-full rounded-lg border p-4 text-xs shadow-[0_4px_16px_rgb(var(--umber-rgb)/0.24)] [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground",
   {
     variants: {
       variant: {
-        default: "border-amber/40 bg-surface text-parchment [&>svg]:text-amber",
-        wax: "border-wax bg-wax/60 text-parchment [&>svg]:text-wax-foreground",
+        default:
+          "border-amber/40 bg-amber/10 text-parchment [&>svg]:text-amber",
+        wax: "border-wax/70 bg-wax/25 text-parchment [&>svg]:text-wax-foreground",
         telegram:
-          "border-fog bg-umber text-parchment font-mono [&>svg]:text-amber",
-        solved: "border-amber/60 bg-amber/15 text-parchment [&>svg]:text-amber",
+          "border-amber/30 bg-surface font-mono text-parchment [&>svg]:text-amber",
+        solved:
+          "border-emerald-800/70 bg-emerald-950/40 text-emerald-100 [&>svg]:text-emerald-400",
       },
     },
     defaultVariants: {
@@ -55,7 +57,7 @@ const AlertDescription = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "text-xs text-parchment leading-relaxed [&_p]:leading-relaxed",
+      "text-xs leading-relaxed text-inherit [&_p]:leading-relaxed",
       className,
     )}
     {...props}

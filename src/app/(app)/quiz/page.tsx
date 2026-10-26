@@ -62,7 +62,7 @@ export default function QuizPage() {
       {/* Split Pane: Left Clues / Right Deduction */}
       <div className="grid gap-6 lg:grid-cols-12">
         {/* Left Pane: Evidence Locker (7 cols) */}
-        <div className="parchment-border space-y-4 rounded-lg bg-surface p-6 lg:col-span-7">
+        <div className="wood-panel space-y-4 rounded-lg p-6 lg:col-span-7">
           <div className="flex items-center justify-between border-b border-fog pb-3">
             <div className="flex items-center gap-2">
               <FileText className="h-4 w-4 text-amber" />
@@ -81,7 +81,7 @@ export default function QuizPage() {
               pulsing across the emergency frequency.
             </p>
 
-            <div className="rounded border border-fog bg-umber p-4 font-mono text-xs text-amber">
+            <div className="rounded border border-fog bg-umber/80 p-4 font-mono text-xs text-amber">
               <code>
                 [TRANSMISSION LOG // BAKER_NET]
                 <br />
@@ -98,7 +98,7 @@ export default function QuizPage() {
           </div>
 
           {/* Hint Requisition */}
-          <div className="mt-6 rounded border border-amber/20 bg-amber/5 p-3 text-xs">
+          <div className="mt-6 rounded border border-amber/30 bg-amber/10 p-3 text-xs">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-1.5 font-semibold text-amber">
                 <Lightbulb className="h-4 w-4" />
@@ -115,7 +115,7 @@ export default function QuizPage() {
         </div>
 
         {/* Right Pane: Deduction Console (5 cols) */}
-        <div className="parchment-border space-y-4 rounded-lg bg-surface p-6 lg:col-span-5">
+        <div className="wood-panel space-y-4 rounded-lg p-6 lg:col-span-5">
           <div className="flex items-center gap-2 border-b border-fog pb-3">
             <Search className="h-4 w-4 text-amber" />
             <h2 className="text-sm font-bold tracking-wider text-parchment uppercase">
@@ -132,7 +132,7 @@ export default function QuizPage() {
                 {...register("deduction")}
                 rows={4}
                 placeholder="Enter decrypted string, key, or conclusion..."
-                className="mt-1 w-full rounded border border-fog bg-umber p-3 text-sm text-parchment placeholder-muted-foreground focus:border-amber focus:outline-none"
+                className="field-control mt-1 w-full rounded border border-fog bg-umber p-3 text-sm text-parchment placeholder-muted-foreground focus:border-amber focus:outline-none"
               />
               {errors.deduction && (
                 <p className="mt-1 text-xs text-wax-foreground">
@@ -147,11 +147,7 @@ export default function QuizPage() {
               </div>
             )}
 
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full cursor-pointer bg-amber font-semibold text-umber hover:bg-amber"
-            >
+            <Button type="submit" disabled={isSubmitting} className="w-full">
               <Send className="mr-2 h-4 w-4" />
               {isSubmitting ? "Dispatching..." : "Submit Deduction"}
             </Button>

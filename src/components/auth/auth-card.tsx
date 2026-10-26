@@ -17,7 +17,7 @@ export function AuthCard({
   return (
     <div
       className={cn(
-        "parchment-border w-full max-w-md rounded-lg bg-surface/95 p-8 backdrop-blur-md",
+        "wood-panel w-full max-w-md rounded-lg p-8 backdrop-blur-md",
         className,
       )}
       {...props}

@@ -18,8 +18,8 @@ export function TeamStatusCard({ team }: TeamStatusCardProps) {
   const allReady = readyCount === team.members.length;
 
   return (
-    <div className="parchment-border rounded-xl bg-surface p-6 space-y-4 h-full">
-      <div className="flex items-center justify-between border-b border-fog pb-4">
+    <div className="wood-panel rounded-xl p-6 space-y-4 h-full">
+      <div className="flex items-center justify-between border-b border-amber/15 pb-4">
         <div>
           <div className="flex items-center gap-2">
             <Users className="h-4 w-4 text-amber" />
@@ -51,7 +51,7 @@ export function TeamStatusCard({ team }: TeamStatusCardProps) {
       </div>
 
       {/* Passcode */}
-      <div className="flex items-center justify-between rounded border border-fog bg-umber px-3 py-2">
+      <div className="flex items-center justify-between rounded border border-fog bg-umber/80 px-3 py-2">
         <div>
           <div className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground">
             Passcode
@@ -63,7 +63,7 @@ export function TeamStatusCard({ team }: TeamStatusCardProps) {
         <button
           type="button"
           title="Copy passcode"
-          className="rounded border border-fog bg-surface p-1.5 text-parchment transition-colors hover:text-amber cursor-pointer"
+          className="rounded border border-fog bg-umber/75 p-1.5 text-parchment transition-colors hover:border-amber/50 hover:text-amber cursor-pointer"
         >
           <Copy className="h-3.5 w-3.5" />
         </button>
@@ -74,7 +74,7 @@ export function TeamStatusCard({ team }: TeamStatusCardProps) {
         {team.members.map((member) => (
           <div
             key={member.userId}
-            className="flex items-center justify-between rounded-md border border-fog/50 bg-surface px-3 py-2"
+            className="flex items-center justify-between rounded-md border border-fog/50 bg-umber/35 px-3 py-2"
           >
             <div className="flex items-center gap-2.5">
               <div

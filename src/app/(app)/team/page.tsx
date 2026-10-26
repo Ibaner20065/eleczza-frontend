@@ -167,7 +167,7 @@ export default function TeamPage() {
             {/* Passcode Banner */}
             <motion.div
               variants={fadeUp}
-              className="flex items-center justify-between rounded-lg border border-fog bg-umber px-5 py-3"
+              className="wood-panel flex items-center justify-between rounded-lg px-5 py-3"
             >
               <div>
                 <div className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground">
@@ -197,7 +197,7 @@ export default function TeamPage() {
                 <motion.div
                   key={member.userId}
                   variants={fadeUp}
-                  className="parchment-border rounded-lg bg-surface p-4 space-y-3"
+                  className="wood-panel space-y-3 rounded-lg p-4"
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex items-center gap-2.5">
@@ -239,7 +239,7 @@ export default function TeamPage() {
                         onChange={(e) =>
                           changeRole(member.userId, e.target.value as TeamRole)
                         }
-                        className="rounded border border-fog bg-umber px-2 py-1 font-mono text-xs text-parchment focus:border-amber focus:outline-none cursor-pointer"
+                        className="field-control cursor-pointer rounded border border-fog bg-umber px-2 py-1 font-mono text-xs text-parchment focus:border-amber focus:outline-none"
                       >
                         {ROLE_OPTIONS.map((r) => (
                           <option key={r} value={r}>
@@ -279,7 +279,7 @@ export default function TeamPage() {
             variants={fadeUp}
             initial="initial"
             animate="animate"
-            className="parchment-border rounded-xl bg-surface p-6 max-w-lg"
+            className="wood-panel max-w-lg rounded-xl p-6"
           >
             <h2 className="font-serif text-xl font-bold text-parchment">
               Charter a New Agency
@@ -327,7 +327,7 @@ export default function TeamPage() {
             variants={fadeUp}
             initial="initial"
             animate="animate"
-            className="parchment-border rounded-xl bg-surface p-6 max-w-sm"
+            className="wood-panel max-w-sm rounded-xl p-6"
           >
             <div className="flex items-center gap-2 text-amber">
               <KeyRound className="h-5 w-5" />

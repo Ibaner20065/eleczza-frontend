@@ -23,8 +23,8 @@ export const BrassButton = React.forwardRef<
       className={cn(
         "group relative inline-flex items-center justify-center gap-2 rounded-md font-semibold uppercase tracking-wider text-umber select-none cursor-pointer overflow-hidden transition-all duration-150",
         "bg-gradient-to-b from-parchment via-amber to-copper",
-        "border border-parchment shadow-[inset_0_1px_1px_rgb(var(--parchment-rgb)/0.7),0_2px_8px_rgb(var(--umber-rgb)/0.6),0_0_12px_rgb(var(--amber-rgb)/0.3)]",
-        "hover:brightness-108 hover:shadow-[inset_0_1px_1px_rgb(var(--parchment-rgb)/0.9),0_4px_14px_rgb(var(--umber-rgb)/0.7),0_0_18px_rgb(var(--amber-rgb)/0.45)]",
+        "border border-parchment/80 shadow-[inset_0_1px_1px_rgb(var(--parchment-rgb)/0.55),0_2px_8px_rgb(var(--umber-rgb)/0.6),0_0_10px_rgb(var(--amber-rgb)/0.22)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber/70 focus-visible:ring-offset-2 focus-visible:ring-offset-umber",
+        "hover:brightness-108 hover:shadow-[inset_0_1px_1px_rgb(var(--parchment-rgb)/0.7),0_4px_14px_rgb(var(--umber-rgb)/0.7),0_0_14px_rgb(var(--amber-rgb)/0.32)]",
         "active:translate-y-[1px] active:brightness-95 active:shadow-[inset_0_2px_4px_rgb(var(--umber-rgb)/0.5)]",
         "disabled:opacity-50 disabled:pointer-events-none",
         sizeClasses[size],

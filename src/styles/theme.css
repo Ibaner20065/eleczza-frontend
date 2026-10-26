@@ -68,9 +68,45 @@
   box-shadow: 0 0 16px rgb(var(--amber-rgb) / 0.22);
 }
 
-.parchment-border {
+.wood-panel {
   border: 1px solid rgb(var(--fog-rgb) / 0.8);
-  box-shadow: 0 0 18px rgb(var(--umber-rgb) / 0.35);
+  background-color: var(--surface);
+  background-image:
+    radial-gradient(
+      ellipse at 12% 0%,
+      rgb(var(--amber-rgb) / 0.07),
+      transparent 42%
+    ),
+    linear-gradient(
+      145deg,
+      rgb(var(--parchment-rgb) / 0.025),
+      transparent 38%,
+      rgb(var(--umber-rgb) / 0.35)
+    );
+  box-shadow:
+    inset 0 1px rgb(var(--parchment-rgb) / 0.035),
+    0 8px 24px rgb(var(--umber-rgb) / 0.38);
+}
+
+.wood-toast {
+  border-color: rgb(var(--amber-rgb) / 0.35);
+}
+
+.wood-toast[data-type="success"] {
+  border-color: rgb(4 120 87 / 0.7);
+  background-color: rgb(2 44 34 / 0.9);
+}
+
+.wood-toast[data-type="error"] {
+  border-color: var(--wax);
+  background-color: rgb(var(--wax-rgb) / 0.35);
+}
+
+.parchment-border {
+  border: 1px solid rgb(var(--parchment-rgb) / 0.14);
+  box-shadow:
+    inset 0 1px rgb(var(--parchment-rgb) / 0.035),
+    0 8px 24px rgb(var(--umber-rgb) / 0.38);
 }
 
 .paper-texture {
@@ -102,6 +138,51 @@
     8px 8px,
     8px 8px;
   border: 1px solid var(--fog);
+}
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not(
+    [type="submit"]
+  ):not([type="button"]),
+textarea,
+select {
+  color-scheme: dark;
+  border-color: rgb(var(--fog-rgb) / 0.9);
+  background-color: rgb(var(--umber-rgb) / 0.92);
+  color: var(--parchment);
+  box-shadow: inset 0 2px 5px rgb(var(--umber-rgb) / 0.65);
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not(
+    [type="submit"]
+  ):not([type="button"]):focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  border-color: var(--amber);
+  outline: 2px solid rgb(var(--amber-rgb) / 0.42);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgb(var(--amber-rgb) / 0.1);
+}
+
+input[aria-invalid="true"],
+textarea[aria-invalid="true"],
+select[aria-invalid="true"] {
+  border-color: var(--wax-foreground);
+}
+
+.field-control:focus-visible {
+  border-color: var(--amber);
+  outline: 2px solid rgb(var(--amber-rgb) / 0.42);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgb(var(--amber-rgb) / 0.1);
+}
+
+button:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid rgb(var(--amber-rgb) / 0.72);
+  outline-offset: 2px;
 }
 
 .wax-seal {

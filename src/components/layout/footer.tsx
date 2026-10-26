@@ -6,13 +6,13 @@ export function Footer() {
   const domain = process.env.NEXT_PUBLIC_ALLOWED_EMAIL_DOMAIN || "@aot.edu.in";
 
   return (
-    <footer className="w-full border-t border-fog bg-umber text-parchment text-xs">
+    <footer className="w-full border-t border-fog bg-[linear-gradient(180deg,var(--surface),var(--umber))] text-parchment text-xs">
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
         <div className="grid gap-8 md:grid-cols-12">
           {/* Brand Info */}
           <div className="space-y-3 md:col-span-5">
             <div className="flex items-center gap-2.5">
-              <div className="flex h-7 w-7 items-center justify-center rounded border border-amber bg-surface font-serif text-sm font-bold text-amber">
+              <div className="wax-seal flex h-7 w-7 items-center justify-center rounded-full font-serif text-sm font-bold text-parchment shadow-[0_0_10px_rgb(var(--wax-rgb)/0.25)]">
                 §
               </div>
               <span className="font-script text-2xl text-parchment">
@@ -68,7 +68,6 @@ export function Footer() {
                   Scotland Yard Ledger
                 </Link>
               </li>
-              <li></li>
             </ul>
           </div>
 

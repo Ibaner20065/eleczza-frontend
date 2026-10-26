@@ -73,7 +73,7 @@ export default function LeaderboardPage() {
         {mockRankings.slice(0, 3).map((agency) => (
           <div
             key={agency.rank}
-            className={`parchment-border relative rounded-lg p-5 text-center ${
+            className={`wood-panel relative rounded-lg p-5 text-center ${
               agency.rank === 1
                 ? "amber-glow border-amber bg-umber"
                 : "bg-surface"
@@ -95,7 +95,7 @@ export default function LeaderboardPage() {
             </div>
             <div className="text-xs text-parchment">{agency.leadInspector}</div>
 
-            <div className="mt-4 border-t border-fog pt-3 text-sm font-bold text-amber">
+            <div className="mt-4 border-t border-amber/20 pt-3 text-sm font-bold text-amber">
               {agency.score} pts
             </div>
           </div>
@@ -103,9 +103,9 @@ export default function LeaderboardPage() {
       </div>
 
       {/* Full Ledger Table */}
-      <div className="parchment-border overflow-hidden rounded-lg bg-surface">
+      <div className="wood-panel overflow-hidden rounded-lg">
         <table className="w-full text-left text-xs">
-          <thead className="border-b border-fog bg-umber tracking-wider text-parchment uppercase">
+          <thead className="border-b border-amber/20 bg-umber/85 tracking-wider text-parchment uppercase">
             <tr>
               <th className="px-4 py-3">Rank</th>
               <th className="px-4 py-3">Agency</th>
@@ -119,7 +119,7 @@ export default function LeaderboardPage() {
             {mockRankings.map((entry) => (
               <tr
                 key={entry.rank}
-                className="transition-colors hover:bg-surface/60"
+                className="transition-colors hover:bg-parchment/5"
               >
                 <td className="px-4 py-3 font-bold text-parchment">
                   <span className="flex items-center gap-1.5">
