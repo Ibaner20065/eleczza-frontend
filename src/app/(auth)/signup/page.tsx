@@ -11,6 +11,10 @@ import { signupSchema, type SignupInput } from "@/lib/validators/auth";
 import { passwordRequirements } from "@/lib/password-strength";
 import { AuthCard } from "@/components/auth/auth-card";
 import { DomainNotice } from "@/components/auth/domain-notice";
+import {
+  LightBeamButton,
+  type LightBeamButtonStatus,
+} from "@/components/theme/brass-button";
 import { Button } from "@/components/ui/button";
 
 function getAuthErrorMessage(error: unknown, action: "signup" | "resend") {
@@ -58,6 +62,8 @@ export default function SignupPage() {
   const [resendMessage, setResendMessage] = useState("");
   const [resendCooldown, setResendCooldown] = useState(0);
   const [isResending, setIsResending] = useState(false);
+  const [submitStatus, setSubmitStatus] =
+    useState<LightBeamButtonStatus>("idle");
   const submitLock = useRef(false);
   const resendLock = useRef(false);
 
@@ -98,11 +104,13 @@ export default function SignupPage() {
 
   const onSubmit = async (data: SignupInput) => {
     setFormError("");
+    setSubmitStatus("loading");
 
     try {
       const { user } = await signupWithEmail(data);
 
       if (!user) {
+        setSubmitStatus("failure");
         setFormError(
           "We couldn't confirm your account request. Please try again.",
         );
@@ -110,14 +118,17 @@ export default function SignupPage() {
       }
 
       if (user.identities?.length === 0) {
+        setSubmitStatus("failure");
         setFormError(
           "This email already has an account. Log in or reset your password instead.",
         );
         return;
       }
 
+      setSubmitStatus("success");
       setRegisteredEmail(data.email);
     } catch (error) {
+      setSubmitStatus("failure");
       setFormError(getAuthErrorMessage(error, "signup"));
     }
   };
@@ -411,9 +422,12 @@ export default function SignupPage() {
             </p>
           )}
 
-          <Button type="submit" disabled={isSubmitting} className="w-full">
+          <LightBeamButton
+            type="submit"
+            status={isSubmitting ? "loading" : submitStatus}
+          >
             {isSubmitting ? "Creating account..." : "Create account"}
-          </Button>
+          </LightBeamButton>
 
           <div className="text-center text-xs text-parchment">
             Already have an account?{" "}

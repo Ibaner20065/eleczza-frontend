@@ -8,7 +8,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { requestPasswordReset } from "@/api/auth";
 import { AuthCard } from "@/components/auth/auth-card";
 import { DomainNotice } from "@/components/auth/domain-notice";
-import { Button } from "@/components/ui/button";
+import {
+  LightBeamButton,
+  type LightBeamButtonStatus,
+} from "@/components/theme/brass-button";
 import {
   forgotPasswordSchema,
   type ForgotPasswordInput,
@@ -28,6 +31,8 @@ function isRateLimitError(error: unknown) {
 export default function ForgotPasswordPage() {
   const [confirmationShown, setConfirmationShown] = useState(false);
   const [formError, setFormError] = useState("");
+  const [submitStatus, setSubmitStatus] =
+    useState<LightBeamButtonStatus>("idle");
   const submitLock = useRef(false);
   const {
     register,
@@ -41,11 +46,14 @@ export default function ForgotPasswordPage() {
 
   const onSubmit = async (data: ForgotPasswordInput) => {
     setFormError("");
+    setSubmitStatus("loading");
 
     try {
       await requestPasswordReset(data);
+      setSubmitStatus("success");
       setConfirmationShown(true);
     } catch (error) {
+      setSubmitStatus("failure");
       setFormError(
         isRateLimitError(error)
           ? "Too many attempts. Please wait a moment before trying again."
@@ -132,9 +140,12 @@ export default function ForgotPasswordPage() {
             </p>
           )}
 
-          <Button type="submit" disabled={isSubmitting} className="w-full">
+          <LightBeamButton
+            type="submit"
+            status={isSubmitting ? "loading" : submitStatus}
+          >
             {isSubmitting ? "Sending recovery link..." : "Send recovery link"}
-          </Button>
+          </LightBeamButton>
 
           <div className="text-center text-xs text-parchment">
             Remember your password?{" "}

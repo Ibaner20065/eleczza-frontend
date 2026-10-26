@@ -10,7 +10,10 @@ import { Eye, EyeOff, KeyRound } from "lucide-react";
 import { toast } from "sonner";
 import { updatePassword } from "@/api/auth";
 import { AuthCard } from "@/components/auth/auth-card";
-import { Button } from "@/components/ui/button";
+import {
+  LightBeamButton,
+  type LightBeamButtonStatus,
+} from "@/components/theme/brass-button";
 import { createClient } from "@/lib/supabase/client";
 import { passwordRequirements } from "@/lib/password-strength";
 import {
@@ -24,6 +27,8 @@ export default function ResetPasswordPage() {
   const [hasRecoverySession, setHasRecoverySession] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [formError, setFormError] = useState("");
+  const [submitStatus, setSubmitStatus] =
+    useState<LightBeamButtonStatus>("idle");
   const submitLock = useRef(false);
 
   const {
@@ -80,13 +85,16 @@ export default function ResetPasswordPage() {
 
   const onSubmit = async (data: ResetPasswordInput) => {
     setFormError("");
+    setSubmitStatus("loading");
 
     try {
       await updatePassword(data.password);
+      setSubmitStatus("success");
       toast.success("Password updated. Log in with your new password.");
       router.replace("/login");
       router.refresh();
     } catch (error) {
+      setSubmitStatus("failure");
       const message = error instanceof Error ? error.message.toLowerCase() : "";
       setFormError(
         message.includes("fetch") || message.includes("network")
@@ -260,9 +268,12 @@ export default function ResetPasswordPage() {
             </p>
           )}
 
-          <Button type="submit" disabled={isSubmitting} className="w-full">
+          <LightBeamButton
+            type="submit"
+            status={isSubmitting ? "loading" : submitStatus}
+          >
             {isSubmitting ? "Updating password..." : "Update password"}
-          </Button>
+          </LightBeamButton>
         </form>
       ) : (
         <div className="space-y-4 text-center">
