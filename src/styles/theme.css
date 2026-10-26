@@ -1,153 +1,129 @@
-/* ==============================================================================
-   ELECZZA 2.0 - Sherlock Holmes Victorian Noir Design Tokens
-   Deep Charcoal, Oxblood, Aged-Paper Cream, Brass Gold & Thames Fog
-   ============================================================================== */
-
+/* Shared ELECZZA palette and shadcn semantic tokens. */
 :root,
 .dark {
-  /* Charcoal Base & Surfaces */
-  --charcoal-950: #0b0c10;
-  --charcoal-900: #12151c;
-  --charcoal-850: #161922;
-  --charcoal-800: #1c202b;
+  --umber: #0d0907;
+  --surface: #1a110c;
+  --amber: #f2a33a;
+  --copper: #b5651d;
+  --burnt-orange: #8a3b12;
+  --parchment: #e9dcc0;
+  --wax: #a3201a;
+  --wax-foreground: #ff9e97;
+  --fog: #2b3238;
 
-  /* Oxblood & Red Sealing Wax */
-  --oxblood-950: #250608;
-  --oxblood-900: #3d0b0e;
-  --oxblood-700: #6b171a;
-  --oxblood-600: #8b1e22;
-  --oxblood-500: #a8262b;
-  --oxblood-400: #c93b41;
+  --umber-rgb: 13 9 7;
+  --surface-rgb: 26 17 12;
+  --amber-rgb: 242 163 58;
+  --burnt-orange-rgb: 138 59 18;
+  --parchment-rgb: 233 220 192;
+  --wax-rgb: 163 32 26;
+  --fog-rgb: 43 50 56;
 
-  /* Aged-Paper Cream & Manuscript Vellum */
-  --cream-50: #fbf8f1;
-  --cream-100: #f4ebd9;
-  --cream-200: #eadcc1;
-  --cream-300: #d9ceb8;
-  --cream-400: #baaa8f;
-  --cream-600: #85755b;
-
-  /* Brass & Gaslamp Gold */
-  --brass-300: #f3d88c;
-  --brass-400: #dfb75a;
-  --brass-500: #c59b27;
-  --brass-600: #9b7728;
-  --brass-800: #574213;
-
-  /* Thames Fog Grey */
-  --fog-900: #181b24;
-  --fog-700: #2d3344;
-  --fog-500: #4e5569;
-  --fog-300: #8892b0;
-  --fog-200: #b4bccf;
-
-  /* Solved Emerald */
-  --emerald-solved: #2a7b54;
-  --emerald-glow: #3eaa75;
-
-  /* Semantic Shadcn Tokens (Dark default) */
-  --background: var(--charcoal-950);
-  --foreground: var(--cream-100);
-
-  --card: var(--charcoal-900);
-  --card-foreground: var(--cream-100);
-
-  --popover: var(--charcoal-900);
-  --popover-foreground: var(--cream-100);
-
-  --primary: var(--brass-400);
-  --primary-foreground: var(--charcoal-950);
-
-  --secondary: var(--charcoal-800);
-  --secondary-foreground: var(--cream-100);
-
-  --muted: var(--charcoal-850);
-  --muted-foreground: var(--cream-300);
-
-  --accent: var(--charcoal-800);
-  --accent-foreground: var(--brass-400);
-
-  --destructive: var(--oxblood-500);
-  --destructive-foreground: var(--cream-50);
-
-  --border: var(--fog-700);
-  --input: var(--fog-700);
-  --ring: var(--brass-400);
-
+  --background: var(--umber);
+  --foreground: var(--parchment);
+  --card: var(--surface);
+  --card-foreground: var(--parchment);
+  --popover: var(--surface);
+  --popover-foreground: var(--parchment);
+  --primary: var(--amber);
+  --primary-foreground: var(--umber);
+  --secondary: var(--surface);
+  --secondary-foreground: var(--parchment);
+  --muted: color-mix(in srgb, var(--fog) 28%, var(--surface));
+  --muted-foreground: color-mix(
+    in srgb,
+    var(--parchment) 78%,
+    var(--background)
+  );
+  --accent: color-mix(in srgb, var(--burnt-orange) 30%, var(--surface));
+  --accent-foreground: var(--parchment);
+  --destructive: var(--wax);
+  --destructive-foreground: var(--parchment);
+  --border: var(--fog);
+  --input: var(--fog);
+  --ring: var(--amber);
   --radius: 0.5rem;
 }
 
-/* ==============================================================================
-   Atmospheric Textures & Visual Effects
-   ============================================================================== */
-
-/* Gaslamp subtle ambient gradient */
 .gaslamp-glow {
   background: radial-gradient(
     circle at 50% 0%,
-    rgba(223, 183, 90, 0.12) 0%,
-    rgba(18, 21, 28, 0.6) 45%,
-    rgba(11, 12, 16, 0.98) 100%
+    rgb(var(--amber-rgb) / 0.12) 0%,
+    rgb(var(--surface-rgb) / 0.6) 45%,
+    rgb(var(--umber-rgb) / 0.98) 100%
   );
 }
 
-/* Burnished brass metallic border & shine */
-.brass-border {
-  border: 1px solid rgba(223, 183, 90, 0.35);
-  box-shadow: 0 0 14px rgba(223, 183, 90, 0.12);
+.amber-border {
+  border: 1px solid rgb(var(--amber-rgb) / 0.35);
+  box-shadow: 0 0 14px rgb(var(--amber-rgb) / 0.12);
 }
 
-.brass-border:hover {
-  border-color: rgba(223, 183, 90, 0.65);
-  box-shadow: 0 0 20px rgba(223, 183, 90, 0.25);
+.amber-border:hover {
+  border-color: rgb(var(--amber-rgb) / 0.65);
+  box-shadow: 0 0 20px rgb(var(--amber-rgb) / 0.25);
 }
 
-/* Aged parchment paper texture simulation */
+.amber-glow {
+  box-shadow: 0 0 16px rgb(var(--amber-rgb) / 0.22);
+}
+
+.parchment-border {
+  border: 1px solid rgb(var(--fog-rgb) / 0.8);
+  box-shadow: 0 0 18px rgb(var(--umber-rgb) / 0.35);
+}
+
 .paper-texture {
-  background-color: var(--charcoal-900);
+  background-color: var(--surface);
   background-image:
     radial-gradient(
       circle at 10% 10%,
-      rgba(223, 183, 90, 0.03) 0%,
+      rgb(var(--amber-rgb) / 0.03) 0%,
       transparent 40%
     ),
     radial-gradient(
       circle at 90% 90%,
-      rgba(107, 23, 26, 0.04) 0%,
+      rgb(var(--burnt-orange-rgb) / 0.04) 0%,
       transparent 50%
     ),
-    linear-gradient(135deg, rgba(244, 235, 217, 0.02) 25%, transparent 25%),
-    linear-gradient(225deg, rgba(244, 235, 217, 0.02) 25%, transparent 25%);
+    linear-gradient(
+      135deg,
+      rgb(var(--parchment-rgb) / 0.02) 25%,
+      transparent 25%
+    ),
+    linear-gradient(
+      225deg,
+      rgb(var(--parchment-rgb) / 0.02) 25%,
+      transparent 25%
+    );
   background-size:
     100% 100%,
     100% 100%,
     8px 8px,
     8px 8px;
-  border: 1px solid var(--fog-700);
+  border: 1px solid var(--fog);
 }
 
-/* Wax seal badge styling */
 .wax-seal {
   background: radial-gradient(
     circle at 35% 35%,
-    #c93b41 0%,
-    #8b1e22 55%,
-    #3d0b0e 100%
+    var(--wax) 0%,
+    var(--wax) 55%,
+    var(--umber) 100%
   );
-  border: 2px solid #a8262b;
+  border: 2px solid var(--wax);
   box-shadow:
-    inset 0 2px 4px rgba(255, 255, 255, 0.2),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.6),
-    0 4px 10px rgba(0, 0, 0, 0.6);
+    inset 0 2px 4px rgb(var(--parchment-rgb) / 0.2),
+    inset 0 -2px 4px rgb(var(--umber-rgb) / 0.6),
+    0 4px 10px rgb(var(--umber-rgb) / 0.6);
 }
 
-/* Red Confidential Stamp */
 .ink-stamp {
   display: inline-block;
   padding: 0.25rem 0.65rem;
-  border: 2px solid #8b1e22;
+  border: 2px solid var(--wax);
   border-radius: 3px;
-  color: #c93b41;
+  color: var(--wax-foreground);
   font-family: var(--font-mono, monospace);
   font-weight: 800;
   letter-spacing: 0.15em;
@@ -158,7 +134,6 @@
   user-select: none;
 }
 
-/* Ambient Fog Animations */
 @keyframes drift {
   0% {
     transform: translate3d(0, 0, 0);
@@ -196,7 +171,6 @@
   }
 }
 
-/* Reduced motion fallbacks */
 @media (prefers-reduced-motion: reduce) {
   *,
   ::before,

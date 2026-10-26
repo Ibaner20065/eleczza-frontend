@@ -8,19 +8,18 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-[#DFB75A] text-[#0B0C10] shadow hover:bg-[#C59B27] border border-[#DFB75A]/60",
-        brass:
-          "bg-gradient-to-b from-[#F3D88C] via-[#DFB75A] to-[#9B7728] text-[#0B0C10] border border-[#F3D88C]/80 shadow-[inset_0_1px_1px_rgba(255,255,255,0.4),0_2px_8px_rgba(0,0,0,0.6)] hover:brightness-110 active:brightness-95",
-        oxblood:
-          "bg-[#8B1E22] text-[#FBF8F1] border border-[#A8262B] shadow-[inset_0_1px_1px_rgba(255,255,255,0.2),0_2px_8px_rgba(61,11,14,0.6)] hover:bg-[#A8262B]",
+          "bg-amber text-umber shadow hover:bg-copper border border-amber/60",
+        amber:
+          "bg-gradient-to-b from-parchment via-amber to-copper text-umber border border-parchment/80 shadow-[inset_0_1px_1px_rgb(var(--parchment-rgb)/0.4),0_2px_8px_rgb(var(--umber-rgb)/0.6)] hover:brightness-110 active:brightness-95",
+        wax: "bg-wax text-parchment border border-wax shadow-[inset_0_1px_1px_rgb(var(--parchment-rgb)/0.2),0_2px_8px_rgb(var(--wax-rgb)/0.6)] hover:bg-wax",
         outline:
-          "border border-[#2D3344] bg-[#12151C] text-[#F4EBD9] hover:bg-[#1C202B] hover:border-[#DFB75A]/50 hover:text-[#DFB75A]",
+          "border border-fog bg-surface text-parchment hover:bg-surface hover:border-amber/50 hover:text-amber",
         secondary:
-          "bg-[#1C202B] text-[#F4EBD9] border border-[#2D3344] hover:bg-[#2D3344]/70",
-        ghost: "text-[#D9CEB8] hover:bg-[#1C202B] hover:text-[#DFB75A]",
+          "bg-surface text-parchment border border-fog hover:bg-fog/70",
+        ghost: "text-parchment hover:bg-surface hover:text-amber",
         destructive:
-          "bg-[#A8262B]/20 text-[#C93B41] border border-[#A8262B]/40 hover:bg-[#A8262B]/30",
-        link: "text-[#DFB75A] underline-offset-4 hover:underline lowercase normal-case tracking-normal",
+          "bg-wax/20 text-wax-foreground border border-wax/40 hover:bg-wax/30",
+        link: "text-amber underline-offset-4 hover:underline lowercase normal-case tracking-normal",
       },
       size: {
         default: "h-9 px-4 py-2",

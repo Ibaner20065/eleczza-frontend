@@ -26,18 +26,22 @@ ELECZZA 2.0 is stylized as an intellectual Victorian investigation agency. The a
 
 ### 2.1 Color Palette & Design Tokens
 
-| Token            | Hex Value | Role & Usage                                             |
-| :--------------- | :-------- | :------------------------------------------------------- |
-| `noir-950`       | `#0B0C10` | Canvas / Deep London night backdrop                      |
-| `noir-900`       | `#12151C` | Dossier cards, study panels, dark container fills        |
-| `noir-800`       | `#1C202B` | Elevated card surfaces, hovered row states               |
-| `fog-700`        | `#2D3344` | Muted borders, subtle dividers, inactive tabs            |
-| `parchment-100`  | `#F7F2E7` | Primary high-contrast text, headline highlights          |
-| `parchment-300`  | `#D9CEB8` | Secondary body text, metadata, case file paper           |
-| `brass-400`      | `#DFB75A` | Primary accent, CTA buttons, active states, trophies     |
-| `brass-600`      | `#9B7728` | Hover/pressed brass states, gold borders                 |
-| `crimson-wax`    | `#9E2A2B` | Critical timers (<60s), urgent alerts, wax seal badges   |
-| `emerald-solved` | `#2A7B54` | Correct deduction badges, solved cases, team ready check |
+| Token            | Hex Value | Role & Usage                                                 |
+| :--------------- | :-------- | :----------------------------------------------------------- |
+| `umber`          | `#0D0907` | Page canvas and deepest background                           |
+| `surface`        | `#1A110C` | Dossier cards, study panels, and raised containers           |
+| `fog`            | `#2B3238` | Borders, dividers, and muted surfaces                        |
+| `parchment`      | `#E9DCC0` | Primary text and readable secondary text                     |
+| `amber`          | `#F2A33A` | Primary accent, CTAs, active states, and readable highlights |
+| `copper`         | `#B5651D` | Decorative highlights and button gradients                   |
+| `burnt-orange`   | `#8A3B12` | Decorative warm shadows and low-contrast highlights          |
+| `wax`            | `#A3201A` | Destructive surfaces, borders, and error indicators          |
+| `wax-foreground` | `#FF9E97` | Accessible error text on dark surfaces                       |
+
+Amber has at least 8.9:1 contrast and parchment at least 13.6:1 on the dark
+surfaces. Copper and burnt orange are decorative only; use amber or parchment
+for text. Wax red is also too dark for text on dark backgrounds, so error text
+uses the lighter `wax-foreground` token.
 
 ### 2.2 Typography Hierarchy
 

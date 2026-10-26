@@ -39,7 +39,7 @@ export function MagnifierLoader({
         {/* Outer Brass Ring */}
         <div
           className={cn(
-            "absolute inset-0 rounded-full border-2 border-[#DFB75A] shadow-[0_0_12px_rgba(223,183,90,0.4)]",
+            "absolute inset-0 rounded-full border-2 border-amber shadow-[0_0_12px_rgb(var(--amber-rgb)/0.4)]",
             !reducedMotion && "animate-[spin_4s_linear_infinite]",
           )}
         >
@@ -48,21 +48,21 @@ export function MagnifierLoader({
         </div>
 
         {/* Optical Lens Core */}
-        <div className="absolute inset-1 rounded-full bg-[#DFB75A]/10 backdrop-blur-xs flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-1 rounded-full bg-amber/10 backdrop-blur-xs flex items-center justify-center overflow-hidden">
           {/* Sweeping Inspection Spotlight */}
           {!reducedMotion ? (
-            <div className="h-full w-full bg-gradient-to-tr from-transparent via-[#DFB75A]/25 to-transparent animate-[pulse_2s_ease-in-out_infinite]" />
+            <div className="h-full w-full bg-gradient-to-tr from-transparent via-amber/25 to-transparent animate-[pulse_2s_ease-in-out_infinite]" />
           ) : (
-            <div className="h-2 w-2 rounded-full bg-[#DFB75A]" />
+            <div className="h-2 w-2 rounded-full bg-amber" />
           )}
         </div>
 
         {/* Diagonal Brass Handle */}
-        <div className="absolute -bottom-1.5 -right-1.5 h-3.5 w-1 bg-gradient-to-b from-[#DFB75A] to-[#85755B] rounded-sm transform rotate-45 shadow-sm" />
+        <div className="absolute -bottom-1.5 -right-1.5 h-3.5 w-1 bg-gradient-to-b from-amber to-muted-foreground rounded-sm transform rotate-45 shadow-sm" />
       </div>
 
       {label && (
-        <p className="font-mono text-xs tracking-wider uppercase text-[#DFB75A] animate-pulse">
+        <p className="font-mono text-xs tracking-wider uppercase text-amber animate-pulse">
           {label}
         </p>
       )}

@@ -1,11 +1,23 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Special_Elite, Inter } from "next/font/google";
+import {
+  Cormorant_Garamond,
+  Pinyon_Script,
+  Special_Elite,
+} from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { AppAuthProvider } from "@/components/auth/auth-provider";
 
-const serifDisplay = Playfair_Display({
-  variable: "--font-serif",
+const bodySerif = Cormorant_Garamond({
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-cormorant",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const calligraphy = Pinyon_Script({
+  weight: "400",
+  variable: "--font-pinyon",
   subsets: ["latin"],
   display: "swap",
 });
@@ -13,12 +25,6 @@ const serifDisplay = Playfair_Display({
 const typewriterMono = Special_Elite({
   weight: "400",
   variable: "--font-mono",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const sansBody = Inter({
-  variable: "--font-sans",
   subsets: ["latin"],
   display: "swap",
 });
@@ -50,7 +56,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`dark ${serifDisplay.variable} ${typewriterMono.variable} ${sansBody.variable} h-full antialiased`}
+      className={`dark ${bodySerif.variable} ${calligraphy.variable} ${typewriterMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans bg-background text-foreground">
         <AppAuthProvider>{children}</AppAuthProvider>

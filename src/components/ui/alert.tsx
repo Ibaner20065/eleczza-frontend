@@ -7,14 +7,11 @@ const alertVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          "border-[#DFB75A]/40 bg-[#12151C] text-[#F4EBD9] [&>svg]:text-[#DFB75A]",
-        oxblood:
-          "border-[#8B1E22] bg-[#3D0B0E]/60 text-[#FBF8F1] [&>svg]:text-[#C93B41]",
+        default: "border-amber/40 bg-surface text-parchment [&>svg]:text-amber",
+        wax: "border-wax bg-wax/60 text-parchment [&>svg]:text-wax-foreground",
         telegram:
-          "border-[#2D3344] bg-[#0B0C10] text-[#D9CEB8] font-mono [&>svg]:text-[#DFB75A]",
-        solved:
-          "border-[#2A7B54]/60 bg-[#2A7B54]/15 text-[#F4EBD9] [&>svg]:text-[#3EAA75]",
+          "border-fog bg-umber text-parchment font-mono [&>svg]:text-amber",
+        solved: "border-amber/60 bg-amber/15 text-parchment [&>svg]:text-amber",
       },
     },
     defaultVariants: {
@@ -58,7 +55,7 @@ const AlertDescription = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "text-xs text-[#D9CEB8] leading-relaxed [&_p]:leading-relaxed",
+      "text-xs text-parchment leading-relaxed [&_p]:leading-relaxed",
       className,
     )}
     {...props}

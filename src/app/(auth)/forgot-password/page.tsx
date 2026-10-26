@@ -79,13 +79,13 @@ export default function ForgotPasswordPage() {
     >
       {confirmationShown ? (
         <div className="space-y-5 text-center" role="status" aria-live="polite">
-          <p className="text-sm leading-relaxed text-[#D9CEB8]">
+          <p className="text-sm leading-relaxed text-parchment">
             If this email exists, a link has been sent. Check your inbox for
             instructions to reset your password.
           </p>
           <Link
             href="/login"
-            className="inline-flex text-sm font-semibold text-[#DFB75A] hover:underline"
+            className="inline-flex text-sm font-semibold text-amber hover:underline"
           >
             Return to log in
           </Link>
@@ -97,7 +97,7 @@ export default function ForgotPasswordPage() {
           <div>
             <label
               htmlFor="email"
-              className="block text-xs font-semibold tracking-wider text-[#D9CEB8] uppercase"
+              className="block text-xs font-semibold tracking-wider text-parchment uppercase"
             >
               College Email
             </label>
@@ -109,13 +109,13 @@ export default function ForgotPasswordPage() {
               placeholder="detective@aot.edu.in"
               aria-invalid={Boolean(errors.email)}
               aria-describedby={errors.email ? "email-error" : undefined}
-              className="mt-1 w-full rounded border border-[#2D3344] bg-[#0B0C10] px-3 py-2 text-sm text-[#F7F2E7] placeholder-[#4E5569] focus:border-[#DFB75A] focus:outline-none"
+              className="mt-1 w-full rounded border border-fog bg-umber px-3 py-2 text-sm text-parchment placeholder-muted-foreground focus:border-amber focus:outline-none"
             />
             {errors.email && (
               <p
                 id="email-error"
                 role="alert"
-                className="animate-[auth-error-shake_0.28s_ease-in-out] mt-1 text-xs text-[#C93B41]"
+                className="animate-[auth-error-shake_0.28s_ease-in-out] mt-1 text-xs text-wax-foreground"
               >
                 {errors.email.message}
               </p>
@@ -126,7 +126,7 @@ export default function ForgotPasswordPage() {
             <p
               role="alert"
               aria-live="assertive"
-              className="rounded border border-[#C93B41]/30 bg-[#3D0B0E]/40 px-3 py-2 text-sm text-[#F1A3A6]"
+              className="rounded border border-wax-foreground/30 bg-wax/40 px-3 py-2 text-sm text-wax-foreground"
             >
               {formError}
             </p>
@@ -136,11 +136,11 @@ export default function ForgotPasswordPage() {
             {isSubmitting ? "Sending recovery link..." : "Send recovery link"}
           </Button>
 
-          <div className="text-center text-xs text-[#D9CEB8]">
+          <div className="text-center text-xs text-parchment">
             Remember your password?{" "}
             <Link
               href="/login"
-              className="font-semibold text-[#DFB75A] hover:underline"
+              className="font-semibold text-amber hover:underline"
             >
               Log in
             </Link>

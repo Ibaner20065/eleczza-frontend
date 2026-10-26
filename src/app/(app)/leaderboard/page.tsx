@@ -56,13 +56,13 @@ export default function LeaderboardPage() {
   return (
     <div className="space-y-8">
       <div>
-        <span className="text-xs font-semibold tracking-wider text-[#DFB75A] uppercase">
+        <span className="text-xs font-semibold tracking-wider text-amber uppercase">
           Scotland Yard Official Ledger
         </span>
-        <h1 className="mt-1 text-2xl font-bold text-[#F7F2E7]">
+        <h1 className="font-script mt-1 text-3xl leading-tight text-parchment">
           High Table of Detectives
         </h1>
-        <p className="text-xs text-[#D9CEB8]">
+        <p className="text-xs text-parchment">
           Live telemetry ranking agencies across the Academy by score, speed,
           and accuracy.
         </p>
@@ -75,27 +75,27 @@ export default function LeaderboardPage() {
             key={agency.rank}
             className={`parchment-border relative rounded-lg p-5 text-center ${
               agency.rank === 1
-                ? "brass-glow border-[#DFB75A] bg-[#14161D]"
-                : "bg-[#12151C]"
+                ? "amber-glow border-amber bg-umber"
+                : "bg-surface"
             }`}
           >
-            <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full border border-[#DFB75A]/60 bg-[#0B0C10]">
+            <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full border border-amber/60 bg-umber">
               {agency.rank === 1 ? (
-                <Trophy className="h-5 w-5 text-[#DFB75A]" />
+                <Trophy className="h-5 w-5 text-amber" />
               ) : (
-                <Medal className="h-5 w-5 text-[#D9CEB8]" />
+                <Medal className="h-5 w-5 text-parchment" />
               )}
             </div>
 
-            <div className="mt-3 text-xs font-semibold tracking-wider text-[#DFB75A] uppercase">
+            <div className="mt-3 text-xs font-semibold tracking-wider text-amber uppercase">
               Rank #{agency.rank}
             </div>
-            <div className="mt-1 font-bold text-[#F7F2E7]">
+            <div className="mt-1 font-bold text-parchment">
               {agency.agencyName}
             </div>
-            <div className="text-xs text-[#D9CEB8]">{agency.leadInspector}</div>
+            <div className="text-xs text-parchment">{agency.leadInspector}</div>
 
-            <div className="mt-4 border-t border-[#2D3344] pt-3 text-sm font-bold text-[#DFB75A]">
+            <div className="mt-4 border-t border-fog pt-3 text-sm font-bold text-amber">
               {agency.score} pts
             </div>
           </div>
@@ -103,9 +103,9 @@ export default function LeaderboardPage() {
       </div>
 
       {/* Full Ledger Table */}
-      <div className="parchment-border overflow-hidden rounded-lg bg-[#12151C]">
+      <div className="parchment-border overflow-hidden rounded-lg bg-surface">
         <table className="w-full text-left text-xs">
-          <thead className="border-b border-[#2D3344] bg-[#0B0C10] tracking-wider text-[#D9CEB8] uppercase">
+          <thead className="border-b border-fog bg-umber tracking-wider text-parchment uppercase">
             <tr>
               <th className="px-4 py-3">Rank</th>
               <th className="px-4 py-3">Agency</th>
@@ -115,27 +115,27 @@ export default function LeaderboardPage() {
               <th className="px-4 py-3 text-right">Score</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#2D3344]/50 text-[#D9CEB8]">
+          <tbody className="divide-y divide-fog/50 text-parchment">
             {mockRankings.map((entry) => (
               <tr
                 key={entry.rank}
-                className="transition-colors hover:bg-[#1C202B]/60"
+                className="transition-colors hover:bg-surface/60"
               >
-                <td className="px-4 py-3 font-bold text-[#F7F2E7]">
+                <td className="px-4 py-3 font-bold text-parchment">
                   <span className="flex items-center gap-1.5">
                     {entry.rank <= 3 && (
-                      <Flame className="h-3.5 w-3.5 text-[#DFB75A]" />
+                      <Flame className="h-3.5 w-3.5 text-amber" />
                     )}
                     #{entry.rank}
                   </span>
                 </td>
-                <td className="px-4 py-3 font-semibold text-[#F7F2E7]">
+                <td className="px-4 py-3 font-semibold text-parchment">
                   {entry.agencyName}
                 </td>
                 <td className="px-4 py-3">{entry.leadInspector}</td>
                 <td className="px-4 py-3">{entry.solvedCount} cases</td>
                 <td className="px-4 py-3 font-mono">{entry.solveTime}</td>
-                <td className="px-4 py-3 text-right font-mono font-bold text-[#DFB75A]">
+                <td className="px-4 py-3 text-right font-mono font-bold text-amber">
                   {entry.score}
                 </td>
               </tr>

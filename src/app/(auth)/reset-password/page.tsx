@@ -116,7 +116,7 @@ export default function ResetPasswordPage() {
       subtitle="Create a strong password to secure your inspector account."
     >
       {isCheckingSession ? (
-        <p className="py-4 text-center text-sm text-[#D9CEB8]" role="status">
+        <p className="py-4 text-center text-sm text-parchment" role="status">
           Verifying your recovery link...
         </p>
       ) : hasRecoverySession ? (
@@ -124,7 +124,7 @@ export default function ResetPasswordPage() {
           <div>
             <label
               htmlFor="password"
-              className="block text-xs font-semibold tracking-wider text-[#D9CEB8] uppercase"
+              className="block text-xs font-semibold tracking-wider text-parchment uppercase"
             >
               New Password
             </label>
@@ -145,14 +145,14 @@ export default function ResetPasswordPage() {
                       ? "password-strength"
                       : undefined
                 }
-                className="w-full rounded border border-[#2D3344] bg-[#0B0C10] px-3 py-2 pr-11 text-sm text-[#F7F2E7] placeholder-[#4E5569] focus:border-[#DFB75A] focus:outline-none"
+                className="w-full rounded border border-fog bg-umber px-3 py-2 pr-11 text-sm text-parchment placeholder-muted-foreground focus:border-amber focus:outline-none"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword((visible) => !visible)}
                 aria-label={showPassword ? "Hide passwords" : "Show passwords"}
                 aria-pressed={showPassword}
-                className="absolute inset-y-0 right-0 flex w-10 items-center justify-center text-[#D9CEB8] transition-colors hover:text-[#DFB75A] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#DFB75A]"
+                className="absolute inset-y-0 right-0 flex w-10 items-center justify-center text-parchment transition-colors hover:text-amber focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber"
               >
                 {showPassword ? (
                   <EyeOff aria-hidden="true" className="h-4 w-4" />
@@ -178,16 +178,16 @@ export default function ResetPasswordPage() {
                       className={`h-1 flex-1 rounded-full transition-colors ${
                         index < strength
                           ? strength >= 4
-                            ? "bg-[#3EAA75]"
+                            ? "bg-amber"
                             : strength >= 2
-                              ? "bg-[#DFB75A]"
-                              : "bg-[#C93B41]"
-                          : "bg-[#2D3344]"
+                              ? "bg-amber"
+                              : "bg-wax-foreground"
+                          : "bg-fog"
                       }`}
                     />
                   ))}
                 </div>
-                <p className="mt-1 text-[11px] text-[#8892B0]">
+                <p className="mt-1 text-[11px] text-muted-foreground">
                   {strength === passwordRequirements.length
                     ? "Strong password"
                     : `${strength} of ${passwordRequirements.length} requirements met`}
@@ -198,7 +198,7 @@ export default function ResetPasswordPage() {
               <p
                 id="password-error"
                 role="alert"
-                className="animate-[auth-error-shake_0.28s_ease-in-out] mt-1 text-xs text-[#C93B41]"
+                className="animate-[auth-error-shake_0.28s_ease-in-out] mt-1 text-xs text-wax-foreground"
               >
                 {errors.password.message}
               </p>
@@ -208,7 +208,7 @@ export default function ResetPasswordPage() {
           <div>
             <label
               htmlFor="confirmPassword"
-              className="block text-xs font-semibold tracking-wider text-[#D9CEB8] uppercase"
+              className="block text-xs font-semibold tracking-wider text-parchment uppercase"
             >
               Confirm New Password
             </label>
@@ -223,14 +223,14 @@ export default function ResetPasswordPage() {
                 aria-describedby={
                   errors.confirmPassword ? "confirm-password-error" : undefined
                 }
-                className="w-full rounded border border-[#2D3344] bg-[#0B0C10] px-3 py-2 pr-11 text-sm text-[#F7F2E7] placeholder-[#4E5569] focus:border-[#DFB75A] focus:outline-none"
+                className="w-full rounded border border-fog bg-umber px-3 py-2 pr-11 text-sm text-parchment placeholder-muted-foreground focus:border-amber focus:outline-none"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword((visible) => !visible)}
                 aria-label={showPassword ? "Hide passwords" : "Show passwords"}
                 aria-pressed={showPassword}
-                className="absolute inset-y-0 right-0 flex w-10 items-center justify-center text-[#D9CEB8] transition-colors hover:text-[#DFB75A] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#DFB75A]"
+                className="absolute inset-y-0 right-0 flex w-10 items-center justify-center text-parchment transition-colors hover:text-amber focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber"
               >
                 {showPassword ? (
                   <EyeOff aria-hidden="true" className="h-4 w-4" />
@@ -243,7 +243,7 @@ export default function ResetPasswordPage() {
               <p
                 id="confirm-password-error"
                 role="alert"
-                className="animate-[auth-error-shake_0.28s_ease-in-out] mt-1 text-xs text-[#C93B41]"
+                className="animate-[auth-error-shake_0.28s_ease-in-out] mt-1 text-xs text-wax-foreground"
               >
                 {errors.confirmPassword.message}
               </p>
@@ -254,7 +254,7 @@ export default function ResetPasswordPage() {
             <p
               role="alert"
               aria-live="assertive"
-              className="rounded border border-[#C93B41]/30 bg-[#3D0B0E]/40 px-3 py-2 text-sm text-[#F1A3A6]"
+              className="rounded border border-wax-foreground/30 bg-wax/40 px-3 py-2 text-sm text-wax-foreground"
             >
               {formError}
             </p>
@@ -266,23 +266,23 @@ export default function ResetPasswordPage() {
         </form>
       ) : (
         <div className="space-y-4 text-center">
-          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-[#DFB75A]/40 bg-[#DFB75A]/10 text-[#DFB75A]">
+          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-amber/40 bg-amber/10 text-amber">
             <KeyRound aria-hidden="true" className="h-5 w-5" />
           </div>
-          <p className="text-sm leading-relaxed text-[#D9CEB8]" role="alert">
+          <p className="text-sm leading-relaxed text-parchment" role="alert">
             {formError ||
               "This recovery link is invalid or expired. Request a new password reset link to continue."}
           </p>
           <div className="flex flex-col gap-3">
             <Link
               href="/forgot-password"
-              className="text-sm font-semibold text-[#DFB75A] hover:underline"
+              className="text-sm font-semibold text-amber hover:underline"
             >
               Request a new recovery link
             </Link>
             <Link
               href="/login"
-              className="text-xs text-[#D9CEB8] hover:text-[#DFB75A]"
+              className="text-xs text-parchment hover:text-amber"
             >
               Return to log in
             </Link>

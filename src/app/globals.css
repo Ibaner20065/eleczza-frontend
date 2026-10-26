@@ -6,41 +6,20 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-serif: var(--font-serif);
+  --font-serif: var(--font-cormorant);
+  --font-script: var(--font-pinyon);
   --font-mono: var(--font-mono);
-  --font-sans: var(--font-sans);
+  --font-sans: var(--font-cormorant);
 
-  --color-charcoal-950: var(--charcoal-950);
-  --color-charcoal-900: var(--charcoal-900);
-  --color-charcoal-850: var(--charcoal-850);
-  --color-charcoal-800: var(--charcoal-800);
-
-  --color-oxblood-950: var(--oxblood-950);
-  --color-oxblood-900: var(--oxblood-900);
-  --color-oxblood-700: var(--oxblood-700);
-  --color-oxblood-600: var(--oxblood-600);
-  --color-oxblood-500: var(--oxblood-500);
-  --color-oxblood-400: var(--oxblood-400);
-
-  --color-cream-50: var(--cream-50);
-  --color-cream-100: var(--cream-100);
-  --color-cream-200: var(--cream-200);
-  --color-cream-300: var(--cream-300);
-  --color-cream-400: var(--cream-400);
-
-  --color-brass-300: var(--brass-300);
-  --color-brass-400: var(--brass-400);
-  --color-brass-500: var(--brass-500);
-  --color-brass-600: var(--brass-600);
-
-  --color-fog-900: var(--fog-900);
-  --color-fog-700: var(--fog-700);
-  --color-fog-500: var(--fog-500);
-  --color-fog-300: var(--fog-300);
-
-  --color-emerald-solved: var(--emerald-solved);
-  --color-emerald-glow: var(--emerald-glow);
-
+  --color-umber: var(--umber);
+  --color-surface: var(--surface);
+  --color-amber: var(--amber);
+  --color-copper: var(--copper);
+  --color-burnt-orange: var(--burnt-orange);
+  --color-parchment: var(--parchment);
+  --color-wax: var(--wax);
+  --color-wax-foreground: var(--wax-foreground);
+  --color-fog: var(--fog);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -73,6 +52,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-cormorant), Georgia, serif;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
   h1,
@@ -80,7 +60,7 @@
   h3,
   h4,
   .font-serif {
-    font-family: var(--font-serif), Georgia, serif;
+    font-family: var(--font-cormorant), Georgia, serif;
   }
   code,
   pre,

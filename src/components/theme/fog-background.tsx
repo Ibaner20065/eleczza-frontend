@@ -25,13 +25,13 @@ export function FogBackground({
     <div
       aria-hidden="true"
       className={cn(
-        "pointer-events-none fixed inset-0 -z-20 overflow-hidden bg-[#0B0C10]",
+        "pointer-events-none fixed inset-0 -z-20 overflow-hidden bg-umber",
         className,
       )}
       {...props}
     >
       {/* 221B Gaslamp Atmospheric Radial Vignette */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_15%,rgba(223,183,90,0.12)_0%,rgba(18,21,28,0.7)_50%,rgba(11,12,16,0.98)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_15%,rgb(var(--amber-rgb)/0.12)_0%,rgb(var(--surface-rgb)/0.7)_50%,rgb(var(--umber-rgb)/0.98)_100%)]" />
 
       {/* Layer 1: Foreground London Fog Drifter */}
       {!reducedMotion ? (
@@ -43,7 +43,7 @@ export function FogBackground({
             )}
             style={{
               backgroundImage:
-                "radial-gradient(ellipse 60% 40% at 50% 60%, rgba(136,146,176,0.15) 0%, transparent 70%)",
+                "radial-gradient(ellipse 60% 40% at 50% 60%, rgb(var(--fog-rgb)/0.15) 0%, transparent 70%)",
             }}
           />
           {/* Layer 2: Deeper Thames Mist drifting in counter direction */}
@@ -54,13 +54,13 @@ export function FogBackground({
             )}
             style={{
               backgroundImage:
-                "radial-gradient(ellipse 70% 30% at 40% 40%, rgba(223,183,90,0.06) 0%, transparent 80%)",
+                "radial-gradient(ellipse 70% 30% at 40% 40%, rgb(var(--amber-rgb)/0.06) 0%, transparent 80%)",
             }}
           />
         </>
       ) : (
         /* Reduced motion: Static soft glow without GPU translation */
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#12151C]/40 to-[#0B0C10]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-surface/40 to-umber" />
       )}
     </div>
   );

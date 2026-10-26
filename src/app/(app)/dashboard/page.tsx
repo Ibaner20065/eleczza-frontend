@@ -13,25 +13,28 @@ export default function DashboardPage() {
   return (
     <div className="space-y-8">
       {/* Welcome Banner */}
-      <section className="parchment-border rounded-xl bg-[#12151C] p-6 shadow-xl">
+      <section className="parchment-border rounded-xl bg-surface p-6 shadow-xl">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <Shield className="h-5 w-5 text-[#DFB75A]" />
-              <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#DFB75A]">
+              <Shield className="h-5 w-5 text-amber" />
+              <span className="font-mono text-xs font-bold uppercase tracking-widest text-amber">
                 Inspector Study • 221B Bureau
               </span>
             </div>
-            <h1 className="font-serif text-3xl font-bold tracking-tight text-[#F7F2E7]">
+            <h1 className="font-script text-3xl leading-tight text-parchment">
               {event.title}
             </h1>
-            <p className="max-w-lg text-sm text-[#D9CEB8] leading-relaxed">
+            <p className="max-w-lg text-sm text-parchment leading-relaxed">
               {event.description}
             </p>
-            <div className="flex flex-wrap gap-4 pt-2 text-xs text-[#8892B0]">
+            <div className="flex flex-wrap gap-4 pt-2 text-xs text-muted-foreground">
               <span>📍 {event.venue}</span>
               <span>👥 {event.totalTeams} Agencies</span>
-              <span>🏆 Prize Pool: <strong className="text-[#DFB75A]">{event.prizePool}</strong></span>
+              <span>
+                🏆 Prize Pool:{" "}
+                <strong className="text-amber">{event.prizePool}</strong>
+              </span>
               <span>👤 Max {event.maxTeamSize} per Agency</span>
             </div>
           </div>
@@ -43,14 +46,16 @@ export default function DashboardPage() {
       </section>
 
       {/* Scotland Yard Dispatch */}
-      <section className="flex items-start gap-3 rounded-lg border border-[#DFB75A]/30 bg-[#DFB75A]/5 p-4 text-xs">
-        <Bell className="mt-0.5 h-4 w-4 shrink-0 text-[#DFB75A]" />
+      <section className="flex items-start gap-3 rounded-lg border border-amber/30 bg-amber/5 p-4 text-xs">
+        <Bell className="mt-0.5 h-4 w-4 shrink-0 text-amber" />
         <div>
-          <div className="font-mono font-bold uppercase tracking-wider text-[#DFB75A]">
+          <div className="font-mono font-bold uppercase tracking-wider text-amber">
             Scotland Yard Dispatch #05
           </div>
-          <p className="mt-0.5 text-[#D9CEB8]">
-            All agencies must be registered and ready before the event starts. The quiz locks 60 seconds after start. Ensure all team members have joined.
+          <p className="mt-0.5 text-parchment">
+            All agencies must be registered and ready before the event starts.
+            The quiz locks 60 seconds after start. Ensure all team members have
+            joined.
           </p>
         </div>
       </section>
@@ -65,10 +70,13 @@ export default function DashboardPage() {
         {/* Active Case Files */}
         <div className="space-y-4 lg:col-span-7">
           <div className="flex items-center justify-between">
-            <h2 className="font-serif text-lg font-bold text-[#F7F2E7]">
+            <h2 className="font-serif text-lg font-bold text-parchment">
               Active Investigation Files
             </h2>
-            <Link href="/leaderboard" className="flex items-center gap-1 text-xs font-semibold text-[#DFB75A] hover:underline">
+            <Link
+              href="/leaderboard"
+              className="flex items-center gap-1 text-xs font-semibold text-amber hover:underline"
+            >
               <Trophy className="h-3.5 w-3.5" />
               Scotland Yard Ledger
             </Link>
@@ -96,16 +104,22 @@ export default function DashboardPage() {
             {[
               { label: "Agency HQ", href: "/team", icon: "👥" },
               { label: "Case Lobby", href: "/quiz/lobby", icon: "🔍" },
-              { label: "Scotland Yard Ledger", href: "/leaderboard", icon: "🏆" },
+              {
+                label: "Scotland Yard Ledger",
+                href: "/leaderboard",
+                icon: "🏆",
+              },
             ].map((tile) => (
               <Link
                 key={tile.href}
                 href={tile.href}
-                className="flex flex-col items-center justify-center gap-2 rounded-lg border border-[#2D3344] bg-[#12151C] p-4 text-center transition-all hover:border-[#DFB75A]/50 hover:bg-[#1C202B]"
+                className="flex flex-col items-center justify-center gap-2 rounded-lg border border-fog bg-surface p-4 text-center transition-all hover:border-amber/50 hover:bg-surface"
               >
                 <span className="text-2xl">{tile.icon}</span>
-                <span className="text-xs font-semibold text-[#D9CEB8]">{tile.label}</span>
-                <ChevronRight className="h-3.5 w-3.5 text-[#4E5569]" />
+                <span className="text-xs font-semibold text-parchment">
+                  {tile.label}
+                </span>
+                <ChevronRight className="h-3.5 w-3.5 text-muted-foreground" />
               </Link>
             ))}
           </div>

@@ -65,7 +65,7 @@ export function TypewriterText({
       {showCursor && !isTypingDone && (
         <span
           aria-hidden="true"
-          className="ml-0.5 inline-block w-1.5 h-3.5 bg-[#DFB75A] animate-[ping_0.8s_steps(2)_infinite]"
+          className="ml-0.5 inline-block w-1.5 h-3.5 bg-amber animate-[ping_0.8s_steps(2)_infinite]"
         />
       )}
     </span>

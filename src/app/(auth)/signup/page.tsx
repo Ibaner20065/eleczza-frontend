@@ -163,16 +163,16 @@ export default function SignupPage() {
     >
       {registeredEmail ? (
         <div className="space-y-5 text-center">
-          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-[#2A7B54]/50 bg-[#2A7B54]/10 text-[#3EAA75]">
+          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-amber/50 bg-amber/10 text-amber">
             <MailCheck aria-hidden="true" className="h-6 w-6" />
           </div>
           <div>
-            <h2 className="text-lg font-semibold text-[#F7F2E7]">
+            <h2 className="text-lg font-semibold text-parchment">
               Check your inbox to verify
             </h2>
-            <p className="mt-2 text-sm text-[#D9CEB8]">
+            <p className="mt-2 text-sm text-parchment">
               We sent a verification link to{" "}
-              <span className="font-semibold text-[#F7F2E7]">
+              <span className="font-semibold text-parchment">
                 {registeredEmail}
               </span>
               . Follow the link to activate your account.
@@ -195,18 +195,18 @@ export default function SignupPage() {
             {resendMessage && (
               <p
                 role="status"
-                className="text-xs text-[#D9CEB8]"
+                className="text-xs text-parchment"
                 aria-live="polite"
               >
                 {resendMessage}
               </p>
             )}
           </div>
-          <p className="text-xs text-[#D9CEB8]">
+          <p className="text-xs text-parchment">
             Already have an account?{" "}
             <Link
               href="/login"
-              className="font-semibold text-[#DFB75A] hover:underline"
+              className="font-semibold text-amber hover:underline"
             >
               Log in
             </Link>
@@ -219,7 +219,7 @@ export default function SignupPage() {
           <div>
             <label
               htmlFor="name"
-              className="block text-xs font-semibold tracking-wider text-[#D9CEB8] uppercase"
+              className="block text-xs font-semibold tracking-wider text-parchment uppercase"
             >
               Name
             </label>
@@ -231,13 +231,13 @@ export default function SignupPage() {
               placeholder="Sherlock Holmes"
               aria-invalid={Boolean(errors.name)}
               aria-describedby={errors.name ? "name-error" : undefined}
-              className="mt-1 w-full rounded border border-[#2D3344] bg-[#0B0C10] px-3 py-2 text-sm text-[#F7F2E7] placeholder-[#4E5569] focus:border-[#DFB75A] focus:outline-none"
+              className="mt-1 w-full rounded border border-fog bg-umber px-3 py-2 text-sm text-parchment placeholder-muted-foreground focus:border-amber focus:outline-none"
             />
             {errors.name && (
               <p
                 id="name-error"
                 role="alert"
-                className="animate-[auth-error-shake_0.28s_ease-in-out] mt-1 text-xs text-[#C93B41]"
+                className="animate-[auth-error-shake_0.28s_ease-in-out] mt-1 text-xs text-wax-foreground"
               >
                 {errors.name.message}
               </p>
@@ -247,7 +247,7 @@ export default function SignupPage() {
           <div>
             <label
               htmlFor="email"
-              className="block text-xs font-semibold tracking-wider text-[#D9CEB8] uppercase"
+              className="block text-xs font-semibold tracking-wider text-parchment uppercase"
             >
               College Email
             </label>
@@ -259,13 +259,13 @@ export default function SignupPage() {
               placeholder="roll.number@aot.edu.in"
               aria-invalid={Boolean(errors.email)}
               aria-describedby={errors.email ? "email-error" : undefined}
-              className="mt-1 w-full rounded border border-[#2D3344] bg-[#0B0C10] px-3 py-2 text-sm text-[#F7F2E7] placeholder-[#4E5569] focus:border-[#DFB75A] focus:outline-none"
+              className="mt-1 w-full rounded border border-fog bg-umber px-3 py-2 text-sm text-parchment placeholder-muted-foreground focus:border-amber focus:outline-none"
             />
             {errors.email && (
               <p
                 id="email-error"
                 role="alert"
-                className="animate-[auth-error-shake_0.28s_ease-in-out] mt-1 text-xs text-[#C93B41]"
+                className="animate-[auth-error-shake_0.28s_ease-in-out] mt-1 text-xs text-wax-foreground"
               >
                 {errors.email.message}
               </p>
@@ -275,7 +275,7 @@ export default function SignupPage() {
           <div>
             <label
               htmlFor="password"
-              className="block text-xs font-semibold tracking-wider text-[#D9CEB8] uppercase"
+              className="block text-xs font-semibold tracking-wider text-parchment uppercase"
             >
               Password
             </label>
@@ -296,14 +296,14 @@ export default function SignupPage() {
                       ? "password-strength"
                       : undefined
                 }
-                className="w-full rounded border border-[#2D3344] bg-[#0B0C10] px-3 py-2 pr-11 text-sm text-[#F7F2E7] placeholder-[#4E5569] focus:border-[#DFB75A] focus:outline-none"
+                className="w-full rounded border border-fog bg-umber px-3 py-2 pr-11 text-sm text-parchment placeholder-muted-foreground focus:border-amber focus:outline-none"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword((visible) => !visible)}
                 aria-label={showPassword ? "Hide passwords" : "Show passwords"}
                 aria-pressed={showPassword}
-                className="absolute inset-y-0 right-0 flex w-10 items-center justify-center text-[#D9CEB8] transition-colors hover:text-[#DFB75A] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#DFB75A]"
+                className="absolute inset-y-0 right-0 flex w-10 items-center justify-center text-parchment transition-colors hover:text-amber focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber"
               >
                 {showPassword ? (
                   <EyeOff aria-hidden="true" className="h-4 w-4" />
@@ -329,16 +329,16 @@ export default function SignupPage() {
                       className={`h-1 flex-1 rounded-full transition-colors ${
                         index < strength
                           ? strength >= 4
-                            ? "bg-[#3EAA75]"
+                            ? "bg-amber"
                             : strength >= 2
-                              ? "bg-[#DFB75A]"
-                              : "bg-[#C93B41]"
-                          : "bg-[#2D3344]"
+                              ? "bg-amber"
+                              : "bg-wax-foreground"
+                          : "bg-fog"
                       }`}
                     />
                   ))}
                 </div>
-                <p className="mt-1 text-[11px] text-[#8892B0]">
+                <p className="mt-1 text-[11px] text-muted-foreground">
                   {strength === passwordRequirements.length
                     ? "Strong password"
                     : `${strength} of ${passwordRequirements.length} requirements met`}
@@ -349,7 +349,7 @@ export default function SignupPage() {
               <p
                 id="password-error"
                 role="alert"
-                className="animate-[auth-error-shake_0.28s_ease-in-out] mt-1 text-xs text-[#C93B41]"
+                className="animate-[auth-error-shake_0.28s_ease-in-out] mt-1 text-xs text-wax-foreground"
               >
                 {errors.password.message}
               </p>
@@ -359,7 +359,7 @@ export default function SignupPage() {
           <div>
             <label
               htmlFor="confirmPassword"
-              className="block text-xs font-semibold tracking-wider text-[#D9CEB8] uppercase"
+              className="block text-xs font-semibold tracking-wider text-parchment uppercase"
             >
               Confirm Password
             </label>
@@ -374,14 +374,14 @@ export default function SignupPage() {
                 aria-describedby={
                   errors.confirmPassword ? "confirm-password-error" : undefined
                 }
-                className="w-full rounded border border-[#2D3344] bg-[#0B0C10] px-3 py-2 pr-11 text-sm text-[#F7F2E7] placeholder-[#4E5569] focus:border-[#DFB75A] focus:outline-none"
+                className="w-full rounded border border-fog bg-umber px-3 py-2 pr-11 text-sm text-parchment placeholder-muted-foreground focus:border-amber focus:outline-none"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword((visible) => !visible)}
                 aria-label={showPassword ? "Hide passwords" : "Show passwords"}
                 aria-pressed={showPassword}
-                className="absolute inset-y-0 right-0 flex w-10 items-center justify-center text-[#D9CEB8] transition-colors hover:text-[#DFB75A] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#DFB75A]"
+                className="absolute inset-y-0 right-0 flex w-10 items-center justify-center text-parchment transition-colors hover:text-amber focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber"
               >
                 {showPassword ? (
                   <EyeOff aria-hidden="true" className="h-4 w-4" />
@@ -394,7 +394,7 @@ export default function SignupPage() {
               <p
                 id="confirm-password-error"
                 role="alert"
-                className="animate-[auth-error-shake_0.28s_ease-in-out] mt-1 text-xs text-[#C93B41]"
+                className="animate-[auth-error-shake_0.28s_ease-in-out] mt-1 text-xs text-wax-foreground"
               >
                 {errors.confirmPassword.message}
               </p>
@@ -405,7 +405,7 @@ export default function SignupPage() {
             <p
               role="alert"
               aria-live="assertive"
-              className="rounded border border-[#C93B41]/30 bg-[#3D0B0E]/40 px-3 py-2 text-sm text-[#F1A3A6]"
+              className="rounded border border-wax-foreground/30 bg-wax/40 px-3 py-2 text-sm text-wax-foreground"
             >
               {formError}
             </p>
@@ -415,11 +415,11 @@ export default function SignupPage() {
             {isSubmitting ? "Creating account..." : "Create account"}
           </Button>
 
-          <div className="text-center text-xs text-[#D9CEB8]">
+          <div className="text-center text-xs text-parchment">
             Already have an account?{" "}
             <Link
               href="/login"
-              className="font-semibold text-[#DFB75A] hover:underline"
+              className="font-semibold text-amber hover:underline"
             >
               Log in
             </Link>

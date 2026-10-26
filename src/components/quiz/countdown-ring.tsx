@@ -31,15 +31,24 @@ export function CountdownRing({
   const minutes = Math.floor(remainingSeconds / 60);
   const seconds = remainingSeconds % 60;
 
-  const ringColor = isCritical ? "#C93B41" : isUrgent ? "#A8262B" : "#DFB75A";
-  const glowColor = isCritical
-    ? "drop-shadow(0 0 8px rgba(201,59,65,0.7))"
+  const ringColor = isCritical
+    ? "var(--wax-foreground)"
     : isUrgent
-    ? "drop-shadow(0 0 6px rgba(168,38,43,0.5))"
-    : "drop-shadow(0 0 6px rgba(223,183,90,0.4))";
+      ? "var(--wax)"
+      : "var(--amber)";
+  const glowColor = isCritical
+    ? "drop-shadow(0 0 8px rgb(var(--wax-rgb) / 0.7))"
+    : isUrgent
+      ? "drop-shadow(0 0 6px rgb(var(--wax-rgb) / 0.5))"
+      : "drop-shadow(0 0 6px rgb(var(--amber-rgb) / 0.4))";
 
   return (
-    <div className={cn("relative inline-flex items-center justify-center", className)}>
+    <div
+      className={cn(
+        "relative inline-flex items-center justify-center",
+        className,
+      )}
+    >
       <svg
         width={size}
         height={size}
@@ -52,7 +61,7 @@ export function CountdownRing({
           cy={size / 2}
           r={radius}
           fill="none"
-          stroke="#1C202B"
+          stroke="var(--surface)"
           strokeWidth={strokeWidth}
         />
         {/* Progress ring */}
@@ -76,19 +85,23 @@ export function CountdownRing({
         <span
           className={cn(
             "font-mono text-xl font-bold leading-none tabular-nums",
-            isCritical ? "text-[#C93B41]" : isUrgent ? "text-[#A8262B]" : "text-[#DFB75A]"
+            isCritical
+              ? "text-wax-foreground"
+              : isUrgent
+                ? "text-wax-foreground"
+                : "text-amber",
           )}
         >
           {String(minutes).padStart(2, "0")}:{String(seconds).padStart(2, "0")}
         </span>
-        <span className="mt-0.5 text-[9px] font-mono uppercase tracking-widest text-[#4E5569]">
+        <span className="mt-0.5 text-[9px] font-mono uppercase tracking-widest text-muted-foreground">
           remaining
         </span>
       </div>
 
       {isCritical && !reducedMotion && (
         <motion.div
-          className="absolute inset-0 rounded-full border-2 border-[#C93B41]/40"
+          className="absolute inset-0 rounded-full border-2 border-wax-foreground/40"
           animate={{ scale: [1, 1.08, 1], opacity: [0.6, 0.2, 0.6] }}
           transition={{ duration: 0.8, repeat: Infinity, ease: "easeInOut" }}
         />

@@ -172,7 +172,7 @@ export default function LoginPage() {
         <div>
           <label
             htmlFor="email"
-            className="block text-xs font-semibold tracking-wider text-[#D9CEB8] uppercase"
+            className="block text-xs font-semibold tracking-wider text-parchment uppercase"
           >
             College Email
           </label>
@@ -184,13 +184,13 @@ export default function LoginPage() {
             placeholder="detective@aot.edu.in"
             aria-invalid={Boolean(errors.email)}
             aria-describedby={errors.email ? "email-error" : undefined}
-            className="mt-1 w-full rounded border border-[#2D3344] bg-[#0B0C10] px-3 py-2 text-sm text-[#F7F2E7] placeholder-[#4E5569] focus:border-[#DFB75A] focus:outline-none"
+            className="mt-1 w-full rounded border border-fog bg-umber px-3 py-2 text-sm text-parchment placeholder-muted-foreground focus:border-amber focus:outline-none"
           />
           {errors.email && (
             <p
               id="email-error"
               role="alert"
-              className="animate-[auth-error-shake_0.28s_ease-in-out] mt-1 text-xs text-[#C93B41]"
+              className="animate-[auth-error-shake_0.28s_ease-in-out] mt-1 text-xs text-wax-foreground"
             >
               {errors.email.message}
             </p>
@@ -201,13 +201,13 @@ export default function LoginPage() {
           <div className="flex items-center justify-between">
             <label
               htmlFor="password"
-              className="block text-xs font-semibold tracking-wider text-[#D9CEB8] uppercase"
+              className="block text-xs font-semibold tracking-wider text-parchment uppercase"
             >
               Password
             </label>
             <Link
               href="/forgot-password"
-              className="text-xs text-[#DFB75A] hover:underline"
+              className="text-xs text-amber hover:underline"
             >
               Forgot password?
             </Link>
@@ -221,14 +221,14 @@ export default function LoginPage() {
               placeholder="Enter your password"
               aria-invalid={Boolean(errors.password)}
               aria-describedby={errors.password ? "password-error" : undefined}
-              className="w-full rounded border border-[#2D3344] bg-[#0B0C10] px-3 py-2 pr-11 text-sm text-[#F7F2E7] placeholder-[#4E5569] focus:border-[#DFB75A] focus:outline-none"
+              className="w-full rounded border border-fog bg-umber px-3 py-2 pr-11 text-sm text-parchment placeholder-muted-foreground focus:border-amber focus:outline-none"
             />
             <button
               type="button"
               onClick={() => setShowPassword((visible) => !visible)}
               aria-label={showPassword ? "Hide password" : "Show password"}
               aria-pressed={showPassword}
-              className="absolute inset-y-0 right-0 flex w-10 items-center justify-center text-[#D9CEB8] transition-colors hover:text-[#DFB75A] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#DFB75A]"
+              className="absolute inset-y-0 right-0 flex w-10 items-center justify-center text-parchment transition-colors hover:text-amber focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber"
             >
               {showPassword ? (
                 <EyeOff aria-hidden="true" className="h-4 w-4" />
@@ -241,7 +241,7 @@ export default function LoginPage() {
             <p
               id="password-error"
               role="alert"
-              className="animate-[auth-error-shake_0.28s_ease-in-out] mt-1 text-xs text-[#C93B41]"
+              className="animate-[auth-error-shake_0.28s_ease-in-out] mt-1 text-xs text-wax-foreground"
             >
               {errors.password.message}
             </p>
@@ -252,7 +252,7 @@ export default function LoginPage() {
           <div
             role="alert"
             aria-live="assertive"
-            className="space-y-2 rounded border border-[#C93B41]/30 bg-[#3D0B0E]/40 px-3 py-2 text-sm text-[#F1A3A6]"
+            className="space-y-2 rounded border border-wax-foreground/30 bg-wax/40 px-3 py-2 text-sm text-wax-foreground"
           >
             <p>{formError}</p>
             {unverifiedEmail && (
@@ -271,7 +271,7 @@ export default function LoginPage() {
                       : "Resend verification email"}
                 </Button>
                 {resendMessage && (
-                  <p role="status" className="text-xs text-[#D9CEB8]">
+                  <p role="status" className="text-xs text-parchment">
                     {resendMessage}
                   </p>
                 )}
@@ -284,11 +284,11 @@ export default function LoginPage() {
           {isSubmitting ? "Signing in..." : "Log in"}
         </Button>
 
-        <div className="text-center text-xs text-[#D9CEB8]">
+        <div className="text-center text-xs text-parchment">
           New here?{" "}
           <Link
             href="/signup"
-            className="font-semibold text-[#DFB75A] hover:underline"
+            className="font-semibold text-amber hover:underline"
           >
             Create account
           </Link>

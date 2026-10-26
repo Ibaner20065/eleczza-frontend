@@ -40,20 +40,20 @@ export default function QuizPage() {
   return (
     <div className="space-y-6">
       {/* Top HUD */}
-      <div className="flex flex-col gap-4 border-b border-[#2D3344] pb-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-4 border-b border-fog pb-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <span className="text-xs font-semibold tracking-wider text-[#DFB75A] uppercase">
+          <span className="text-xs font-semibold tracking-wider text-amber uppercase">
             Active Investigation • Clue #03 of 10
           </span>
-          <h1 className="text-xl font-bold text-[#F7F2E7]">
+          <h1 className="font-script text-2xl leading-tight text-parchment">
             Case #001: The Hound of the North Lawn
           </h1>
         </div>
 
         <div className="flex items-center gap-4">
           <div className="text-right text-xs">
-            <span className="text-[#D9CEB8]">Current Bounty:</span>
-            <span className="ml-1 font-bold text-[#DFB75A]">500 pts</span>
+            <span className="text-parchment">Current Bounty:</span>
+            <span className="ml-1 font-bold text-amber">500 pts</span>
           </div>
           <PocketWatchTimer initialSeconds={2700} />
         </div>
@@ -62,18 +62,18 @@ export default function QuizPage() {
       {/* Split Pane: Left Clues / Right Deduction */}
       <div className="grid gap-6 lg:grid-cols-12">
         {/* Left Pane: Evidence Locker (7 cols) */}
-        <div className="parchment-border space-y-4 rounded-lg bg-[#12151C] p-6 lg:col-span-7">
-          <div className="flex items-center justify-between border-b border-[#2D3344] pb-3">
+        <div className="parchment-border space-y-4 rounded-lg bg-surface p-6 lg:col-span-7">
+          <div className="flex items-center justify-between border-b border-fog pb-3">
             <div className="flex items-center gap-2">
-              <FileText className="h-4 w-4 text-[#DFB75A]" />
-              <h2 className="text-sm font-bold tracking-wider text-[#F7F2E7] uppercase">
+              <FileText className="h-4 w-4 text-amber" />
+              <h2 className="text-sm font-bold tracking-wider text-parchment uppercase">
                 Archived Evidence
               </h2>
             </div>
-            <span className="text-xs text-[#D9CEB8]">Document Ref: EX-402</span>
+            <span className="text-xs text-parchment">Document Ref: EX-402</span>
           </div>
 
-          <div className="space-y-3 text-sm leading-relaxed text-[#D9CEB8]">
+          <div className="space-y-3 text-sm leading-relaxed text-parchment">
             <p>
               At 23:42 hours, an irregular signal oscillation was detected
               across the server racks in Room 304. The night watchman reported
@@ -81,7 +81,7 @@ export default function QuizPage() {
               pulsing across the emergency frequency.
             </p>
 
-            <div className="rounded border border-[#2D3344] bg-[#0B0C10] p-4 font-mono text-xs text-[#DFB75A]">
+            <div className="rounded border border-fog bg-umber p-4 font-mono text-xs text-amber">
               <code>
                 [TRANSMISSION LOG // BAKER_NET]
                 <br />
@@ -98,15 +98,15 @@ export default function QuizPage() {
           </div>
 
           {/* Hint Requisition */}
-          <div className="mt-6 rounded border border-[#DFB75A]/20 bg-[#DFB75A]/5 p-3 text-xs">
+          <div className="mt-6 rounded border border-amber/20 bg-amber/5 p-3 text-xs">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-1.5 font-semibold text-[#DFB75A]">
+              <div className="flex items-center gap-1.5 font-semibold text-amber">
                 <Lightbulb className="h-4 w-4" />
                 <span>Baker Street Irregular Telegram (Hint)</span>
               </div>
               <button
                 type="button"
-                className="text-[11px] font-semibold text-[#DFB75A] hover:underline"
+                className="text-[11px] font-semibold text-amber hover:underline"
               >
                 Requisition Hint (-50 pts)
               </button>
@@ -115,34 +115,34 @@ export default function QuizPage() {
         </div>
 
         {/* Right Pane: Deduction Console (5 cols) */}
-        <div className="parchment-border space-y-4 rounded-lg bg-[#12151C] p-6 lg:col-span-5">
-          <div className="flex items-center gap-2 border-b border-[#2D3344] pb-3">
-            <Search className="h-4 w-4 text-[#DFB75A]" />
-            <h2 className="text-sm font-bold tracking-wider text-[#F7F2E7] uppercase">
+        <div className="parchment-border space-y-4 rounded-lg bg-surface p-6 lg:col-span-5">
+          <div className="flex items-center gap-2 border-b border-fog pb-3">
+            <Search className="h-4 w-4 text-amber" />
+            <h2 className="text-sm font-bold tracking-wider text-parchment uppercase">
               File Deduction
             </h2>
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>
-              <label className="block text-xs font-semibold tracking-wider text-[#D9CEB8] uppercase">
+              <label className="block text-xs font-semibold tracking-wider text-parchment uppercase">
                 Your Forensic Deduction / Cipher Key
               </label>
               <textarea
                 {...register("deduction")}
                 rows={4}
                 placeholder="Enter decrypted string, key, or conclusion..."
-                className="mt-1 w-full rounded border border-[#2D3344] bg-[#0B0C10] p-3 text-sm text-[#F7F2E7] placeholder-[#4E5569] focus:border-[#DFB75A] focus:outline-none"
+                className="mt-1 w-full rounded border border-fog bg-umber p-3 text-sm text-parchment placeholder-muted-foreground focus:border-amber focus:outline-none"
               />
               {errors.deduction && (
-                <p className="mt-1 text-xs text-[#9E2A2B]">
+                <p className="mt-1 text-xs text-wax-foreground">
                   {errors.deduction.message}
                 </p>
               )}
             </div>
 
             {submissionFeedback && (
-              <div className="rounded border border-[#2A7B54]/50 bg-[#2A7B54]/10 p-3 text-xs text-[#2A7B54]">
+              <div className="rounded border border-amber/50 bg-amber/10 p-3 text-xs text-amber">
                 {submissionFeedback}
               </div>
             )}
@@ -150,7 +150,7 @@ export default function QuizPage() {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="w-full cursor-pointer bg-[#DFB75A] font-semibold text-[#0B0C10] hover:bg-[#C59B27]"
+              className="w-full cursor-pointer bg-amber font-semibold text-umber hover:bg-amber"
             >
               <Send className="mr-2 h-4 w-4" />
               {isSubmitting ? "Dispatching..." : "Submit Deduction"}

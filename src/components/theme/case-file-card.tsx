@@ -32,7 +32,7 @@ export function CaseFileCard({
   return (
     <div
       className={cn(
-        "paper-texture relative overflow-hidden rounded-lg p-6 shadow-xl transition-all duration-200 hover:border-[#DFB75A]/60",
+        "paper-texture relative overflow-hidden rounded-lg p-6 shadow-xl transition-all duration-200 hover:border-amber/60",
         className,
       )}
       {...props}
@@ -40,15 +40,15 @@ export function CaseFileCard({
       {/* Brass Corner Rivets */}
       <span
         aria-hidden="true"
-        className="absolute top-2 left-2 h-1.5 w-1.5 rounded-full bg-[#DFB75A]/60 shadow-[0_0_2px_#000]"
+        className="absolute top-2 left-2 h-1.5 w-1.5 rounded-full bg-amber/60 shadow-[0_0_2px_rgb(var(--umber-rgb))]"
       />
       <span
         aria-hidden="true"
-        className="absolute bottom-2 left-2 h-1.5 w-1.5 rounded-full bg-[#DFB75A]/60 shadow-[0_0_2px_#000]"
+        className="absolute bottom-2 left-2 h-1.5 w-1.5 rounded-full bg-amber/60 shadow-[0_0_2px_rgb(var(--umber-rgb))]"
       />
       <span
         aria-hidden="true"
-        className="absolute bottom-2 right-2 h-1.5 w-1.5 rounded-full bg-[#DFB75A]/60 shadow-[0_0_2px_#000]"
+        className="absolute bottom-2 right-2 h-1.5 w-1.5 rounded-full bg-amber/60 shadow-[0_0_2px_rgb(var(--umber-rgb))]"
       />
 
       {/* Stamped Corner Badge */}
@@ -58,7 +58,7 @@ export function CaseFileCard({
             variants={stampIn}
             initial="initial"
             animate="animate"
-            className="ink-stamp border-[#8B1E22] text-[#C93B41] text-[10px] tracking-widest bg-[#3D0B0E]/70 px-2.5 py-0.5 rounded shadow-sm"
+            className="ink-stamp border-wax text-wax-foreground text-[10px] tracking-widest bg-wax/70 px-2.5 py-0.5 rounded shadow-sm"
           >
             {stampText}
           </motion.div>
@@ -66,32 +66,32 @@ export function CaseFileCard({
       )}
 
       {/* Header Metadata */}
-      <div className="flex items-center gap-2 text-xs font-mono text-[#DFB75A]">
+      <div className="flex items-center gap-2 text-xs font-mono text-amber">
         <FolderLock className="h-4 w-4" />
         <span>DOSSIER #{caseNumber}</span>
-        <span className="text-[#4E5569]">•</span>
-        <span className="text-[#D9CEB8] uppercase">{difficulty}</span>
+        <span className="text-muted-foreground">•</span>
+        <span className="text-parchment uppercase">{difficulty}</span>
       </div>
 
       {/* Case Title */}
-      <h3 className="mt-3 font-serif text-xl font-bold tracking-tight text-[#F7F2E7] hover:text-[#DFB75A] transition-colors">
+      <h3 className="mt-3 font-serif text-xl font-bold tracking-tight text-parchment hover:text-amber transition-colors">
         {title}
       </h3>
 
       {/* Synopsis */}
-      <p className="mt-2 text-xs text-[#D9CEB8] leading-relaxed line-clamp-3">
+      <p className="mt-2 text-xs text-parchment leading-relaxed line-clamp-3">
         {synopsis}
       </p>
 
       {/* Footer Info */}
-      <div className="mt-6 flex items-center justify-between border-t border-[#2D3344]/50 pt-4 text-xs text-[#D9CEB8]">
+      <div className="mt-6 flex items-center justify-between border-t border-fog/50 pt-4 text-xs text-parchment">
         <div className="flex items-center gap-4">
-          <span className="flex items-center gap-1 font-mono text-[#DFB75A]">
+          <span className="flex items-center gap-1 font-mono text-amber">
             <Award className="h-3.5 w-3.5" />
             {points} pts
           </span>
           <span className="flex items-center gap-1 font-mono">
-            <Clock className="h-3.5 w-3.5 text-[#4E5569]" />
+            <Clock className="h-3.5 w-3.5 text-muted-foreground" />
             {durationMinutes}m
           </span>
         </div>

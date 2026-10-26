@@ -17,19 +17,19 @@ export function AuthCard({
   return (
     <div
       className={cn(
-        "parchment-border w-full max-w-md rounded-lg bg-[#12151C]/95 p-8 backdrop-blur-md",
+        "parchment-border w-full max-w-md rounded-lg bg-surface/95 p-8 backdrop-blur-md",
         className,
       )}
       {...props}
     >
       <div className="mb-6 text-center">
-        <div className="mb-2 inline-block rounded-full border border-[#DFB75A]/40 px-3 py-1 text-[11px] font-semibold tracking-wider text-[#DFB75A] uppercase">
+        <div className="mb-2 inline-block rounded-full border border-amber/40 px-3 py-1 text-[11px] font-semibold tracking-wider text-amber uppercase">
           Scotland Yard Bureau
         </div>
-        <h1 className="text-2xl font-bold tracking-tight text-[#F7F2E7]">
+        <h1 className="font-script text-3xl leading-tight text-parchment">
           {title}
         </h1>
-        <p className="mt-1 text-sm text-[#D9CEB8]">{subtitle}</p>
+        <p className="mt-1 text-sm text-parchment">{subtitle}</p>
       </div>
 
       {children}
