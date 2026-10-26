@@ -1,6 +1,6 @@
-# ELECZZA — Phase 0: Discovery & Design Brief
+# ELECZZA 2.0 — Phase 0: Discovery & Design Brief
 
-> **Project Code:** ELECZZA  
+> **Project Code:** ELECZZA 2.0  
 > **Target Audience:** Students of Academy of Technology (AOT)  
 > **Theme:** Victorian Noir / Sherlock Holmes (221B Baker Street & Scotland Yard)  
 > **Framework:** Next.js (App Router), Tailwind CSS, Framer Motion, TypeScript
@@ -22,7 +22,7 @@ To ensure the contest is exclusive to verified students of the Academy of Techno
 
 ## 2. Visual Identity & Thematic System
 
-ELECZZA is stylized as an intellectual Victorian investigation agency. The atmosphere balances **1890s London mystery** (fog, gaslamps, leather-bound case files, red wax seals) with **sleek, high-precision competitive UI**.
+ELECZZA 2.0 is stylized as an intellectual Victorian investigation agency. The atmosphere balances **1890s London mystery** (fog, gaslamps, leather-bound case files, red wax seals) with **sleek, high-precision competitive UI**.
 
 ### 2.1 Color Palette & Design Tokens
 

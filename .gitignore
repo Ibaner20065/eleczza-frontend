@@ -1,5 +1,5 @@
 # ==========================================
-# ELECZZA - Git Ignore Configuration
+# ELECZZA 2.0 - Git Ignore Configuration
 # Next.js, TypeScript, Node.js & Tooling
 # ==========================================
 
@@ -103,4 +103,3 @@ desktop.ini
 *.swp
 *.swo
 *~
-

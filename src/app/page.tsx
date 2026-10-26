@@ -18,17 +18,11 @@ export default function Home() {
             §
           </div>
           <span className="font-serif text-xl font-bold tracking-wider text-[#F7F2E7]">
-            ELECZZA
+            ELECZZA 2.0
           </span>
         </div>
 
         <div className="flex items-center gap-4">
-          <Link
-            href="/styleguide"
-            className="hidden sm:inline-block text-xs font-semibold text-[#D9CEB8] transition-colors hover:text-[#DFB75A]"
-          >
-            Styleguide
-          </Link>
           <Link
             href="/login"
             className="text-xs font-semibold text-[#D9CEB8] transition-colors hover:text-[#DFB75A]"

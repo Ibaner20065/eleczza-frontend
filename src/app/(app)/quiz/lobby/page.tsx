@@ -1,0 +1,153 @@
+"use client";
+import * as React from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { stagger, fadeUp } from "@/lib/motion";
+import { MOCK_MY_TEAM, MOCK_CASE } from "@/lib/mock-data";
+import { TypewriterText } from "@/components/theme/typewriter-text";
+import { BrassButton } from "@/components/theme/brass-button";
+import { MagnifierLoader } from "@/components/theme/magnifier-loader";
+import { Users, Shield, ArrowRight, CheckCircle2, Circle, Volume2, VolumeX } from "lucide-react";
+
+export default function QuizLobbyPage() {
+  const [audioEnabled, setAudioEnabled] = React.useState(false);
+  const team = MOCK_MY_TEAM;
+  const caseFile = MOCK_CASE;
+  const readyCount = team.members.filter((m) => m.isReady).length;
+  const allReady = readyCount === team.members.length;
+
+  return (
+    <div className="mx-auto max-w-3xl space-y-8 py-6">
+      {/* Header */}
+      <div className="text-center space-y-3">
+        <div className="inline-flex items-center gap-2 rounded-full border border-[#DFB75A]/40 bg-[#12151C] px-4 py-1.5 font-mono text-xs font-bold uppercase tracking-widest text-[#DFB75A]">
+          <Shield className="h-3.5 w-3.5" />
+          Case Briefing Room — 221B Bureau
+        </div>
+        <h1 className="font-serif text-3xl font-bold text-[#F7F2E7]">{caseFile.title}</h1>
+
+        <div className="mx-auto max-w-md rounded-lg border border-[#2D3344] bg-[#0B0C10] p-4 font-mono text-xs text-[#DFB75A]">
+          <div className="text-[10px] uppercase tracking-wider text-[#4E5569] mb-1">
+            INSPECTOR LESTRADE BRIEFING:
+          </div>
+          <TypewriterText
+            text={caseFile.briefing}
+            speedMs={20}
+            className="text-[#D9CEB8] italic leading-relaxed"
+          />
+        </div>
+      </div>
+
+      {/* Case Metadata */}
+      <motion.div variants={stagger} initial="initial" animate="animate" className="grid grid-cols-3 gap-4">
+        {[
+          { label: "Difficulty", value: caseFile.difficulty, icon: "🎯" },
+          { label: "Duration", value: `${caseFile.durationMinutes}m`, icon: "⏱" },
+          { label: "Max Points", value: `${caseFile.totalPoints} pts`, icon: "🏆" },
+        ].map((item) => (
+          <motion.div
+            key={item.label}
+            variants={fadeUp}
+            className="parchment-border rounded-lg bg-[#12151C] p-4 text-center"
+          >
+            <div className="text-2xl">{item.icon}</div>
+            <div className="mt-1 font-mono text-sm font-bold text-[#DFB75A]">{item.value}</div>
+            <div className="text-[10px] uppercase tracking-wider text-[#4E5569]">{item.label}</div>
+          </motion.div>
+        ))}
+      </motion.div>
+
+      {/* Waiting Indicator & Agency Readiness */}
+      <div className="parchment-border rounded-xl bg-[#12151C] p-6 space-y-5">
+        <div className="flex items-center justify-between border-b border-[#2D3344] pb-4">
+          <div className="flex items-center gap-3">
+            <MagnifierLoader label="" size="sm" />
+            <div>
+              <h2 className="font-serif text-lg font-bold text-[#F7F2E7]">
+                {allReady ? "Agency Ready for Investigation!" : "Waiting for the Detective Bureau…"}
+              </h2>
+              <p className="text-xs text-[#8892B0]">
+                {allReady
+                  ? "All inspectors are positioned. You may proceed."
+                  : `${team.members.length - readyCount} operative(s) still preparing.`}
+              </p>
+            </div>
+          </div>
+
+          {/* Audio Toggle */}
+          <button
+            type="button"
+            onClick={() => setAudioEnabled(!audioEnabled)}
+            className="rounded border border-[#2D3344] bg-[#0B0C10] p-2 text-[#8892B0] transition-colors hover:text-[#DFB75A] cursor-pointer"
+            title="Toggle ambient audio"
+          >
+            {audioEnabled ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
+          </button>
+        </div>
+
+        {/* Team Ready Status */}
+        <div>
+          <div className="mb-3 flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-[#DFB75A]">
+            <Users className="h-3.5 w-3.5" />
+            {team.name} — Agency Readiness
+          </div>
+          <div className="space-y-2">
+            {team.members.map((member) => (
+              <div
+                key={member.userId}
+                className="flex items-center justify-between rounded-md border border-[#2D3344]/60 bg-[#161922] px-4 py-2.5"
+              >
+                <div className="flex items-center gap-2.5">
+                  {member.isReady ? (
+                    <CheckCircle2 className="h-4 w-4 text-[#3EAA75]" />
+                  ) : (
+                    <Circle className="h-4 w-4 text-[#4E5569]" />
+                  )}
+                  <span className="text-sm font-semibold text-[#F4EBD9]">{member.fullName}</span>
+                </div>
+                <span
+                  className={`font-mono text-xs font-bold uppercase tracking-wider ${
+                    member.isReady ? "text-[#3EAA75]" : "text-[#8892B0]"
+                  }`}
+                >
+                  {member.isReady ? "Positioned" : "Preparing…"}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* Progress bar */}
+          <div className="mt-3 h-1.5 w-full rounded-full bg-[#1C202B] overflow-hidden">
+            <motion.div
+              className="h-full rounded-full bg-gradient-to-r from-[#DFB75A] to-[#3EAA75]"
+              initial={{ width: 0 }}
+              animate={{ width: `${(readyCount / team.members.length) * 100}%` }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            />
+          </div>
+          <div className="mt-1 text-right font-mono text-[10px] text-[#4E5569]">
+            {readyCount} / {team.members.length} operatives ready
+          </div>
+        </div>
+      </div>
+
+      {/* Action Buttons */}
+      <div className="flex flex-col items-center gap-3 sm:flex-row">
+        <Link href="/quiz/question" className="w-full sm:w-auto">
+          <BrassButton size="lg" withLoupe className="w-full">
+            Begin Investigation
+            <ArrowRight className="h-4 w-4 ml-1" />
+          </BrassButton>
+        </Link>
+        <Link href="/dashboard" className="w-full sm:w-auto">
+          <button
+            type="button"
+            className="w-full inline-flex h-11 items-center justify-center gap-2 rounded-md border border-[#2D3344] bg-[#12151C] px-6 text-xs font-semibold uppercase tracking-wider text-[#D9CEB8] transition-colors hover:border-[#DFB75A]/50 hover:text-[#F4EBD9]"
+          >
+            Return to Study
+          </button>
+        </Link>
+      </div>
+    </div>
+  );
+}

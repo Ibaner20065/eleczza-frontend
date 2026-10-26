@@ -1,4 +1,7 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ELECZZA 2.0
+
+ELECZZA 2.0 is a Sherlock Holmes-themed forensic and cryptography quiz portal
+for the Academy of Technology, built with Next.js, TypeScript, and Tailwind CSS.
 
 ## Getting Started
 
@@ -36,7 +39,7 @@ to `apiRequest`; mock mode intentionally fails if a caller has no mock value.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to optimize and load Playfair Display, Special Elite, and Inter.
 
 ## Learn More
 

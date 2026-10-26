@@ -24,9 +24,22 @@ const sansBody = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "ELECZZA — 221B Baker Street Investigation",
+  title: "ELECZZA 2.0 — 221B Baker Street Investigation",
   description:
     "A Sherlock Holmes themed forensic and cryptography quiz portal for Academy of Technology.",
+  openGraph: {
+    title: "ELECZZA 2.0 — 221B Baker Street Investigation",
+    description:
+      "A Sherlock Holmes themed forensic and cryptography quiz portal for Academy of Technology.",
+    siteName: "ELECZZA 2.0",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "ELECZZA 2.0 — 221B Baker Street Investigation",
+    description:
+      "A Sherlock Holmes themed forensic and cryptography quiz portal for Academy of Technology.",
+  },
 };
 
 export default function RootLayout({

@@ -1,85 +1,116 @@
-import { CaseCard } from "@/components/quiz/case-card";
-import { getActiveCases } from "@/api/quiz";
-import { Award, Compass, Bell, Flame } from "lucide-react";
+import Link from "next/link";
+import { MOCK_EVENT, MOCK_MY_TEAM } from "@/lib/mock-data";
+import { DashboardCountdown } from "@/components/dashboard/dashboard-countdown";
+import { TeamStatusCard } from "@/components/dashboard/team-status-card";
+import { CaseFileCard } from "@/components/theme/case-file-card";
+import { BrassButton } from "@/components/theme/brass-button";
+import { Bell, Trophy, Shield, ChevronRight } from "lucide-react";
 
-export default async function DashboardPage() {
-  const activeCases = await getActiveCases();
+export default function DashboardPage() {
+  const event = MOCK_EVENT;
+  const myTeam = MOCK_MY_TEAM;
 
   return (
     <div className="space-y-8">
-      {/* Inspector Dossier Summary */}
-      <section className="parchment-border rounded-lg bg-[#12151C] p-6">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <span className="text-xs font-semibold tracking-wider text-[#DFB75A] uppercase">
-              Inspector Dossier #AOT-221B
-            </span>
-            <h1 className="mt-1 text-2xl font-bold text-[#F7F2E7]">
-              Welcome back, Detective
+      {/* Welcome Banner */}
+      <section className="parchment-border rounded-xl bg-[#12151C] p-6 shadow-xl">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+          <div className="space-y-2">
+            <div className="flex items-center gap-2">
+              <Shield className="h-5 w-5 text-[#DFB75A]" />
+              <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#DFB75A]">
+                Inspector Study • 221B Bureau
+              </span>
+            </div>
+            <h1 className="font-serif text-3xl font-bold tracking-tight text-[#F7F2E7]">
+              {event.title}
             </h1>
-            <p className="text-xs text-[#D9CEB8]">
-              Department: Computer Science & Technology • Status: Active Service
+            <p className="max-w-lg text-sm text-[#D9CEB8] leading-relaxed">
+              {event.description}
             </p>
+            <div className="flex flex-wrap gap-4 pt-2 text-xs text-[#8892B0]">
+              <span>📍 {event.venue}</span>
+              <span>👥 {event.totalTeams} Agencies</span>
+              <span>🏆 Prize Pool: <strong className="text-[#DFB75A]">{event.prizePool}</strong></span>
+              <span>👤 Max {event.maxTeamSize} per Agency</span>
+            </div>
           </div>
 
+          <div className="shrink-0">
+            <DashboardCountdown targetIso={event.startsAt} />
+          </div>
+        </div>
+      </section>
+
+      {/* Scotland Yard Dispatch */}
+      <section className="flex items-start gap-3 rounded-lg border border-[#DFB75A]/30 bg-[#DFB75A]/5 p-4 text-xs">
+        <Bell className="mt-0.5 h-4 w-4 shrink-0 text-[#DFB75A]" />
+        <div>
+          <div className="font-mono font-bold uppercase tracking-wider text-[#DFB75A]">
+            Scotland Yard Dispatch #05
+          </div>
+          <p className="mt-0.5 text-[#D9CEB8]">
+            All agencies must be registered and ready before the event starts. The quiz locks 60 seconds after start. Ensure all team members have joined.
+          </p>
+        </div>
+      </section>
+
+      {/* Grid: Team Status + Active Cases */}
+      <div className="grid gap-6 lg:grid-cols-12">
+        {/* Team Status */}
+        <div className="lg:col-span-5">
+          <TeamStatusCard team={myTeam} />
+        </div>
+
+        {/* Active Case Files */}
+        <div className="space-y-4 lg:col-span-7">
+          <div className="flex items-center justify-between">
+            <h2 className="font-serif text-lg font-bold text-[#F7F2E7]">
+              Active Investigation Files
+            </h2>
+            <Link href="/leaderboard" className="flex items-center gap-1 text-xs font-semibold text-[#DFB75A] hover:underline">
+              <Trophy className="h-3.5 w-3.5" />
+              Scotland Yard Ledger
+            </Link>
+          </div>
+
+          <CaseFileCard
+            caseNumber="005"
+            title="Case #005: The Final Problem"
+            synopsis="A cryptographic anomaly has been detected across the Academy of Technology laboratory network. Five interconnected dossiers await your deduction."
+            difficulty="Moriarty"
+            points={1200}
+            durationMinutes={45}
+            stampText="LIVE"
+            action={
+              <Link href="/quiz/lobby">
+                <BrassButton size="sm" withLoupe>
+                  Enter Lobby
+                </BrassButton>
+              </Link>
+            }
+          />
+
+          {/* Quick Nav Tiles */}
           <div className="grid grid-cols-3 gap-3">
-            <div className="rounded border border-[#2D3344] bg-[#0B0C10] p-3 text-center">
-              <div className="flex items-center justify-center text-[#DFB75A]">
-                <Award className="h-4 w-4" />
-              </div>
-              <div className="mt-1 text-lg font-bold text-[#F7F2E7]">1,450</div>
-              <div className="text-[10px] text-[#D9CEB8]">Score</div>
-            </div>
-
-            <div className="rounded border border-[#2D3344] bg-[#0B0C10] p-3 text-center">
-              <div className="flex items-center justify-center text-[#DFB75A]">
-                <Flame className="h-4 w-4" />
-              </div>
-              <div className="mt-1 text-lg font-bold text-[#F7F2E7]">#4</div>
-              <div className="text-[10px] text-[#D9CEB8]">Rank</div>
-            </div>
-
-            <div className="rounded border border-[#2D3344] bg-[#0B0C10] p-3 text-center">
-              <div className="flex items-center justify-center text-[#2A7B54]">
-                <Compass className="h-4 w-4" />
-              </div>
-              <div className="mt-1 text-lg font-bold text-[#F7F2E7]">6</div>
-              <div className="text-[10px] text-[#D9CEB8]">Solved</div>
-            </div>
+            {[
+              { label: "Agency HQ", href: "/team", icon: "👥" },
+              { label: "Case Lobby", href: "/quiz/lobby", icon: "🔍" },
+              { label: "Scotland Yard Ledger", href: "/leaderboard", icon: "🏆" },
+            ].map((tile) => (
+              <Link
+                key={tile.href}
+                href={tile.href}
+                className="flex flex-col items-center justify-center gap-2 rounded-lg border border-[#2D3344] bg-[#12151C] p-4 text-center transition-all hover:border-[#DFB75A]/50 hover:bg-[#1C202B]"
+              >
+                <span className="text-2xl">{tile.icon}</span>
+                <span className="text-xs font-semibold text-[#D9CEB8]">{tile.label}</span>
+                <ChevronRight className="h-3.5 w-3.5 text-[#4E5569]" />
+              </Link>
+            ))}
           </div>
         </div>
-      </section>
-
-      {/* Scotland Yard Telegram Despatch */}
-      <section className="rounded border border-[#DFB75A]/30 bg-[#DFB75A]/5 p-4 text-xs text-[#D9CEB8]">
-        <div className="flex items-center gap-2 font-semibold text-[#DFB75A]">
-          <Bell className="h-4 w-4" />
-          <span>SCOTLAND YARD DISPATCH #04</span>
-        </div>
-        <p className="mt-1">
-          Attention all agencies: Case Zero is now in active investigation.
-          Verify all encrypted signals through the teletype before filing
-          deductions.
-        </p>
-      </section>
-
-      {/* Active Cases Grid */}
-      <section>
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-bold text-[#F7F2E7]">
-            Active Case Files
-          </h2>
-          <span className="text-xs text-[#DFB75A]">
-            {activeCases.length} Investigation Open
-          </span>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {activeCases.map((caseFile) => (
-            <CaseCard key={caseFile.id} caseFile={caseFile} />
-          ))}
-        </div>
-      </section>
+      </div>
     </div>
   );
 }

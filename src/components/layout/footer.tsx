@@ -16,7 +16,7 @@ export function Footer() {
                 §
               </div>
               <span className="font-serif text-base font-bold tracking-wider text-[#F7F2E7]">
-                ELECZZA
+                ELECZZA 2.0
               </span>
             </div>
             <p className="max-w-sm text-xs text-[#8892B0] leading-relaxed">
@@ -69,12 +69,6 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/styleguide"
-                  className="hover:text-[#DFB75A] transition-colors"
-                >
-                  Design System & Tokens
-                </Link>
               </li>
             </ul>
           </div>
@@ -97,7 +91,7 @@ export function Footer() {
         </div>
 
         <div className="mt-8 flex flex-col items-center justify-between border-t border-[#2D3344]/50 pt-6 text-[11px] text-[#4E5569] sm:flex-row">
-          <div>© 2026 ELECZZA. All forensic deductions reserved.</div>
+          <div>© 2026 ELECZZA 2.0. All forensic deductions reserved.</div>
           <div className="mt-2 font-mono sm:mt-0">
             221B Baker St. Archival System • Ver 3.0
           </div>

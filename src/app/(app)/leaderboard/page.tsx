@@ -13,7 +13,7 @@ const mockRankings: RankingEntry[] = [
   {
     rank: 1,
     agencyName: "The Baker Street Irregulars",
-    leadInspector: "S. Holmes (CSE)",
+    leadInspector: "S. Holmes (ECE)",
     score: 2850,
     solvedCount: 10,
     solveTime: "34m 12s",

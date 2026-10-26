@@ -1,5 +1,5 @@
 "use client";
-
+import * as React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -8,169 +8,329 @@ import {
   type CreateTeamInput,
   type JoinTeamInput,
 } from "@/lib/validators/team";
+import { MOCK_MY_TEAM } from "@/lib/mock-data";
 import { Button } from "@/components/ui/button";
-import { Users, KeyRound, ShieldCheck, UserCheck } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { BrassButton } from "@/components/theme/brass-button";
+import { motion, AnimatePresence } from "framer-motion";
+import { fadeUp, stagger } from "@/lib/motion";
+import {
+  Users,
+  KeyRound,
+  ShieldCheck,
+  UserCheck,
+  Crown,
+  UserMinus,
+  Copy,
+  CheckCircle2,
+} from "lucide-react";
+import { toast } from "sonner";
+import type { TeamRole } from "@/types/team.types";
+
+const ROLE_LABELS: Record<TeamRole, string> = {
+  LEAD_INSPECTOR: "Lead Inspector",
+  CRYPTANALYST: "Cryptanalyst",
+  FIELD_AGENT: "Field Agent",
+};
+
+const ROLE_OPTIONS: TeamRole[] = ["LEAD_INSPECTOR", "CRYPTANALYST", "FIELD_AGENT"];
 
 export default function TeamPage() {
-  const createForm = useForm<CreateTeamInput>({
-    resolver: zodResolver(createTeamSchema),
-  });
+  const [myTeam, setMyTeam] = React.useState(MOCK_MY_TEAM);
+  const [copiedPasscode, setCopiedPasscode] = React.useState(false);
+  const [tab, setTab] = React.useState<"roster" | "create" | "join">("roster");
+  const isLeader = true; // mock: current user is leader
 
-  const joinForm = useForm<JoinTeamInput>({
-    resolver: zodResolver(joinTeamSchema),
-  });
+  const createForm = useForm<CreateTeamInput>({ resolver: zodResolver(createTeamSchema) });
+  const joinForm = useForm<JoinTeamInput>({ resolver: zodResolver(joinTeamSchema) });
 
   const onCreate = (data: CreateTeamInput) => {
-    console.log("Chartering agency:", data);
+    toast.success("Agency Chartered", {
+      description: `"${data.name}" is now registered with Scotland Yard.`,
+    });
+    createForm.reset();
+    setTab("roster");
   };
 
   const onJoin = (data: JoinTeamInput) => {
-    console.log("Joining agency via passcode:", data);
+    toast.success("Enlisted!", {
+      description: `Joined agency via passcode ${data.passcode}.`,
+    });
+    joinForm.reset();
+    setTab("roster");
   };
 
+  const copyPasscode = () => {
+    navigator.clipboard.writeText(myTeam.passcode).then(() => {
+      setCopiedPasscode(true);
+      setTimeout(() => setCopiedPasscode(false), 2000);
+    });
+  };
+
+  const kickMember = (userId: string) => {
+    setMyTeam((t) => ({ ...t, members: t.members.filter((m) => m.userId !== userId) }));
+    toast.info("Operative dismissed from agency roster.");
+  };
+
+  const changeRole = (userId: string, role: TeamRole) => {
+    setMyTeam((t) => ({
+      ...t,
+      members: t.members.map((m) => (m.userId === userId ? { ...m, role } : m)),
+    }));
+  };
+
+  const toggleReady = (userId: string) => {
+    setMyTeam((t) => ({
+      ...t,
+      members: t.members.map((m) => (m.userId === userId ? { ...m, isReady: !m.isReady } : m)),
+    }));
+  };
+
+  const readyCount = myTeam.members.filter((m) => m.isReady).length;
+  const allReady = readyCount === myTeam.members.length;
+
   return (
-    <div className="space-y-8">
-      <div>
-        <span className="text-xs font-semibold tracking-wider text-[#DFB75A] uppercase">
-          Detective Agency HQ
-        </span>
-        <h1 className="mt-1 text-2xl font-bold text-[#F7F2E7]">
-          Agency Organization
-        </h1>
-        <p className="text-xs text-[#D9CEB8]">
-          Form a syndicate of up to 4 inspectors or enter a secret agency
-          passcode.
-        </p>
-      </div>
-
-      <div className="grid gap-6 md:grid-cols-2">
-        {/* Create Agency */}
-        <div className="parchment-border rounded-lg bg-[#12151C] p-6">
-          <div className="flex items-center gap-2">
-            <Users className="h-5 w-5 text-[#DFB75A]" />
-            <h2 className="text-lg font-bold text-[#F7F2E7]">
-              Charter New Agency
-            </h2>
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex items-start justify-between">
+        <div>
+          <div className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-widest text-[#DFB75A]">
+            <Users className="h-4 w-4" /> Detective Agency HQ
           </div>
-          <p className="mt-1 text-xs text-[#D9CEB8]">
-            You will be designated as the Lead Inspector with authority to
-            invite operatives.
-          </p>
-
-          <form
-            onSubmit={createForm.handleSubmit(onCreate)}
-            className="mt-6 space-y-4"
-          >
-            <div>
-              <label className="block text-xs font-semibold tracking-wider text-[#D9CEB8] uppercase">
-                Agency Moniker
-              </label>
-              <input
-                {...createForm.register("name")}
-                type="text"
-                placeholder="The Baker Street Irregulars"
-                className="mt-1 w-full rounded border border-[#2D3344] bg-[#0B0C10] px-3 py-2 text-sm text-[#F7F2E7] placeholder-[#4E5569] focus:border-[#DFB75A] focus:outline-none"
-              />
-              {createForm.formState.errors.name && (
-                <p className="mt-1 text-xs text-[#9E2A2B]">
-                  {createForm.formState.errors.name.message}
-                </p>
-              )}
-            </div>
-
-            <div>
-              <label className="block text-xs font-semibold tracking-wider text-[#D9CEB8] uppercase">
-                Motto (Optional)
-              </label>
-              <input
-                {...createForm.register("motto")}
-                type="text"
-                placeholder="Data! Data! Data! I cannot make bricks without clay."
-                className="mt-1 w-full rounded border border-[#2D3344] bg-[#0B0C10] px-3 py-2 text-sm text-[#F7F2E7] placeholder-[#4E5569] focus:border-[#DFB75A] focus:outline-none"
-              />
-            </div>
-
-            <Button
-              type="submit"
-              className="w-full cursor-pointer bg-[#DFB75A] font-semibold text-[#0B0C10] hover:bg-[#C59B27]"
-            >
-              Charter Agency
-            </Button>
-          </form>
+          <h1 className="mt-1 font-serif text-3xl font-bold text-[#F7F2E7]">{myTeam.name}</h1>
+          {myTeam.motto && (
+            <p className="text-xs italic text-[#8892B0]">&ldquo;{myTeam.motto}&rdquo;</p>
+          )}
         </div>
-
-        {/* Join Agency */}
-        <div className="parchment-border rounded-lg bg-[#12151C] p-6">
-          <div className="flex items-center gap-2">
-            <KeyRound className="h-5 w-5 text-[#DFB75A]" />
-            <h2 className="text-lg font-bold text-[#F7F2E7]">
-              Enlist via Passcode
-            </h2>
-          </div>
-          <p className="mt-1 text-xs text-[#D9CEB8]">
-            Enter the 6-character case passcode provided by your Lead Inspector.
-          </p>
-
-          <form
-            onSubmit={joinForm.handleSubmit(onJoin)}
-            className="mt-6 space-y-4"
-          >
-            <div>
-              <label className="block text-xs font-semibold tracking-wider text-[#D9CEB8] uppercase">
-                6-Character Passcode
-              </label>
-              <input
-                {...joinForm.register("passcode")}
-                type="text"
-                maxLength={6}
-                placeholder="BAKER7"
-                className="mt-1 w-full rounded border border-[#2D3344] bg-[#0B0C10] px-3 py-2 text-center font-mono text-lg tracking-widest text-[#DFB75A] uppercase focus:border-[#DFB75A] focus:outline-none"
-              />
-              {joinForm.formState.errors.passcode && (
-                <p className="mt-1 text-xs text-[#9E2A2B]">
-                  {joinForm.formState.errors.passcode.message}
-                </p>
-              )}
-            </div>
-
-            <Button
-              type="submit"
-              className="w-full cursor-pointer border border-[#DFB75A]/40 bg-[#1C202B] font-semibold text-[#DFB75A] hover:bg-[#2D3344]"
-            >
-              Enter Agency Roster
-            </Button>
-          </form>
+        <div
+          className={`flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold ${
+            allReady ? "border-[#2A7B54] text-[#3EAA75]" : "border-[#DFB75A]/40 text-[#DFB75A]"
+          }`}
+        >
+          <ShieldCheck className="h-3.5 w-3.5" />
+          {allReady
+            ? "Agency Ready for Investigation"
+            : `${readyCount} / ${myTeam.members.length} ready`}
         </div>
       </div>
 
-      {/* Mock Active Roster */}
-      <section className="parchment-border rounded-lg bg-[#12151C] p-6">
-        <div className="flex items-center justify-between border-b border-[#2D3344] pb-4">
-          <div>
-            <h3 className="font-bold text-[#F7F2E7]">
-              Current Agency: The Baskerville Syndicate
-            </h3>
-            <p className="text-xs text-[#D9CEB8]">
-              Passcode: <span className="font-mono text-[#DFB75A]">BSK221</span>
+      {/* Tab Switcher */}
+      <div className="flex gap-2 border-b border-[#2D3344] pb-0">
+        {(["roster", "create", "join"] as const).map((t) => (
+          <button
+            key={t}
+            type="button"
+            onClick={() => setTab(t)}
+            className={`-mb-px border-b-2 px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-colors ${
+              tab === t
+                ? "border-[#DFB75A] text-[#DFB75A]"
+                : "border-transparent text-[#8892B0] hover:text-[#D9CEB8]"
+            }`}
+          >
+            {t === "roster" ? "Agency Roster" : t === "create" ? "Charter Agency" : "Enlist via Code"}
+          </button>
+        ))}
+      </div>
+
+      <AnimatePresence mode="wait">
+        {/* ROSTER TAB */}
+        {tab === "roster" && (
+          <motion.div
+            key="roster"
+            variants={stagger}
+            initial="initial"
+            animate="animate"
+            className="space-y-4"
+          >
+            {/* Passcode Banner */}
+            <motion.div
+              variants={fadeUp}
+              className="flex items-center justify-between rounded-lg border border-[#2D3344] bg-[#0B0C10] px-5 py-3"
+            >
+              <div>
+                <div className="text-[10px] font-mono uppercase tracking-wider text-[#4E5569]">
+                  Agency Passcode — share to invite
+                </div>
+                <div className="font-mono text-2xl font-bold tracking-widest text-[#DFB75A]">
+                  {myTeam.passcode}
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={copyPasscode}
+                className="flex items-center gap-1.5 rounded border border-[#2D3344] bg-[#12151C] px-3 py-2 text-xs font-semibold text-[#D9CEB8] hover:text-[#DFB75A] transition-colors cursor-pointer"
+              >
+                {copiedPasscode ? (
+                  <CheckCircle2 className="h-3.5 w-3.5 text-[#3EAA75]" />
+                ) : (
+                  <Copy className="h-3.5 w-3.5" />
+                )}
+                {copiedPasscode ? "Copied!" : "Copy Code"}
+              </button>
+            </motion.div>
+
+            {/* Member Cards */}
+            <div className="grid gap-3 sm:grid-cols-2">
+              {myTeam.members.map((member) => (
+                <motion.div
+                  key={member.userId}
+                  variants={fadeUp}
+                  className="parchment-border rounded-lg bg-[#12151C] p-4 space-y-3"
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="flex items-center gap-2.5">
+                      <div
+                        className={`h-2.5 w-2.5 rounded-full ${
+                          member.isReady
+                            ? "bg-[#3EAA75] shadow-[0_0_6px_rgba(62,170,117,0.6)]"
+                            : "bg-[#4E5569]"
+                        }`}
+                      />
+                      <div>
+                        <div className="flex items-center gap-1.5 font-semibold text-[#F4EBD9]">
+                          {member.userId === myTeam.leaderId && (
+                            <Crown className="h-3.5 w-3.5 text-[#DFB75A]" />
+                          )}
+                          {member.fullName}
+                        </div>
+                        <div className="text-[10px] text-[#8892B0]">{member.email}</div>
+                      </div>
+                    </div>
+                    {isLeader && member.userId !== myTeam.leaderId && (
+                      <button
+                        type="button"
+                        onClick={() => kickMember(member.userId)}
+                        className="rounded border border-[#2D3344] bg-[#0B0C10] p-1 text-[#4E5569] transition-colors hover:border-[#8B1E22] hover:text-[#C93B41] cursor-pointer"
+                        title="Remove from agency"
+                      >
+                        <UserMinus className="h-3 w-3" />
+                      </button>
+                    )}
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    {isLeader && member.userId !== myTeam.leaderId ? (
+                      <select
+                        value={member.role}
+                        onChange={(e) => changeRole(member.userId, e.target.value as TeamRole)}
+                        className="rounded border border-[#2D3344] bg-[#0B0C10] px-2 py-1 font-mono text-xs text-[#D9CEB8] focus:border-[#DFB75A] focus:outline-none cursor-pointer"
+                      >
+                        {ROLE_OPTIONS.map((r) => (
+                          <option key={r} value={r}>
+                            {ROLE_LABELS[r]}
+                          </option>
+                        ))}
+                      </select>
+                    ) : (
+                      <span className="font-mono text-xs text-[#DFB75A]">
+                        {ROLE_LABELS[member.role]}
+                      </span>
+                    )}
+
+                    <button
+                      type="button"
+                      onClick={() => toggleReady(member.userId)}
+                      className={`flex items-center gap-1 rounded border px-2 py-1 text-[10px] font-semibold uppercase tracking-wider transition-colors cursor-pointer ${
+                        member.isReady
+                          ? "border-[#2A7B54] text-[#3EAA75] hover:bg-[#8B1E22]/20 hover:border-[#8B1E22] hover:text-[#C93B41]"
+                          : "border-[#2D3344] text-[#8892B0] hover:border-[#DFB75A]/50 hover:text-[#DFB75A]"
+                      }`}
+                    >
+                      <UserCheck className="h-3 w-3" />
+                      {member.isReady ? "Ready" : "Not Ready"}
+                    </button>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+
+        {/* CREATE TAB */}
+        {tab === "create" && (
+          <motion.div
+            key="create"
+            variants={fadeUp}
+            initial="initial"
+            animate="animate"
+            className="parchment-border rounded-xl bg-[#12151C] p-6 max-w-lg"
+          >
+            <h2 className="font-serif text-xl font-bold text-[#F7F2E7]">Charter a New Agency</h2>
+            <p className="mt-1 text-xs text-[#D9CEB8]">
+              You will be designated Lead Inspector with full authority over the roster.
             </p>
-          </div>
-          <span className="flex items-center gap-1 text-xs font-semibold text-[#2A7B54]">
-            <ShieldCheck className="h-4 w-4" /> Ready for Investigation
-          </span>
-        </div>
+            <form onSubmit={createForm.handleSubmit(onCreate)} className="mt-6 space-y-4">
+              <div className="space-y-1">
+                <Label htmlFor="name">Agency Moniker</Label>
+                <Input
+                  id="name"
+                  {...createForm.register("name")}
+                  placeholder="The Baker Street Irregulars"
+                />
+                {createForm.formState.errors.name && (
+                  <p className="text-xs text-[#C93B41]">
+                    {createForm.formState.errors.name.message}
+                  </p>
+                )}
+              </div>
+              <div className="space-y-1">
+                <Label htmlFor="motto">Motto (Optional)</Label>
+                <Input
+                  id="motto"
+                  {...createForm.register("motto")}
+                  placeholder="Data! Data! Data!"
+                />
+              </div>
+              <BrassButton type="submit" size="md" className="w-full">
+                Charter Agency
+              </BrassButton>
+            </form>
+          </motion.div>
+        )}
 
-        <div className="mt-4 divide-y divide-[#2D3344]/50">
-          <div className="flex items-center justify-between py-2 text-xs">
-            <div className="flex items-center gap-2">
-              <UserCheck className="h-4 w-4 text-[#DFB75A]" />
-              <span className="font-semibold text-[#F7F2E7]">
-                Lead Inspector (You)
-              </span>
+        {/* JOIN TAB */}
+        {tab === "join" && (
+          <motion.div
+            key="join"
+            variants={fadeUp}
+            initial="initial"
+            animate="animate"
+            className="parchment-border rounded-xl bg-[#12151C] p-6 max-w-sm"
+          >
+            <div className="flex items-center gap-2 text-[#DFB75A]">
+              <KeyRound className="h-5 w-5" />
+              <h2 className="font-serif text-xl font-bold text-[#F7F2E7]">Enlist via Passcode</h2>
             </div>
-            <span className="text-[#D9CEB8]">lead.inspector@aot.edu.in</span>
-          </div>
-        </div>
-      </section>
+            <p className="mt-1 text-xs text-[#D9CEB8]">
+              Enter the 6-character passcode from your Lead Inspector.
+            </p>
+            <form onSubmit={joinForm.handleSubmit(onJoin)} className="mt-6 space-y-4">
+              <div className="space-y-1">
+                <Label htmlFor="passcode">6-Character Passcode</Label>
+                <Input
+                  id="passcode"
+                  {...joinForm.register("passcode")}
+                  maxLength={6}
+                  placeholder="BSK221"
+                  className="font-mono text-center text-xl tracking-widest uppercase text-[#DFB75A]"
+                  onChange={(e) => {
+                    joinForm.setValue("passcode", e.target.value.toUpperCase());
+                  }}
+                />
+                {joinForm.formState.errors.passcode && (
+                  <p className="text-xs text-[#C93B41]">
+                    {joinForm.formState.errors.passcode.message}
+                  </p>
+                )}
+              </div>
+              <Button type="submit" variant="outline" className="w-full">
+                Enter Agency Roster
+              </Button>
+            </form>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

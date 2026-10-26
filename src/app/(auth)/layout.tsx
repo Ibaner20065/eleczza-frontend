@@ -29,7 +29,7 @@ export default function AuthLayout({
               </div>
               <div>
                 <span className="font-serif text-xl font-bold tracking-wider text-[#F7F2E7]">
-                  ELECZZA
+                  ELECZZA 2.0
                 </span>
                 <span className="block text-[10px] font-mono tracking-widest text-[#DFB75A] uppercase">
                   221B Scotland Yard Bureau
@@ -89,7 +89,7 @@ export default function AuthLayout({
 
           {/* Bottom Bureau Metadata */}
           <div className="relative z-10 border-t border-[#2D3344]/50 pt-4 text-[11px] text-[#4E5569]">
-            Academy of Technology • Department of Computer Science & Technology
+            Academy of Technology • Department of ECE
           </div>
         </aside>
 
@@ -111,7 +111,7 @@ export default function AuthLayout({
                 §
               </div>
               <span className="font-serif text-sm font-bold text-[#F7F2E7]">
-                ELECZZA
+                ELECZZA 2.0
               </span>
             </div>
           </div>
