@@ -6,10 +6,12 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-serif: var(--font-cormorant);
-  --font-script: var(--font-pinyon);
+  --font-display: var(--font-display);
+  --font-archival: var(--font-archival);
+  --font-serif: var(--font-serif);
+  --font-script: var(--font-script);
   --font-mono: var(--font-mono);
-  --font-sans: var(--font-cormorant);
+  --font-sans: var(--font-serif);
 
   --color-umber: var(--umber);
   --color-surface: var(--surface);
@@ -58,21 +60,38 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html,
+  body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
   body {
     @apply bg-background text-foreground;
-    font-family: var(--font-cormorant), Georgia, serif;
+    font-family: var(--font-serif), "EB Garamond", Garamond, Georgia, serif;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
   h1,
+  .font-display {
+    font-family: var(--font-display), "Cormorant Garamond", Georgia, serif;
+  }
+  .font-archival {
+    font-family: var(--font-archival), "Cinzel", Georgia, serif;
+  }
   h2,
   h3,
-  h4,
+  h4 {
+    font-family: var(--font-display), "Cormorant Garamond", Georgia, serif;
+  }
+  p,
   .font-serif {
-    font-family: var(--font-cormorant), Georgia, serif;
+    font-family: var(--font-serif), "EB Garamond", Garamond, Georgia, serif;
+  }
+  .font-script {
+    font-family: var(--font-script), "Pinyon Script", cursive;
   }
   code,
   pre,
   .font-mono {
-    font-family: var(--font-mono), monospace;
+    font-family: var(--font-mono), "Special Elite", monospace;
   }
 }

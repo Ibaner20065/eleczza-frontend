@@ -22,7 +22,7 @@ export default function DashboardPage() {
                 Inspector Study • 221B Bureau
               </span>
             </div>
-            <h1 className="font-script text-3xl leading-tight text-parchment">
+            <h1 className="font-display text-3xl font-extrabold tracking-wide text-parchment">
               {event.title}
             </h1>
             <p className="max-w-lg text-sm text-parchment leading-relaxed">

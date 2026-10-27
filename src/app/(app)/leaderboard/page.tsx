@@ -59,7 +59,7 @@ export default function LeaderboardPage() {
         <span className="text-xs font-semibold tracking-wider text-amber uppercase">
           Scotland Yard Official Ledger
         </span>
-        <h1 className="font-script mt-1 text-3xl leading-tight text-parchment">
+        <h1 className="font-display mt-1 text-3xl font-extrabold tracking-wide text-parchment">
           High Table of Detectives
         </h1>
         <p className="text-xs text-parchment">

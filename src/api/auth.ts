@@ -13,6 +13,42 @@ function getAuthCallbackUrl(next: string) {
 }
 
 export async function loginWithEmail(credentials: LoginInput) {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const isLocalDev =
+    !supabaseUrl ||
+    supabaseUrl.includes("placeholder") ||
+    supabaseUrl.includes("xyzcompany");
+
+  if (isLocalDev) {
+    // Cache credentials and session in localhost
+    if (typeof window !== "undefined") {
+      const mockUser = {
+        id:
+          "local-detective-" +
+          btoa(credentials.email)
+            .replace(/[^a-zA-Z0-9]/g, "")
+            .slice(0, 8),
+        email: credentials.email,
+        aud: "authenticated",
+        role: "authenticated",
+        created_at: new Date().toISOString(),
+      };
+      localStorage.setItem("eleczza_local_user", JSON.stringify(mockUser));
+      localStorage.setItem(
+        "eleczza_cached_credentials",
+        JSON.stringify({
+          email: credentials.email,
+          password: credentials.password,
+          savedAt: new Date().toISOString(),
+        }),
+      );
+      return {
+        user: mockUser as unknown as import("@supabase/supabase-js").User,
+        session: null,
+      };
+    }
+  }
+
   const supabase = createClient();
   const { data, error } = await supabase.auth.signInWithPassword({
     email: credentials.email,
@@ -21,6 +57,18 @@ export async function loginWithEmail(credentials: LoginInput) {
 
   if (error) {
     throw error;
+  }
+
+  if (typeof window !== "undefined" && data.user) {
+    localStorage.setItem("eleczza_local_user", JSON.stringify(data.user));
+    localStorage.setItem(
+      "eleczza_cached_credentials",
+      JSON.stringify({
+        email: credentials.email,
+        password: credentials.password,
+        savedAt: new Date().toISOString(),
+      }),
+    );
   }
 
   return data;
@@ -90,6 +138,17 @@ export async function updatePassword(password: string) {
 }
 
 export async function signOut() {
+  if (typeof window !== "undefined") {
+    localStorage.removeItem("eleczza_local_user");
+  }
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  if (
+    !supabaseUrl ||
+    supabaseUrl.includes("placeholder") ||
+    supabaseUrl.includes("xyzcompany")
+  ) {
+    return;
+  }
   const supabase = createClient();
   const { error } = await supabase.auth.signOut();
   if (error) {

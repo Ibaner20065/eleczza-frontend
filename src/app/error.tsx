@@ -43,7 +43,7 @@ export default function ErrorPage({
             <span>Forensic Synthesis Failure</span>
           </div>
 
-          <h1 className="font-script text-3xl leading-tight text-parchment sm:text-4xl">
+          <h1 className="font-display text-3xl font-extrabold tracking-tight text-parchment sm:text-4xl">
             Deductive Chain Fractured
           </h1>
 

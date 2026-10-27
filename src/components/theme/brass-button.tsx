@@ -29,44 +29,49 @@ export const LightBeamButton = React.forwardRef<
       ref={ref}
       type="button"
       className={cn(
-        "group relative inline-flex min-h-11 w-full items-center justify-center overflow-hidden rounded-md border border-brass/80 bg-crimson px-6 py-3 text-sm font-semibold tracking-[0.16em] text-ivory uppercase select-none transition-[transform,box-shadow,background-color] duration-200",
-        "shadow-[inset_0_1px_0_rgb(var(--parchment-rgb)/0.12),0_4px_14px_rgb(var(--umber-rgb)/0.42)]",
-        "hover:bg-crimson/90 hover:shadow-[inset_0_1px_0_rgb(var(--parchment-rgb)/0.18),0_6px_18px_rgb(var(--umber-rgb)/0.55),0_0_12px_rgb(var(--amber-rgb)/0.16)]",
-        "active:translate-y-px active:shadow-[inset_0_2px_4px_rgb(var(--umber-rgb)/0.5)]",
+        "group relative min-h-11 w-full select-none rounded overflow-hidden px-6 py-3",
+        "bg-surface text-parchment font-archival text-xs font-bold tracking-[0.2em] uppercase",
+        "border border-brass/70 shadow-[inset_0_1px_0_rgba(233,220,192,0.1),0_2px_8px_rgba(13,9,7,0.7)]",
+        "transition-all duration-200 ease-out",
+        "hover:border-brass hover:bg-[#22160f] hover:shadow-[inset_0_1px_0_rgba(233,220,192,0.15),0_0_12px_rgba(198,138,50,0.25),0_4px_12px_rgba(13,9,7,0.8)]",
+        "active:translate-y-[1px] active:bg-[#180f0a]",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass focus-visible:ring-offset-2 focus-visible:ring-offset-obsidian",
-        "disabled:cursor-not-allowed disabled:opacity-60",
-        isSuccess && "border-brass bg-walnut",
-        isFailure && "border-crimson-foreground bg-crimson/90",
-        !reducedMotion &&
-          "before:pointer-events-none before:absolute before:inset-y-0 before:left-[-35%] before:w-1/3 before:skew-x-[-18deg] before:bg-gradient-to-r before:from-transparent before:via-ivory/20 before:to-transparent before:transition-transform before:duration-700 before:group-hover:left-[105%]",
+        "disabled:cursor-not-allowed disabled:opacity-50",
+        isSuccess && "!border-brass !bg-surface text-parchment",
+        isFailure && "!border-crimson !bg-crimson/30 text-parchment",
         className,
       )}
       disabled={isDisabled}
       aria-busy={isLoading || undefined}
       {...props}
     >
-      <span className="relative z-10">{children}</span>
-      {isLoading && (
-        <LoaderCircle
-          aria-hidden="true"
-          className={cn(
-            "relative z-10 ml-2 h-4 w-4",
-            !reducedMotion && "animate-spin",
-          )}
-        />
-      )}
-      {isSuccess && (
-        <Check
-          aria-hidden="true"
-          className="relative z-10 ml-2 h-4 w-4 text-brass"
-        />
-      )}
-      {isFailure && (
-        <AlertCircle
-          aria-hidden="true"
-          className="relative z-10 ml-2 h-4 w-4 text-crimson-foreground"
-        />
-      )}
+      {/* Subtle brass sheen on hover */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-brass/15 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full"
+      />
+
+      <span className="relative z-10 flex items-center justify-center gap-2">
+        {children}
+        {isLoading && (
+          <LoaderCircle
+            aria-hidden="true"
+            className={cn(
+              "h-4 w-4 shrink-0 text-brass",
+              !reducedMotion && "animate-spin",
+            )}
+          />
+        )}
+        {isSuccess && (
+          <Check aria-hidden="true" className="h-4 w-4 shrink-0 text-brass" />
+        )}
+        {isFailure && (
+          <AlertCircle
+            aria-hidden="true"
+            className="h-4 w-4 shrink-0 text-crimson-foreground"
+          />
+        )}
+      </span>
       {isLoading && (
         <span className="sr-only" role="status">
           Loading

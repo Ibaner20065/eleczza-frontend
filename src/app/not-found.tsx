@@ -29,7 +29,7 @@ export default function NotFound() {
             <span>Archive Error #404</span>
           </div>
 
-          <h1 className="font-script text-3xl leading-tight text-parchment sm:text-4xl">
+          <h1 className="font-display text-3xl font-extrabold tracking-tight text-parchment sm:text-4xl">
             Case File Missing
           </h1>
 

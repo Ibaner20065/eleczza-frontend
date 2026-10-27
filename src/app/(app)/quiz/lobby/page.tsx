@@ -32,7 +32,7 @@ export default function QuizLobbyPage() {
           <Shield className="h-3.5 w-3.5" />
           Case Briefing Room — 221B Bureau
         </div>
-        <h1 className="font-script text-3xl leading-tight text-parchment">
+        <h1 className="font-display text-3xl font-extrabold tracking-wide text-parchment">
           {caseFile.title}
         </h1>
 

@@ -15,7 +15,7 @@ export function Footer() {
               <div className="wax-seal flex h-7 w-7 items-center justify-center rounded-full font-serif text-sm font-bold text-parchment shadow-[0_0_10px_rgb(var(--wax-rgb)/0.25)]">
                 §
               </div>
-              <span className="font-script text-2xl text-parchment">
+              <span className="font-archival text-lg font-bold tracking-[0.2em] text-parchment">
                 ELECZZA 2.0
               </span>
             </div>

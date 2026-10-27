@@ -45,7 +45,7 @@ export default function QuizPage() {
           <span className="text-xs font-semibold tracking-wider text-amber uppercase">
             Active Investigation • Clue #03 of 10
           </span>
-          <h1 className="font-script text-2xl leading-tight text-parchment">
+          <h1 className="font-display text-2xl font-bold tracking-tight text-parchment">
             Case #001: The Hound of the North Lawn
           </h1>
         </div>

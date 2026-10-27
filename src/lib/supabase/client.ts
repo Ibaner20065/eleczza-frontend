@@ -4,9 +4,11 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 let browserClient: SupabaseClient | undefined;
 
 export function createClient(): SupabaseClient {
-  browserClient ??= createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-  );
+  const url =
+    process.env.NEXT_PUBLIC_SUPABASE_URL ||
+    "https://eleczza-placeholder.supabase.co";
+  const key =
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "placeholder-anon-key";
+  browserClient ??= createBrowserClient(url, key);
   return browserClient;
 }

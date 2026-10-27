@@ -111,7 +111,7 @@ export default function TeamPage() {
           <div className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-widest text-amber">
             <Users className="h-4 w-4" /> Detective Agency HQ
           </div>
-          <h1 className="font-script mt-1 text-3xl leading-tight text-parchment">
+          <h1 className="font-display mt-1 text-3xl font-extrabold tracking-wide text-parchment">
             {myTeam.name}
           </h1>
           {myTeam.motto && (

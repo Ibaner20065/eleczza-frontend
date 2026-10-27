@@ -76,7 +76,7 @@ export function Navbar() {
             §
           </div>
           <div className="flex flex-col">
-            <span className="font-script text-2xl text-parchment group-hover:text-amber transition-colors">
+            <span className="font-archival text-lg font-bold tracking-[0.2em] text-parchment group-hover:text-amber transition-colors">
               ELECZZA 2.0
             </span>
             <span className="text-[9px] font-mono tracking-widest text-amber uppercase">

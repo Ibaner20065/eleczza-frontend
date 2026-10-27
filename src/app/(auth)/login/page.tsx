@@ -57,15 +57,40 @@ export default function LoginPage() {
   const submitLock = useRef(false);
   const resendLock = useRef(false);
 
+  const [rememberCredentials, setRememberCredentials] = useState(true);
+  const [hasCachedCredentials, setHasCachedCredentials] = useState(false);
+
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<LoginInput>({
     resolver: zodResolver(loginSchema),
     mode: "onBlur",
     reValidateMode: "onChange",
   });
+
+  // Restore cached credentials on mount
+  useEffect(() => {
+    try {
+      const cached = localStorage.getItem("eleczza_cached_credentials");
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (parsed?.email) {
+          setValue("email", parsed.email, { shouldValidate: true });
+        }
+        if (parsed?.password) {
+          setValue("password", parsed.password);
+        }
+        queueMicrotask(() => {
+          setHasCachedCredentials(true);
+        });
+      }
+    } catch (e) {
+      console.warn("Unable to read cached credentials:", e);
+    }
+  }, [setValue]);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -96,6 +121,27 @@ export default function LoginPage() {
 
     try {
       await loginWithEmail(data);
+
+      // Cache credentials in localhost as requested
+      if (rememberCredentials) {
+        try {
+          localStorage.setItem(
+            "eleczza_cached_credentials",
+            JSON.stringify({
+              email: data.email,
+              password: data.password,
+              savedAt: new Date().toISOString(),
+            }),
+          );
+          setHasCachedCredentials(true);
+        } catch (e) {
+          console.warn("Could not cache credentials:", e);
+        }
+      } else {
+        localStorage.removeItem("eleczza_cached_credentials");
+        setHasCachedCredentials(false);
+      }
+
       setSubmitStatus("success");
       toast.success("Welcome back.");
 
@@ -104,7 +150,7 @@ export default function LoginPage() {
       const destination =
         redirect?.startsWith("/") && !redirect.startsWith("//")
           ? redirect
-          : "/dashboard";
+          : "/transition";
       router.replace(destination);
     } catch (error) {
       const { code, message } = errorDetails(error);
@@ -181,7 +227,7 @@ export default function LoginPage() {
         <div>
           <label
             htmlFor="email"
-            className="block text-xs font-semibold tracking-wider text-parchment uppercase"
+            className="block font-archival text-[10px] font-bold tracking-[0.18em] text-parchment/80 uppercase"
           >
             College Email
           </label>
@@ -193,7 +239,7 @@ export default function LoginPage() {
             placeholder="detective@aot.edu.in"
             aria-invalid={Boolean(errors.email)}
             aria-describedby={errors.email ? "email-error" : undefined}
-            className="mt-1 w-full rounded border border-fog bg-umber px-3 py-2 text-sm text-parchment placeholder-muted-foreground focus:border-amber focus:outline-none"
+            className="mt-1.5 w-full rounded-sm border border-[#3a2e24] bg-[#120c08] px-3.5 py-2.5 font-serif text-sm text-parchment placeholder:text-parchment/35 focus:border-amber focus:ring-1 focus:ring-amber/40 focus:outline-none transition-colors"
           />
           {errors.email && (
             <p
@@ -210,18 +256,18 @@ export default function LoginPage() {
           <div className="flex items-center justify-between">
             <label
               htmlFor="password"
-              className="block text-xs font-semibold tracking-wider text-parchment uppercase"
+              className="block font-archival text-[10px] font-bold tracking-[0.18em] text-parchment/80 uppercase"
             >
               Password
             </label>
             <Link
               href="/forgot-password"
-              className="text-xs text-amber hover:underline"
+              className="font-serif text-xs text-amber/80 hover:text-amber hover:underline transition-colors"
             >
               Forgot password?
             </Link>
           </div>
-          <div className="relative mt-1">
+          <div className="relative mt-1.5">
             <input
               {...register("password")}
               id="password"
@@ -230,14 +276,14 @@ export default function LoginPage() {
               placeholder="Enter your password"
               aria-invalid={Boolean(errors.password)}
               aria-describedby={errors.password ? "password-error" : undefined}
-              className="w-full rounded border border-fog bg-umber px-3 py-2 pr-11 text-sm text-parchment placeholder-muted-foreground focus:border-amber focus:outline-none"
+              className="w-full rounded-sm border border-[#3a2e24] bg-[#120c08] px-3.5 py-2.5 pr-11 font-serif text-sm text-parchment placeholder:text-parchment/35 focus:border-amber focus:ring-1 focus:ring-amber/40 focus:outline-none transition-colors"
             />
             <button
               type="button"
               onClick={() => setShowPassword((visible) => !visible)}
               aria-label={showPassword ? "Hide password" : "Show password"}
               aria-pressed={showPassword}
-              className="absolute inset-y-0 right-0 flex w-10 items-center justify-center text-parchment transition-colors hover:text-amber focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber"
+              className="absolute inset-y-0 right-0 flex w-10 items-center justify-center text-parchment/60 transition-colors hover:text-amber focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber"
             >
               {showPassword ? (
                 <EyeOff aria-hidden="true" className="h-4 w-4" />
@@ -257,11 +303,41 @@ export default function LoginPage() {
           )}
         </div>
 
+        {/* Cache credentials in localhost */}
+        <div className="flex items-center justify-between pt-1">
+          <label className="flex items-center gap-2 cursor-pointer select-none">
+            <input
+              type="checkbox"
+              checked={rememberCredentials}
+              onChange={(e) => setRememberCredentials(e.target.checked)}
+              className="h-3.5 w-3.5 rounded-sm border border-[#3a2e24] bg-[#120c08] accent-amber focus:ring-1 focus:ring-amber"
+            />
+            <span className="font-serif text-xs text-parchment/75">
+              Remember credentials on this terminal
+            </span>
+          </label>
+          {hasCachedCredentials && (
+            <button
+              type="button"
+              onClick={() => {
+                localStorage.removeItem("eleczza_cached_credentials");
+                setValue("email", "");
+                setValue("password", "");
+                setHasCachedCredentials(false);
+                toast.info("Cached credentials purged.");
+              }}
+              className="font-mono text-[9px] uppercase tracking-wider text-parchment/40 transition-colors hover:text-wax-foreground"
+            >
+              Clear Cache
+            </button>
+          )}
+        </div>
+
         {formError && (
           <div
             role="alert"
             aria-live="assertive"
-            className="space-y-2 rounded border border-wax-foreground/30 bg-wax/40 px-3 py-2 text-sm text-wax-foreground"
+            className="space-y-2 rounded-sm border border-wax-foreground/30 bg-wax/40 px-3 py-2 text-sm text-wax-foreground"
           >
             <p>{formError}</p>
             {unverifiedEmail && (
@@ -296,7 +372,7 @@ export default function LoginPage() {
           {isSubmitting ? "Signing in..." : "Log in"}
         </LightBeamButton>
 
-        <div className="text-center text-xs text-parchment">
+        <div className="text-center font-serif text-xs text-parchment/75">
           New here?{" "}
           <Link
             href="/signup"

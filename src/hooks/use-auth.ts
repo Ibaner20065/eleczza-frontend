@@ -22,12 +22,38 @@ interface AuthContextValue {
 const AuthContext = createContext<AuthContextValue | null>(null);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState<User | null>(() => {
+    if (typeof window === "undefined") return null;
+    try {
+      const cached = localStorage.getItem("eleczza_local_user");
+      return cached ? JSON.parse(cached) : null;
+    } catch {
+      return null;
+    }
+  });
+
+  const [loading, setLoading] = useState<boolean>(() => {
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const isLocalDev =
+      !supabaseUrl ||
+      supabaseUrl.includes("placeholder") ||
+      supabaseUrl.includes("xyzcompany");
+    return !isLocalDev;
+  });
 
   useEffect(() => {
     let active = true;
     let unsubscribe: (() => void) | undefined;
+
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const isLocalDev =
+      !supabaseUrl ||
+      supabaseUrl.includes("placeholder") ||
+      supabaseUrl.includes("xyzcompany");
+
+    if (isLocalDev) {
+      return;
+    }
 
     void Promise.resolve()
       .then(async () => {
@@ -55,7 +81,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       .catch((error: unknown) => {
         if (!active) return;
         console.error("Unable to initialize or restore Supabase auth:", error);
-        setUser(null);
+        // Fallback to local cached user if present
+        if (typeof window !== "undefined") {
+          const cached = localStorage.getItem("eleczza_local_user");
+          if (cached) {
+            try {
+              setUser(JSON.parse(cached));
+            } catch {}
+          }
+        }
         setLoading(false);
       });
 
@@ -66,6 +100,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const signOut = useCallback(async () => {
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("eleczza_local_user");
+    }
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    if (
+      !supabaseUrl ||
+      supabaseUrl.includes("placeholder") ||
+      supabaseUrl.includes("xyzcompany")
+    ) {
+      setUser(null);
+      return;
+    }
     const supabase = createClient();
     const { error } = await supabase.auth.signOut();
     if (error) throw error;
