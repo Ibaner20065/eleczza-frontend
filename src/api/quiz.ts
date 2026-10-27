@@ -1,5 +1,12 @@
+import { apiRequest, type ApiResponse } from "@/api/client";
+import { SAMPLE_ARENAS } from "@/lib/quiz/sample-data";
+import type { Arena } from "@/types/arena.types";
 import type { CaseFile, DeductionResult } from "@/types/quiz.types";
 import type { DeductionSubmissionInput } from "@/lib/validators/quiz";
+
+export function getArenas(): Promise<ApiResponse<Arena[]>> {
+  return apiRequest<Arena[]>("/arenas", { method: "GET" }, SAMPLE_ARENAS);
+}
 
 export async function getActiveCases(): Promise<CaseFile[]> {
   return [

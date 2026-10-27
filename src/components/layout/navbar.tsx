@@ -27,7 +27,7 @@ interface NavItem {
 const navItems: NavItem[] = [
   { label: "Study", href: "/dashboard", icon: Shield },
   { label: "Agency", href: "/team", icon: Users },
-  { label: "Case Files", href: "/quiz", icon: HelpCircle },
+  { label: "Quiz", href: "/quiz", icon: HelpCircle },
   { label: "Ledger", href: "/leaderboard", icon: Trophy },
 ];
 
@@ -89,7 +89,8 @@ export function Navbar() {
         <nav className="hidden items-center gap-1 md:flex">
           {navItems.map((item) => {
             const Icon = item.icon;
-            const isActive = pathname === item.href;
+            const isActive =
+              pathname === item.href || pathname.startsWith(`${item.href}/`);
 
             return (
               <Link
@@ -187,7 +188,8 @@ export function Navbar() {
         <div className="wood-panel space-y-2 border-b border-fog p-4 md:hidden">
           {navItems.map((item) => {
             const Icon = item.icon;
-            const isActive = pathname === item.href;
+            const isActive =
+              pathname === item.href || pathname.startsWith(`${item.href}/`);
 
             return (
               <Link
